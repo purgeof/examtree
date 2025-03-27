@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>支援 MathJax</title>
+
+  <!-- MathJax 配置 -->
+  <script>
+    window.MathJax = {
+      
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']], // 行內公式
+        displayMath: [['$$', '$$'], ['\\[', '\\]']], // 區塊公式
+        displayAlign: 'left',   // 設定塊級公式左對齊
+        displayIndent: "0em",  // 移除縮排
+        displayWidth: "100%"   // 讓公式適應區域大小
+      },
+      chtml: {
+        displayAlign: 'left'    // 使用 CHTML 時左對齊
+      },
+      svg: {
+        displayAlign: 'left'    // 使用 SVG 時左對齊
+      }
+    };
+  </script>
+  <!-- 引入 MathJax -->
+ 
+      <script type="text/javascript" src="mathjax/es5/tex-svg.js"></script>
+      <script type="text/javascript" src="mathjax/es5/tex-mml-svg.js"></script>
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 50px;
+      text-align: left; /* 確保整體內容左對齊 */
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(10, 50px);
+      gap: 3px;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    .tab {
+      background: #007bff;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease, border 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+    .tab:hover {
+      background: #0056b3;
+    }
+    .tab.active {
+      background: white;
+      color: #007bff;
+      border: 2px solid #007bff;
+    }
+    .tab-content {
+      display: none;
+      background: #ffffff;
+      padding: 20px;
+      border: 1px solid #007bff;
+      border-radius: 20px;
+      margin-top: 10px;
+      width: 80%; /* 調整整個題目內容寬度 */
+      margin: 10px auto 0 auto;
+      text-align: left; /* 確保內容文字左對齊 */
+    }
+    .tab-content.active {
+      display: block;
+    }
+    /* 強制 MathJax 塊級公式左對齊 */
+    .MathJax_Display {
+      text-align: left !important;
+      margin: 0 !important;
+    }
+    /* 覆蓋 MathJax 容器的默認樣式 */
+    mjx-container[jax="CHTML"][display="true"] {
+      text-align: left !important;
+    }
+  </style>
+  <style>/* 題目內容的style */
+            /* 外部包裹層，讓 .container 可以調整水平寬度 */
+            .wrapper-00 {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            min-width: 300px;
+            resize: horizontal;  /* 允許左右調整 */
+            overflow: hidden;  /* 避免超出 */
+            /*border: 2px solid #d41010; */
+            margin-top: 10px;  /* ✅ 往下移動 wrapper */
+        }
+
+        .container-00 {
+            display: flex;
+            width: 94%;  /* 讓寬度跟隨 wrapper 變化 */
+            /*border: 3px solid #333;*/
+            border-radius: 10px;
+            background: white;
+            
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 5px;
+            margin: 0px;
+            align-items: stretch;  /* 讓左右區塊的高度隨內容增加 */           
+        }
+
+        .left-00 {
+            width: 40%;
+            min-width: 100px;
+            max-width: 500px;
+            resize: horizontal;  /* 允許左右調整 */
+            overflow: auto;
+            /* border: 3px solid #f71d1d; */
+            padding: 0px;
+            margin: 0px;
+            background-color: white;
+        }
+
+        .right-00 {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .right-00 img {
+            max-width: 100%;
+            height: auto;
+        }
+
+  </style>
+</head>
+<body>
+ 
+  <h1>106年會考試題</h1>
+  <div class="tabs">
+    <!-- 這裡會動態生成 tabs -->
+  </div>
+
+  <!-- 這裡會動態生成 tab 對應內容 -->
+  <div class="tab-contents">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabsContainer = document.querySelector(".tabs");
+      const contentsContainer = document.querySelector(".tab-contents");
+      const tabs = [];
+      const contents = [];
+
+      const totalTabs = 27; // 調整增加題目數量-- tab的數量
+
+      // 動態生成 tabs 和對應的內容區塊
+      for (let i = 1; i <= totalTabs; i++) {
+        // 創建 tab
+        const tab = document.createElement("div");
+        tab.classList.add("tab");
+        tab.setAttribute("data-tab", `tab${i}`);
+        tab.innerText = i;
+        tabs.push(tab);
+        tabsContainer.appendChild(tab);
+
+        // 創建對應的內容區塊
+        const content = document.createElement("div");
+        content.classList.add("tab-content");
+        content.setAttribute("id", `tab${i}`);
+
+        // 使用條件語句為特定的題目設定不同的內容
+        if (i === 1) {
+          content.innerHTML = `
+          <h2><div>
+              <p>第 1 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              <p>$$(-3)^3之值為何?$$
+                  $$(A)-27$$
+                  $$(B)-9$$
+                  $$(C)9$$
+                  $$(D)27$$
+                </p>
+            </div></h2>
+          `;
+        } else if (i === 2) {
+          content.innerHTML = `
+          <h2><div>
+              <p>第 2 題：<select><option hidden>答案：</option><option>C</option></select></p>
+              $$下列何者為多項式x^2-36的因式?$$
+              $$(A)x-3$$
+              $$(B)x-4$$
+              $$(C)x-6$$
+              $$(D)x-9$$
+            </div></h2>
+          `;
+        } else if (i === 3) {
+          content.innerHTML = `
+          <!-- 題目文字 -->
+          <h2><p>第 3 題：<select><option hidden>答案：</option><option>B</option></select></p>
+              $$右圖的立體圖形由相同大小的正方體積木堆疊而成。$$
+              $$判斷拿走右圖的哪一個積木後,此圖形前視圖的形狀會改變?$$
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+                      $$(A)甲$$
+                      $$(B)乙$$
+                      $$(C)丙$$
+                      $$(D)丁$$
+                </div>
+                <div class="right-00">
+                    <img alt="數學題目圖片" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiC0MXcBbMY4dIGeuRVVcfEVge8LRCQZGMImX2tsxteRujcaJJWqX1spuzplkFMEN_PqMbJ31ljVjx4IGpwfmzNZPdfdbtPwZTkE-1WUSorgkf_UP6iAtMsU2OgOJAN6qMn6wywKh4jTDaIOnu8qsZQLn9n2lREMv-ninDmlHrRCXglUr0cb_B0jOYz/s400/Snipaste_2023-06-16_09-08-04.jpg" />
+                </div>
+              </div>
+            </div>
+            </h2>
+          `;
+        } else if (i === 4) {
+          content.innerHTML = `
+          <!-- 題目文字 -->
+          <h2><p>第 4 題：<select><option hidden>答案：</option><option>C</option></select></p>
+            $$化簡\\sqrt{135}的結果為下列何者?$$
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+                  $$(A)3\\sqrt{5}$$
+                  $$(B)27\\sqrt{5}$$
+                  $$(C)3\\sqrt{15}$$
+                  $$(D)9\\sqrt{15}$$
+                </div>
+               
+              </div>
+            </div></h2>
+          `;
+        } else if (i === 5) {
+          content.innerHTML = `
+            <div>
+              <h2><p>第 5 題：<select><option hidden>答案：</option><option>B</option></select></p>
+              $$坐標平面上,一次函數\\,y=-2x-6的圖形通過下列哪一個點?$$
+                    $$(A)(-4,1)$$ 
+                    $$(B)(-4,2)$$ 
+                    $$(C)(-4,-1)$$
+                    $$(D)(-4,-2)$$
+              </h2>
+            </div>
+          `;
+        } else if (i === 6) {
+          content.innerHTML = `
+            <div>
+              <h2><p>第 6 題：<select><option hidden>答案：</option><option>A</option></select></p>
+               $$已知a=-1,\\,\\,\\,b=-1\\dfrac{3}{4},\\,\\,\\,c=-1\\dfrac{5}{8},$$
+               $$下列關於a、b、c三數的大小關係,何者正確?$$
+              $$(A)a>c>b$$
+              $$(B)a>b>c$$
+              $$(C)b>c>a$$
+              $$(D)c>b>a$$</h2>
+            </div>
+          `;
+        } else if (i === 7) {
+          content.innerHTML = `
+           <!-- 題目文字 -->
+              <h2><p>第 7 題：<select><option hidden>答案：</option><option>A</option></select></p>
+                $$如圖,坐標平面上直線L的方程式為x=-5,$$
+                $$直線M的方程式為y=-3,\\,P點的坐標為(a,b)。$$
+                $$根據右圖中\\,P點位置判斷,下列關係何者正確?$$
+              <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+                    $$(A)a<-5,\\,\\,b>-3$$
+                    $$(B)a<-5,\\,\\,b<-3$$
+                    $$(C)a>-5,\\,\\,b>-3$$
+                    $$(D)a>-5,\\,\\,b<-3$$
+                </div>
+                <div class="right-00">
+                    <img alt="數學題目圖片" <img  src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigl38FLLGVZx9dIBqywyEShku_VOQPcsM_pbgz96Sp3eKUjsiJSOVqFPSJ_ZOm7y9lbocsushP3jooNuQYY6xPRYQbwEXEuVS76TleoDyN5LFGbbksLJV2YZmUtsHV6CA8Sq5TVJ85rr4xo_cL60jmgk1LnJ71IPqTQuOUU7UHZIowisu8UG2tR19W/s400/Snipaste_2023-06-16_09-55-40.jpg"/>
+                </div>
+              </div>
+            </div></h2>
+          `;
+        } else if (i === 8) {
+          content.innerHTML = `
+           <!-- 題目文字 start-->
+              <h2><p>第 8 題：<select><option hidden>答案：</option><option>C</option></select></p>
+                $$梯形ABCD中,\\overline{AD}//\\overline{BC}。若\\angle ADC=140^\\circ, $$
+                $$且\\overline{BD}\\perp \\overline{CD},則\\angle DBC的度數為何?$$
+              <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+                    $$(A)30$$
+                    $$(B)40$$
+                    $$(C)50$$
+                    $$(D)60$$
+                </div>
+                <div class="right-00">
+                    <img alt="數學題目圖片" <img alt="" border="0" width="400" data-original-height="383" data-original-width="629" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiW_1TibOC-4Vhyw4tAsyoNyoI--oUw7NL3o4sOSevwZk4gucB1_PUlD68yGej-lDaqBHExfprj3bCtq7yR0sS2ZjLGYjCPArPUpXXdURoKVXciZq7GAdXWU0dEY-u-b4pg2-V8Y7gT2tKaynoSGOIZk8WDCxGZE8g-iKUaXAqXPnLUjZdMhEyJ3Kxs/s400/Snipaste_2023-06-16_10-06-21.jpg"/>
+                </div>
+              </div>
+            </div>
+            </h2></B>
+            <!-- 題目文字 END-->
+          `;
+        } else if (i === 9) {
+          content.innerHTML = `
+            <div>
+              <h2>第 9 題：<select><option>答案：</option><option>B</option></select></p>
+               $$
+               \\begin{array}{l}
+               有多少個正整數是18的倍數,同時也是216的因數?\\\\
+               (A)2\\\\
+               (B)6\\\\
+               (C)10\\\\
+               (D)12
+               \\end{array}              
+               $$</h2>
+            </div>
+          `;
+        } else if (i === 10) {
+          content.innerHTML = `
+            <div>
+             <h2><p>第 10 題：<select><option hidden>答案：</option><option>D</option></select></p>
+             $$利用公式解可得一元二次方程式3x^2-11x-1=0的兩解為\\,a、b,$$
+             $$且a > b, \\,\\,求\\,a\\,值為何?$$
+              $$(A)\\dfrac{-11+\\sqrt{109}}{6}\\quad\\quad(B)\\dfrac{-11+\\sqrt{133}}{6}$$ 
+              $$(C)\\dfrac{11+\\sqrt{109}}{6}\\quad\\quad\\quad(D)\\dfrac{11+\\sqrt{133}}{6}$$ 
+            </div></h2>
+          `;
+        } else if (i === 11) {
+          content.innerHTML = `
+          <!-- 題目文字start -->
+              <h2><p>第 11 題：<select><option hidden>答案：</option><option>D</option></select></p>
+              $$\\begin{array}{lr}
+              業者販售含咖啡因飲料時通常會以紅、黃、綠三色\\\\
+              來標示每杯飲料的咖啡因含量,各顏色的意義如表(一)所示。
+              \\end{array}$$</h2>
+              <div class="container-00">
+                    <div class="left-00">
+                        <h3><table style="border:5px #FFAC55 solid;" rules="all" cellpadding="5">
+                            <caption>表(一)</caption> <!-- 使用 <caption> 來表示標題 -->
+                                  <thead>
+                                      <tr>
+                                          <th>咖啡因含量標示</th>
+                                          <th>咖啡因含量</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td>紅色</td>
+                                          <td>超過 200 毫克</td>                                      
+                                      </tr>
+                                      <tr>
+                                          <td>黃色</td>
+                                          <td>超過 100 毫克，但不超過 200 毫克</td>                                     
+                                      </tr>
+                                      <tr>
+                                          <td>綠色</td>
+                                          <td>不超過 100 毫克</td>
+                                      </tr>
+                                  </tbody>
+                        </h3></table>
+                    </div> 
+                    <div class="right-00">
+                        <h3><table style="border:5px #FFAC55 solid;" rules="all" cellpadding="5">
+                              <caption><strong>表(二)</strong></caption> <!-- 使用 <caption> 來表示表格標題 -->
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>容量</th>
+                                        <th>咖啡因含量標示</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td align="center">中杯</td>
+                                        <td align="center">360 毫升</td>  
+                                        <td align="center">黃色</td> 
+                                    </tr>
+                                    <tr>
+                                        <td align="center">大杯</td>
+                                        <td align="center">480 毫升</td>  
+                                        <td align="center">紅色</td> 
+                                    </tr>
+                                </tbody>
+                        </h3></table>
+                    </div>  
+              </div>  <!-- container-00 結束 -->
+        
+              <h2>我國建議每位成人一日的咖啡因攝取量不超過300毫克,<BR>
+              歐盟則建議一日不超過400毫克。<BR>
+              表(二)為某商店美式咖啡的容量及咖啡因含量標示,<BR>
+              已知該店美式咖啡每毫升的咖啡因含量相同,<BR>
+              判斷一位成人一日喝2杯該店中杯的美式咖啡,<BR>
+              其咖啡因攝取量是否符合我國或歐盟的建議?              
+                <div class="left-00">
+                  $$\\begin{array}{lr}
+                      (A)符合我國也符合 \\underline{歐盟}\\\\
+                      (B)不符合我國也不符合\\underline{歐盟}\\\\
+                      (C)符合我國,不符合\\underline{歐盟}\\\\
+                      (D)不符合我國,符合\\underline{歐盟}
+                   \\end{array}             
+                   $$
+                </div></h2>                                           
+          <!-- 題目文字end --> 
+          `;
+        } else if (i === 12) {
+          content.innerHTML = `
+            <div>
+            <h2><p>第 12 題：<select><option hidden>答案：</option><option>A</option></select></p>
+                盒玩的販售方式是將一款玩具裝在盒子中販賣,<BR>
+                購買者只能從外盒知道購買的是哪一系列玩具,<BR>
+                但無法知道是系列中的哪一款。<BR>
+                圖(一)、圖(二)分別為動物系列、汽車系列盒玩中所有可能出現的款式。<BR>
+            
+              <div class="container-00">
+                <div class="left-00">
+                    <img alt="" border="0" width="340" data-original-height="829" data-original-width="1050"  style="border:2px red solid" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglNexX92VZGV8QBOPBVEZicegU5UrvQaJx_YUt7hbWKrUmlV7Sj_awq5ShpMZ9lS7pFBqaMv1tdn1Zq0A7ZE-ohOlsrE8tOKfXkBFvBuwPRNGSnOCZ8K3JLI86qeDA-Uh7iK4ImMFGQm3DnkhNsncfDVXG1fEg3qfO_Pu5T6b-MospgKru2cCQ0WnU/s400/Snipaste_2023-06-18_22-09-55.jpg"/>
+                </div>
+                <div class="right-00">
+                    <img alt="" border="0" width="330" data-original-height="764" data-original-width="1190" style="display: block; padding: 1em 0; text-align: center; clear: right; float: right; border:2px blue solid" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgs09m1hyha2ACPMPzA0kSQ_oenLDQgs5A2R_WhsefeclMYeP5RXtUCKi4twPWaBcV5JRyWNmNfSERqpeU8xVLs3EoRh1rdNMDXigVyHnLW_ioDroub1Z-v2Pob2Se7dmhmZqUSRdw5LAGPgT-fUTKSzlvrQ2A-_aj77EK4dX82uQMiXSuaJJklhUl0/s400/Snipaste_2023-06-18_22-10-13.jpg"/>
+                </div>
+              </div>
+                  $$已知\\underline{小友}喜歡圖(一)中的A款、C款,喜歡圖(二)中的B款,$$
+                  $$若他打算購買圖(一)的盒玩一盒,且他買到圖(一)中每款玩具的機會相等;$$
+                  $$他也打算購買圖(二)的盒玩一盒,且他買到圖(二)中每款玩具的機會相等,$$
+                  $$則他買到的兩盒盒玩內的玩具都是他喜歡的款式的機率為何?$$
+                  $$(A)\\dfrac{1}{15}\\qquad(B)\\dfrac{1}{10}\\qquad(C)\\dfrac{2}{11}\\qquad(D)\\dfrac{3}{11}$$
+                  </h2>
+            </div>
+          `;
+        } else if (i === 13) {
+          content.innerHTML = `
+            <div>
+             <h2><p>第 13 題：<select><option hidden>答案：</option><option>A</option></select></p>
+             $$直角柱ABCDEF的底面為直角三角形。若\\angle ABC= \\angle DEF=90^\\circ,$$
+             $$\\overline{BC}>\\overline{AB}>\\overline{BE},\\quad則連接\\overline{AE}後,\\;下列敘述何者正確? $$
+            </div></h2></B>
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00"><h2>
+                      $$(A)\\angle ACB < \\angle FDE\\;,$$$$\\hspace{0.9cm}\\angle AEB > \\angle ACB$$
+                      $$(B)\\angle ACB < \\angle FDE\\;,$$$$\\hspace{0.9cm}\\angle AEB < \\angle ACB$$
+                      $$(C)\\angle ACB > \\angle FDE\\;,$$$$\\hspace{0.9cm}\\angle AEB > \\angle ACB$$
+                      $$(D)\\angle ACB > \\angle FDE\\;,$$$$\\hspace{0.9cm}\\angle AEB < \\angle ACB$$</h2>
+                </div>
+                <div class="right-00">
+                    <img alt="" border="0" height="300" data-original-height="593" data-original-width="557" style="display: block; text-align: center; clear: right; float: left;"src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEga48IeRYBVr3Ur4M93MidGB0T1R7e5_wLmqra65n0JwdZ0E6eYzxk2X4vRJI-wpxD3f91xslosBR9eH77dVNXqdVjrHcev2ElAJWW71dN8ekRu6VScIzXsEzuGOwjpyICIsiF5eASeLYFpyOqdPNF3126ahKiVMbMk3Wa5Jwk6m_0NA_lgp0RYJm1a/s400/Snipaste_2023-06-19_10-21-12.jpg"/>
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (i === 14) {
+          content.innerHTML = `
+             <B><h2><p>第 14 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        坐標平面上有兩個二次函數的圖形,其頂點P、Q皆在x軸上,\\\\
+                        且有一水平線與兩圖形相交於A、B、C、D四點,\\\\
+                        各點位置如圖所示。若\\overline{AB}=10,\\;\\overline{BC}=5,\\;\\overline{CD}=6,\\\\
+                        則\\overline{PQ}的長度為何?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)7\\\\
+                                        (B)8\\\\
+                                        (C)9\\\\
+                                        (D)10\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img alt="" border="0" width="500" data-original-height="467" data-original-width="1023" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhe-LVu9oIStkcMtHdPS1yynNxbqaQQ0W_JyyIHvFNCBiGyfrntI03dtyFFJHq9lTndRGxeZM26oMJ8E6axNL91p20cZhckwBOjt1MTOVW2kFsEb7Lqx6S_kjySvzHyJI0wzNuLswnRRZIgJjocai_Cvpj6G5z1CSmhM3Y92gdRBSHdzJRYMRKf6oxv/s600/Snipaste_2023-06-19_10-33-33.jpg"/>
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 15) {
+          content.innerHTML = `
+               <h2><p>第 15 題：<select><option hidden>答案：</option><option>D</option></select></p><B>
+                   <!-- 題目內容 -->
+                        $$
+                          \\begin{array}{lr}
+                            若想在等差數列1,2,3,4,5中插入一些數,\\\\使得新的數列也是等差數列,\\\\
+                            且新的數列的首項仍是1,末項仍是5,\\\\則新的數列的項數可能為下列何者?\\\\
+                            (A)11\\\\
+                            (B)15\\\\
+                            (C)30\\\\
+                            (D)33\\\\
+                          \\end{array}
+                        $$       
+                </h2>
+          `;
+        } else if (i === 16) {
+          content.innerHTML = `
+             <h2><p>第 16 題：<select><option hidden>答案：</option><option>C</option></select></p>
+                   <!-- 題目內容 -->
+                  $$
+                    \\begin{array}{lr}
+                      已知某速食店販售的套餐內容為一片雞排和一杯可樂,\\\\
+                      且一份套餐的價錢比單點一片雞排再單點一杯可樂的總價錢便宜40元。\\\\
+                      \\underline{阿俊}打算到該速食店買兩份套餐,\\\\
+                      若他發現店內有單點一片雞排就再送一片雞排的促銷活動,\\\\
+                      且單點一片雞排再單點兩杯可樂的總價錢,比兩份套餐的總價錢便宜10元,\\\\
+                      則根據題意可得到下列哪一個結論?
+                    \\end{array}
+                  $$
+                  $$
+                    \\begin{array}{lr}
+                      (A)一份套餐的價錢必為140元\\\\
+                      (B)一份套餐的價錢必為120元\\\\
+                      (C)單點一片雞排的價錢必為90元\\\\
+                      (D)單點一片雞排的價錢必為70元
+                    \\end{array}
+                  $$ </h2>
+          `;
+        } else if (i === 17) {
+          content.innerHTML = `
+             <B><h2><p>第 17 題：<select><option hidden>答案：</option><option>D</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        右圖的方格紙中,每個方格的邊長為1,\\;\\; A、O兩點皆在格線的交點上。\\\\
+                        今在此方格紙格線的交點上另外找兩點B、C,\\;使得\\triangle ABC的外心為O,\\\\
+                        求\\overline{BC}的長度為何?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                          (A)4\\\\
+                                          (B)5\\\\
+                                          (C)\\sqrt{10}\\\\
+                                          (D)\\sqrt{20}\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img alt="" border="0" width="400" data-original-height="412" data-original-width="678" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEha5Vi8p1ekldaGt9TpTxOa3r8PW7OQeU1pmNTcqxqsq-iqL9Ad8gnc8_r2WxDBr0fy0nCyVQiVuCx-tuycxMQv_20dScMMWCYFRTBq12DeY-jNx8BllVHcTOLR9Mj2Ds4IZcIns-8EefouS1lyRliuapKihbeyMqKyz8OiIIbFf1cUzASTvrd5H-O4RVE/s400/Snipaste_2023-06-19_13-50-34.jpg"/></div>
+                                </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 18) {
+          content.innerHTML = `
+             <B><h2><p>第 18 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        \\underline{樂樂停車場}為24小時營業,其收費方式如表(一)所示。\\\\
+                        已知\\underline{阿虹}某日10:00進場停車,停了x\\;小時後離場,\\;x為整數。\\\\
+                        若\\underline{阿虹}離場的時間介於當日的20:00～24:00間,\\\\
+                        則他此次停車的費用為多少元?
+                      \\end{array}
+                    $$</h2>
+
+               <!--  wrapper選項+圖片   Start-->    
+                       
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)5x+30\\\\
+                                        (B)5x+50\\\\
+                                        (C)5x+150\\\\
+                                        (D)5x+200\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      
+                                <h2><table style="text-align: center; border:5px #FFAC55 solid;" rules="all" cellpadding="5">
+                                        <caption>表(一)</caption> <!-- 使用 <caption> 來表示標題 -->
+                                        <thead>
+                                            <tr>
+                                                <th>停車時段</th>
+                                                <th>收費方式</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>08:00～20:00</td>
+                                                <td>20元/小時<BR>該時段最多收100元</td>                                      
+                                            </tr>
+                                            <tr>
+                                                <td>20:00～08:00</td>
+                                                <td>5元/小時<BR>該時段最多收30元</td>                                     
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" >若進場與離場時間不在同一時段，則兩時段分別計費</td>
+                                            </tr>
+                                        </tbody>
+                                    </table></h2>
+                                </div>
+                          </div>
+                      
+          `;
+        } else if (i === 19) {
+          content.innerHTML = `
+             <B><h2><p>第 19 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        圖(一)為一圓形紙片,A、B、C為圓周上三點,其中\\overline{AC}為直徑。\\\\
+                        今以\\overline{AB}為摺線將紙片向右摺後,紙片蓋住部分的\\overline{AC},\\\\
+                        而\\overset{\\frown}{AB}上與\\overline{AC}重疊的點為D,如圖(二)所示。\\\\
+                        若\\overset{\\frown}{BC}=35^\\circ,\\; 則\\overset{\\frown}{AD}的度數為何?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)105\\\\
+                                        (B)110\\\\
+                                        (C)120\\\\
+                                        (D)145\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img alt="" border="0" width="500" data-original-height="416" data-original-width="692" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1uK-B0DSNxY-7nxEJ0A-EjUnAdKFzZYDptFYoIWk5rMLZG7qdRS9MKrCcCJPcyQbDIW4Z_u125HuX_RSaMftqwbsPayReGiY-wxbX1kjN7XmwAJYkGtAI0Lk7Lvt9-j5akM4wKs5z-slOVQrmXNcuG7ouYaitfTEYA92ySrDRY_UdoMsMhbYymW3W9dI/s600/Snipaste_2023-06-19_14-21-05.jpg"/>
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 20) {
+          content.innerHTML = `
+             <B><h2><p>第 20 題：<select><option hidden>答案：</option><option>C</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        如圖,\\triangle ABC中,D點在\\overline{BC}上,且\\overline{BD}的中垂線與\\overline{AB}相交於E點,\\\\
+                        \\overline{CD}的中垂線與\\overline{AC}相交於F點。已知\\triangle ABC的三個內角皆不相等,\\\\
+                        根據圖中標示的角,判斷下列敘述何者正確?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)\\angle 1 = \\angle 3\\;,\\;\\angle 2=\\angle 4\\\\
+                                        (B)\\angle 1 = \\angle 3\\;,\\;\\angle 2\\neq\\angle 4\\\\
+                                        (C)\\angle 1 \\neq\ \\angle 3\\;,\\;\\angle 2=\\angle 4\\\\
+                                        (D)\\angle 1 \\neq\ \\angle 3\\;,\\;\\angle 2\\neq\\angle 4\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img alt="" border="0" width="360" data-original-height="436" data-original-width="694" style="display: block; text-align: center; clear: right; float: right;"  src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8K8dLfAmCnCWRuQKUhXOTHLI-xWDp9R09UFk69Tyo5_cCSNSLx4lgJ9p6JjNa22VbUr4eotYD1fAS1CQBMXiOGNBOKD986ux2e0c_9h25S677MbRxEqdQsOUStDooXUN7qZu-292Q8Yclu7jPM9Yaj1vH4NaF6YUv67y1ioLP1VNXRAME4K6yjlKAMcw/s600/Snipaste_2023-06-19_14-30-06.jpg"/>
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 21) {
+          content.innerHTML = `
+              <B><h2><p>第 21 題：<select><option hidden>答案：</option><option>D</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        有一東西向的直線吊橋橫跨溪谷,\\\\
+                        \\underline{小維}、\\underline{阿良}分別從西橋頭、東橋頭同時開始往吊橋的另一頭筆直地走過去,\\\\
+                        如圖所示。已知\\underline{小維}從西橋頭走了84步,\\underline{阿良}從東橋頭走了60步時,\\\\
+                        兩人在吊橋上的某點交會,且交會之後\\underline{阿良}再走70步恰好走到西橋頭。\\\\
+                        若\\underline{小維}每步的距離相等,\\underline{阿良}每步的距離相等,\\\\
+                        則交會之後\\underline{小維}再走多少步會恰好走到東橋頭?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)46\\\\
+                                        (B)50\\\\
+                                        (C)60\\\\
+                                        (D)72\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img alt="" border="0" data-original-height="187" data-original-width="650" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjy9e05duE8iRj8AznAxmWjK_4a0vE190-30-kRMmxJgd5BxfZxxyIHpI-Two4RAHZKUIgmDKd7G5h9J1k41rSz-v8A_BS4n_nhD7K-xnQkk2xCTLelgzre12yn-ujypkwCeMMwJ5drR481ALbnpbu1EyHVg1TDyTJdI_1xnCoJJOhj4VycYZR1Jtnb45M/s1600/Snipaste_2023-06-19_22-27-47.jpg"/>
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 22) {
+          content.innerHTML = `
+             <B><h2><p>第 22 題：<select><option hidden>答案：</option><option>C</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        正方形ABCD與\\triangle EBC中,\\\\
+                        \\overline{AD}分別與\\overline{EB}、\\overline{EC}相交於F點、G點。\\\\
+                        若\\triangle EBG的面積為6,\\;正方形ABCD的面積為16,\\\\
+                        則\\overline{FG}與\\overline{BC}的長度比為何?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start    
+                      <div class="wrapper-00"> -->
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)3:5\\\\
+                                        (B)3:6\\\\
+                                        (C)3:7\\\\
+                                        (D)3:8\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img src="ppicture/112-22.png" width="350" height="80" >
+                                </div>
+                          </div>
+                     <!-- </div>  wrapper選項+圖片 END-->
+          `;
+        } else if (i === 23) {
+          content.innerHTML = `
+             <B><h2><p>第 23 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        右圖,矩形ABCD中,\\overline{AB}=6,\\;\\overline{AD}=8,且有一點P從B點沿著\\overline{BD}往D點移動。\\\\
+                        若過P點作\\overline{AB}的垂線交\\overline{AB}於E點,過P點作\\overline{AD}的垂線交\\overline{AD}於F點,\\\\
+                        則\\overline{EF}的長度最小為多少?
+                      \\end{array}
+                    $$</h2>
+
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)\\dfrac{14}{5}\\\\
+                                        (B)\\dfrac{24}{5}\\\\
+                                        (C)\\;\\;5\\\\
+                                        (D)\\;\\;7
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img alt="" border="0" width="400" data-original-height="385" data-original-width="533" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6-MPKkaNV-cPju4JeRb49HoJatywssVadd2yNf6TUsMuiqfKL6oYkrGeubqDCa0juCio1RilOnUAQwPEsn-A2ibBeoVIO5VEfAiTvMyRzPtYIMtzViyya-wDT8ia7zXaxpgaqW2VB621B2JQF6ICPHtfRprJMtHKlb_uI-E-EAbcKc4LU8MJCezq9E9g/s400/Snipaste_2023-06-21_08-33-14.jpg"/>
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 24) {
+          content.innerHTML = `
+             <h2>$$ {\\color{red}\\blacksquare}請閱讀下列敘述後，回答(24)～(25)題,$$
+              <!-- 題目內容 -->
+                    $$
+                      \\boxed{
+                          \\begin{array}{lr}
+                          人口老化是國家人口分布向高年齡偏移的現象,\\\\
+                          許多國家已開始面臨此問題。依國際常用定義,\\\\
+                          一個國家中的65歲以上人口占總人口的百分比為\\\\
+                          7％以上(含)且未達14％時,稱作「高齡化社會」,\\\\
+                          14％以上(含)且未達20％時,稱作「高齡社會」,\\\\
+                          20％以上(含)時,稱作「超高齡社會」。\\\\
+                          \\end{array}
+                      }
+                    $$</h2>
+                    <B><h2><p>$ \\color{red}{第 24 題}$：<select><option hidden>答案：</option><option>D</option></select></p><B>
+                    $$    
+                      \\begin{array}{lr}
+                      下圖為某機構於2020年繪製的四個國家65歲以上人口占總人口百分比之折線圖,\\\\
+                      甲、乙兩人根據表(一)、表(二)的資訊提出以下看法:\\\\
+                      其中2020年之後的數值為推估值。
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)法國\\\\
+                                        (B)義大利\\\\
+                                        (C)美國\\\\
+                                        (D)韓國\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img alt="" border="0" data-original-height="357" data-original-width="814" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFkwgaiZ5YAfRsNElFKyj3i-8d3aaMld9xM5RkCWGxRvooimhVBZB1v8x9KHCVVWhLRld68cypIK9hMwVUYgc8IWor7LgjK2e2Cmzmn5OgbEi4WhujPI9MGAkIRQtjEXE_M1jYNb_xIs2LnLx0x9re2YpqVaX9vBKZKByPOJqGk0LTEcSKo7kvlqY1bg8/s1600/Snipaste_2023-06-21_09-26-42.jpg"/>
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 25) {
+          content.innerHTML = `
+             <B><h2><p>$ \\color{red}{第 25 題}$：<select><option hidden>答案：</option><option>A</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        已知2019年我國進入「高齡社會」,預測2025年會進入「超高齡社會」。\\\\
+                        假設我國2019年與2025年總人口數皆為2300萬人,\\\\
+                        且2019年我國65歲以上人口占總人口的百分比恰好達到「高齡社會」的最低標準,\\\\
+                        則根據上述預測,關於我國65歲以上人口數,\\\\
+                        2025年 與 2019年相比至少增加了多少萬人?
+                      \\end{array}
+                    $$</h2>
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)138\\\\
+                                        (B)161\\\\
+                                        (C)322\\\\
+                                        (D)460\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                  <h2>$$
+                                      \\boxed{
+                                          \\begin{array}{lr}
+                                          依國際常用定義,\\\\
+                                          一個國家中的65歲以上人口占總人口的百分比為\\\\
+                                          7％以上(含)且未達14％時,稱作「高齡化社會」,\\\\
+                                          14％以上(含)且未達20％時,稱作「高齡社會」,\\\\
+                                          20％以上(含)時,稱作「超高齡社會」。\\\\
+                                          \\end{array}
+                                      }
+                                    $$</h2>
+                                </div>
+                          </div>
+          `;
+        } else if (i === 26) {
+          content.innerHTML = `
+             <B><h2><p>$ \\color{red}{非選擇}$_第 1 題：</p><B>
+              <!-- 題目內容 -->
+                    $$\\begin{array}{lr}
+                        A、B兩廠牌的疫苗皆進行實驗以計算其疫苗效力。\\\\
+                        兩廠牌的疫苗實驗人數皆為30000人,\\\\
+                        各廠牌實驗人數中一半的人施打疫苗，另一半的人施打不具疫苗成分的安慰劑。\\\\
+                        經過一段時間後觀察得知，在A廠牌的實驗中，施打疫苗後仍感染的人數為50人，\\\\
+                        施打安慰劑後感染的人數為500人。而疫苗效力的算式如下：
+                      \\end{array}
+                    $$
+                    $$\\boxed{
+                          \\begin{array}{lr}
+                          疫苗效力=(1-p\\div q)×100\\%,\\;其中\\\\
+                          p=\\dfrac{施打疫苗後仍感染的人數}{施打疫苗的人數}\\\\
+                          q=\\dfrac{施打安慰劑後仍感染的人數}{施打安慰劑的人數}
+                          \\end{array}
+                      }
+                    $$
+                    $請根據上述資訊回答下列問題,完整寫出你的解題過程並詳細解釋$</h2>
+                    <h2>$(1)根據實驗數據算出A廠牌的疫苗效力為多少?$<select><option hidden>答案：</option><option>90%</option></select>
+                      <BR><BR>
+                        $(2)若B廠牌的實驗數據算出的疫苗效力高於A廠牌,$
+                          $\\quad請詳細說明B廠牌的實驗中施打疫苗後仍感染的人數,$
+                          $\\quad是否一定低於A廠牌實驗中施打疫苗後仍感染的人數?$
+                        <select><option hidden>答案：</option><option>不一定</option></select>
+                    </h2>
+          `;
+        } else if (i === 27) {
+          content.innerHTML = `
+             <B><h2><p>$ \\color{red}{非選擇}$_第 2 題：</p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        小儀利用一副撲克牌摺疊出一個環套,如圖(十六)所示。\\\\
+                        環套的上視圖為邊長6公分的正八邊形,如圖(十七)所示。
+                      \\end{array}
+                    $$                          
+                    <div class="right-00">  <!-- 圖片 -->
+                      <img src="ppicture/112-27-1.jpg" width="230" height="80"  style="margin-right: 40px;">
+                      <img src="ppicture/112-27-2.png" width="230" height="80"  >
+                    </div>
+                    $$
+                      \\begin{array}{lr}
+                        請根據上述資訊回答下列問題，完整寫出你的解題過程並詳細解釋：
+                      \\end{array}
+                    $$
+                    $(1)圖(十七)的正八邊形的一個內角度數為多少？$<select><option hidden>答案：</option><option>135°</option></select>
+                    $$(2)已知有一個圓柱形花瓶其底面半徑為8公分,假設不考慮花瓶與環套厚度,$$
+                    $$\\quad\\;判斷圖(十六)的環套是否能在不變形的前提下,$$
+                    $\\quad\\;套在此圓柱形花瓶側面外圍?$<select><option hidden>答案：</option><option>不能</option></select>
+                    <div class="right-00">  <!-- 圖片 -->
+                      <img src="ppicture/112-27-3.jpg" width="500" height="80">
+                     
+                    </div>
+                    </h2> 
+                      
+                    
+                         
+                     
+          `;
+        }
+        else {
+          // 其他題目默認內容
+          content.innerHTML = `
+          /div>  <div>
+              <p>這是第 ${i} 題，您可以在這裡輸入您的內容。</p>
+              <p>例如，您可以加入數學公式：</p>
+              <p>$$E = mc^2$$</p>
+            </div>
+          `;
+        }
+
+        contents.push(content);
+        contentsContainer.appendChild(content);
+      }
+
+      // 不預設任何 active 的 tab 和內容
+
+      // 處理 tab 點擊事件
+      tabs.forEach(tab => {
+        tab.addEventListener("click", function() {
+          const target = this.getAttribute("data-tab");
+
+          tabs.forEach(t => t.classList.remove("active"));
+          contents.forEach(c => c.classList.remove("active"));
+
+          this.classList.add("active");
+          document.getElementById(target).classList.add("active");
+
+          // 重新渲染 MathJax，以顯示新的公式
+          MathJax.typesetPromise();
+        });
+      });
+    });
+    MathJax.typeset();
+  </script>
+</body>
+</html>

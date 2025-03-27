@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "content": "已知一次函數 \\( y = 3x + 2 \\)，請問當 \\( x = 4 \\) 時，\\( y \\) 等於多少？",
+    "image": "",
+    "width": "",
+    "height": "",
+    "options": [
+      "10",
+      "12",
+      "14",
+      "16"
+    ],
+    "answer": "14"
+  },
+  {
+    "id": 2,
+    "content": "下列哪一個圖形是正方形？",
+    "image": "https://via.placeholder.com/150", 
+    "width": "150",
+    "height": "150",
+    "options": [
+      "A. 長方形",
+      "B. 圓形",
+      "C. 正方形",
+      "D. 三角形"
+    ],
+    "answer": "C. 正方形"
+  },
+  {
+    "id": 3,
+    "content": "計算 \\( 7 \\times 8 \\) 的結果為？",
+    "image": "",
+    "width": "",
+    "height": "",
+    "options": [
+      "54",
+      "56",
+      "58",
+      "60"
+    ],
+    "answer": "56"
+  }
+]

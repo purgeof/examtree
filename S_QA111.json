@@ -1,0 +1,143 @@
+[
+  {
+    "id": 1,
+    "content": "<h1><div>$圖(一)數線上的A、B、C、D四點所表示的數分別為a、b、c、d,$ $且O為原點。根據圖中各點的位置判斷,$ $下列何者的值最小?$<div class='container-00'><div class='left-01'>$$(A)\\large \\left| a \\right|$$ $$ (B)\\large \\left| b \\right|$$ $$(C)\\large \\left| c \\right|$$ $$(D)\\large \\left| d \\right|$$</div><div class='right-01'><img src='ppicture/111-1.jpg' width='600' height='180'></div></div></div></h1>",
+    "answer": "A"
+  },
+  {
+    "id": 2,
+    "content": "<h1><div>$$計算多項式 6x^2 + 4x\\;除以\\; 2x^2 後，得到的餘式為何?$$ $(A)2$<BR>$(B)4$<BR>$(C)2x$<BR>$(D)4x$</div></h1>",
+    "answer": "D"
+  },
+  {
+    "id": 3,
+    "content": "<h1>$下列何者為156的質因數?$ <BR>$(A)11$<BR>$(B)12$<BR>$(C)13$<BR>$(D)14$ </h1>",
+    "answer": "C"
+  },
+  {
+    "id": 4,
+    "content": "<h1>$圖(二)為一個長方體的展開圖,且長方體的底面為正方形。$ $根據圖中標示的長度,求此長方體的體積為何?$<div class='wrapper-00'><div class='container-00'><div class='left-01'>$(A)144$ $(B)224$ $(C)264$ $(D)300$</div><div class='right-00'><img src='ppicture/111-4.jpg' width='400' height='80'></div></div></h1>",
+    "answer": "B"
+  },
+  {
+    "id": 5,
+    "content": "<div><h2>$$算式\\frac{9}{22}+\\frac{11}{18}-(\\frac{23}{22}-\\frac{7}{18})之值為何?$$$$(A)\\frac{4}{11}$$ $$(B)\\frac{9}{10}$$ $$(C)\\frac{1}{9}$$ $$(D)\\frac{5}{4}$$</h2></div>",
+    "answer": "A"
+  },
+  {
+    "id": 6,
+    "content": "<div><h2>$$\\sqrt{2022}的值介於下列哪兩個數之間?$$ $(A)25,30$<BR>$(B)30,35$<BR>$(C)35,40$<BR>$(D)40,45$</h2></div>",
+    "answer": "D"
+  },
+  {
+    "id": 7,
+    "content": "<h1>$$已知坐標平面上有一直線L與一點A。若L的方程式為\\;x＝-2,$$ $$A點坐標為(6,5),\\;則A點到直線L的距離為何?$$<BR><div class='left-00'>$$(A)3$$ $$(B)4$$ $$(C)7$$ $$(D)8$$</div></h1>",
+    "answer": "D"
+  },
+  {
+    "id": 8,
+    "content": "<h1>$多項式39x^2+5x-14可因式分解成(3x+a)(bx+c),$ $其中a、b、c均為整數,求a+2c之值為何?$<div class='left-00'>$$(A)-12$$ $$(B)-3$$ $$(C)3$$ $$(D)12$$</div></h1>",
+    "answer": "A"
+  },
+  {
+    "id": 9,
+    "content": "<h1><div>$$\\begin{array}{l}箱子內有分別標示號碼1～6的球,每個號碼各2顆,總共12顆。\\\\已知小茹先從箱內抽出5顆球且不將球放回箱內,\\\\這5顆球的號碼分別是1、2、2、3、5。\\\\今阿純打算從此箱內剩下的球中抽出1顆球,\\\\若箱內剩下的每顆球被他抽出的機會相等,\\\\則他抽出的球的號碼,與小茹已抽出的5顆球中\\\\任意一顆球的號碼相同的機率是多少?\\end{array}$$ <div class='left-00'>$$(A)\\frac{3}{6}(B)\\frac{4}{6}(C)\\frac{3}{7}(D)\\frac{4}{7}$$</div></div></h1>",
+    "answer": "C"
+  },
+  {
+    "id": 10,
+    "content": "<h1><div>$已知一元二次方程式(x-2)^2=3的兩根為a、b,$ $且a>b，求2a+b之值為何?$<div class='left-00'>$$(A)9$$ $$(B)-3$$ $$(C)6+\\sqrt{3}$$ $$(D)-6+\\sqrt{3}$$</div></div></h1>",
+    "answer": "C"
+  },
+  {
+    "id": 11,
+    "content": "<h1>$根據圖(三)中兩人的對話紀錄,求出哥哥買遊戲機的預算為多少元?$</h1><div class='container-00'><div class='left-01'><h1> $$\\begin{array}{lr}(A)3800\\\\(B)4800\\\\(C)5800\\\\(D)6800\\end{array}$$</h1></div><div class='right-00'><img src='ppicture/111-11.jpg' width='400' height='80'></div></div>",
+    "answer": "C"
+  },
+  {
+    "id": 12,
+    "content": "<h1><div>$已知p = 7.52 \\times 10^{-6},下列關於p值的敘述何者正確?$ $$(A) 小於0$$ $$(B) 介於0與1兩數之間,兩數中比較接近0$$ $$(C) 介於0與1兩數之間,兩數中比較接近1$$ $$(D)大於1$$</div></h1>",
+    "answer": "B"
+  },
+  {
+    "id": 13,
+    "content": "<h1><span>$如圖(四), \\overline{AB} 為圓 O 的一弦, 且 C 點在 \\overline{AB} 上。$<br>$若 \\overline{AC} = 6, \\quad \\overline{BC} = 2, \\quad \\overline{AB} 的弦心距為 3,$<br>$則 \\overline{OC} 的長度為何?$</span></h1><div class='container-00'><div class='left-01'><h1>$(A) 3$<br> $(B) 4$<br> $(C)\\sqrt{11}$<br> $(D)\\sqrt{13}$</h1></div><div class='right-00'><img src='ppicture/111-13.jpg' width='280' height='80'></div></div>",
+    "answer": "D"
+  },
+  {
+    "id": 14,
+    "content": "<h1>$$\\begin{array}{lr} 某國主計處調查該國所有受僱員工的年薪資料，\\\\ 並公布調查結果如圖(五)的直方圖所示。 \\end{array}$$</h1><div><img src='ppicture/111-14.jpg' width='700' height='400'></div><h1>$$\\begin{array}{lr} 已知總調查人數為 750 萬人，根據圖中資訊計算\\\\ 該國受僱員工年薪低於平均數的人數占總調查人數的\\\\ 百分率為下列何者?\\\\ (A) 6\\%\\\\ (B) 50\\%\\\\ (C) 68\\%\\\\ (D) 73\\% \\end{array}$$</h1>",
+    "answer": "C"
+  },
+  {
+    "id": 15,
+    "content": "<h1>$$\\begin{array}{lr} 如圖(六),\\triangle{ABC}中,D點在\\overline{AB}上,E點在\\overline{BC}上,\\\\ \\overline{DE}為\\overline{AB}的中垂線。若\\angle{B}=\\angle{C},且\\angle{EAC}>90^{\\circ},\\\\ 則根據圖中標示的角,判斷下列敘述何者正確？ \\end{array}$$</h1><div class='container-00'><div class='left-00'><h2>$$ \\begin{array}{lr} (A)\\large \\angle{1}=\\angle{2}，\\angle{1}<\\angle{3}\\\\ (B)\\large \\angle{1}=\\angle{2}，\\angle{1}>\\angle{3}\\\\ (C)\\large \\angle{1}\\ne\\angle{2}，\\angle{1}<\\angle{3}\\\\ (D)\\large \\angle{1} \\ne \\angle{2}，\\angle{1}<\\angle{3} \\end{array} $$</h2></div><div class='right-00'><img src='ppicture/111-15.jpg' width='600' height='80'></div></div>",
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "content": "<h2>$$\\begin{array}{lr} \\large 緩降機是火災發生時避難的逃生設備, \\large 圖(七)是廠商提供的緩降機\\\\ \\large 安裝示意圖,圖中呈現在三樓安裝緩降機時,\\\\ \\large 使用此緩降機直接緩降到一樓地面的所需繩長(不計安全帶)。\\\\ \\large 若某棟建築的每個樓層高度皆為3公尺，\\\\ \\large 則根據圖(七)的安裝方式在該建築八樓安裝緩降機時,\\\\ \\large 使用此緩降機直接緩降到一樓地面的所需繩長(不計安全帶)\\\\ \\large 為多少公尺？ \\end{array}$$</h2><div class='container-00'><div class='left-01'><h1>$$ \\begin{array}{lr} (A)21.7\\\\ (B)22.6\\\\ (C)24.7\\\\ (D)25.6 \\end{array} $$</h1></div><div class='right-00'><img src='ppicture/111-16.jpg' width='400' height='50'></div></div>",
+    "answer": "A"
+  },
+  {
+    "id": 17,
+    "content": "<h1>$$\\begin{array}{lr} 圖(八)為兩直線L、M與\\triangle{ABC}相交的情形,\\\\ 其中L、M分別與\\overline{BC}、\\overline{AB}平行。\\\\ 根據圖中標示的角度,求\\angle{B}的度數為何? \\end{array}$$</h1><div class='wrapper-00'><div class='container-00'><div class='left-00'><h1>$$ \\begin{array}{lr} (A) 55\\\\ (B) 60\\\\ (C) 65\\\\ (D) 70 \\end{array} $$</h1></div><div class='right-00'><img src='ppicture/111-17.jpg' width='400' height='50'></div></div></div>",
+    "answer": "A"
+  },
+  {
+    "id": 18,
+    "content": "<h1>$某鞋店正舉辦開學特惠活動,圖(九)為活動說明。$<div><img src='ppicture/111-18.jpg' width='700' height='300'></div>$$\\begin{array}{l} \\underline{小徹}打算在該店同時購買一雙球鞋及一雙皮鞋,\\\\且他有一張所有購買的商品定價皆打8折的折價券。\\\\ 若\\underline{小徹}計算後發現:\\\\ 使用折價券與參加特惠活動兩者的花費相差50元,\\\\ 則下列敘述何者正確?\\end{array}$$<div class='right-00'>$$\\begin{array}{l} (A)使用折價券的花費較少,且兩雙鞋的定價相差100 元 \\\\ (B)使用折價券的花費較少,且兩雙鞋的定價相差250 元\\\\ (C)參加特惠活動的花費較少,且兩雙鞋的定價相差 100 元\\\\ (D)參加特惠活動的花費較少,且兩雙鞋的定價相差 250 元\\\\ \\end{array}$$</div></h1>",
+    "answer": "B"
+  },
+  {
+    "id": 19,
+    "content":  "<h1>$$\\begin{array}{lr} 圖(十),\\triangle{ABC}的重心為G,\\overline{BC}的中點為D,今以G為圓心,\\\\ \\overline{GD}長為半徑畫一圓,且作A點到圓G的兩切線段\\overline{AE}、\\overline{AF},\\\\ 其中E、F均為切點。根據圖中標示的角與角度,\\\\ 求\\angle{1}與\\angle{2}的度數和為多少? \\end{array}$$</h1><div class='container-00'><div class='left-01'><h1>$$\\begin{array}{lr} (A)30\\\\ (B)35\\\\ (C)40\\\\ (D)45\\\\ \\end{array}$$</h1></div><div class='right-01'><img src='ppicture/111-19.jpg' width='700' height='400'></div></div>",
+    "answer": "B"
+  },
+  {
+    "id": 20,
+    "content": "<h1>$$\\begin{array}{lr} 圖(十一)為一張正三角形紙片ABC,其中D點在\\overline{AB}上,\\\\ E點在\\overline{BC}上。今以\\overline{DE}為摺線將B點往右摺後,\\\\ \\overline{BD}、\\overline{BE}分別與\\overline{AC}相交於F點、G點，如圖(十二) 所示。\\\\ 若\\overline{AD}=10,\\;\\overline{AF}=16,\\;\\overline{DF}=14,\\;\\overline{BF}=8,\\;\\\\ 則\\overline{CG}的長度為多少？ \\end{array}$$</h1><div class='container-00'><div class='left-01'><h1>$$\\begin{array}{lr} (A)7\\\\ (B)8\\\\ (C)9\\\\ (D)10\\\\ \\end{array}$$</h1></div><div class='right-01'><img src='ppicture/111-20.jpg' width='700' height='300'></div></div>",
+    "answer": "C"
+  },
+  {
+    "id": 21,
+    "content": "<h1>$$\\begin{array}{lr} 有一直徑為\\overline{AB}的圓，且圓上有C、D、E、F四點，\\\\ 如圖(十三)所示。若\\overline{AC}=6,\\;\\overline{AD}=8,\\;\\overline{AE}=5,\\;\\\\ \\overline{AF}=9,\\;\\overline{AB}=10,\\;則下列弧長關係何者正確？ \\end{array}$$</h1><div class='container-00'><div class='left-00'><h2>$$\\begin{array}{lr} \\large(A)\\overset{\\frown}{AC}+\\overset{\\frown}{AD}=\\overset{\\frown}{AB},\\\\ \\large\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF}=\\overset{\\frown}{AB}\\\\ \\large(B)\\overset{\\frown}{AC}+\\overset{\\frown}{AD}=\\overset{\\frown}{AB},\\\\ \\large\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF} \\ne \\overset{\\frown}{AB}\\\\ \\large(C)\\overset{\\frown}{AC}+\\overset{\\frown}{AD} \\ne \\overset{\\frown}{AB},\\\\ \\large\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF} = \\overset{\\frown}{AB}\\\\ \\large(D)\\overset{\\frown}{AC}+\\overset{\\frown}{AD} \\ne \\overset{\\frown}{AB},\\\\ \\large\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF} \\ne \\overset{\\frown}{AB}\\\\ \\end{array}$$</h2></div><div class='right-00'><img src='ppicture/111-21.jpg' width='400' height='80'></div></div>",
+    "answer": "B"
+  },
+  {
+    "id": 22,
+    "content": "<h1>$$\\begin{array}{lr} 二次函數y=-(x+6)^2+5的圖形，\\\\已知函數圖形與x軸相交於(a,0)、(b,0)兩點,其中a < b。\\\\ 今將此函數圖形往上平移,平移後函數圖形與x軸相交於\\\\ (c,0)、(d,0)兩點，其中c < d,\\\\ 判斷下列敘述何者正確? \\end{array}$$</h1><div class='container-00'><div class='right-00'><h1>$$\\begin{array}{lr} (A)(a+b)=(c+d)\\;,(b - a)<(d - c)\\\\ (B)(a+b)=(c+d)\\;,(b - a) > (d - c)\\\\ (C)(a+b)<(c+d)\\;,(b - a) < (d - c)\\\\ (D)(a+b)<(c+d)\\;,(b - a) > (d - c)\\\\ \\end{array}$$</h1></div></div>",
+    "answer": "A"
+  },
+  {
+    "id": 23,
+    "content": "<h1>$$\\begin{array}{l}\\triangle{ABC}的邊上有D、E、F三點,各點位置如圖(十四)所示。\\\\ 若\\angle{B}=\\angle{FAC},\\;\\overline{BD}=\\overline{AC},\\;\\angle{BDE}=\\angle{C},\\\\ 則根據圖中標示的長度,\\\\ 求四邊形ADEF與\\triangle{ABC}的面積比為何? \\end{array}$$</h1><div class='wrapper-00'><div class='container-00'><div class='left-01'><h1>$$\\begin{array}{lr} (A)1:3\\\\ (B)1:4\\\\ (C)2:5\\\\ (D)3:8\\\\ \\end{array}$$</h1></div><div class='right-00'><img src='ppicture/111-23.jpg' width='500' height='80'></div></div></div>",
+    "answer": "D"
+  },
+  {
+    "id": 24,
+    "content": "<h1>$$ {\\color{red}\\blacksquare}請閱讀下列敘述後，回答(24)～(25)題,$$</h1><h2>$$\\boxed{\\begin{array}{c} \\large \\text{表（一）} \\\\ \\begin{array}{|c|c|c|c|c|} \\hline \\large PA燈管類別 & 直徑(毫米) & 長度(毫米) & 功率(瓦) & 光通量(流明) \\\\ \\hline \\large PA-20 & 25.4 & 580 & 20 &1440  \\\\ \\hline \\large PA-30 & 25.4 & 895 &30  &2340  \\\\ \\hline \\large PA-40 & 25.4 & 1198 &40  &3360  \\\\ \\hline \\end{array}  \\\\ \\large \\text{表（二）} \\\\ \\begin{array}{|c|c|c|c|c|} \\hline \\large PA燈管類別 & 直徑(毫米) & 長度(毫米) &功率(瓦)&光通量(流明) \\\\ \\hline \\large PB-14 &15.8&549&14&1200\\\\ \\hline \\large PB-28 &15.8&1149&28&2600 \\\\ \\hline \\end{array} \\end{array}}$$</h2><h2><p>$ \\color{red}{第 24 題}$：</p>$$\\begin{array}{lr} \\large已知日光燈管的發光效率為光通量與功率的比值,\\\\ \\large甲、乙兩人根據表(一)、表(二) 的資訊提出以下看法:\\\\ \\large甲、乙兩人根據表(一)、表(二)的資訊提出以下看法:\\\\ \\large(甲)PA-20日光燈管的發光效率比PB-14日光燈管高。\\\\ \\large(乙)PA日光燈管中，功率較大的燈管其發光效率較高。\\\\ \\large關於甲、乙兩人的看法,下列敘述何者正確？ \\end{array}$$</h2><div class='wrapper-00'><div class='container-00'><div class='left-00'><h2>$$\\begin{array}{lr} \\large(A)甲、乙皆正確\\\\ \\large(B)甲、乙皆錯誤\\\\ \\large(C)甲正確，乙錯誤\\\\ \\large(D)甲錯誤，乙正確\\\\ \\end{array}$$</h2></div></div></div>",
+    "answer": "D"
+  },
+  {
+    "id": 25,
+    "content": "<h2 style='font-size:30px;'>$$\\begin{array}{c} \\text{有一間公司請水電工程廠商安裝日光燈管,廠商提供兩種方案如表(三) 所示。}\\\\ \\large\\text{表(三)} \\\\ \\begin{array}{|c|c|c|} \\hline \\large 方案 & 施工內容 & 施工費用(含材料費) \\\\ \\hline \\large 基本方案 & 安裝90支 PA-40日光燈管 &45000元 \\\\ \\hline \\large 省電方案 & 安裝120支 PB-28日光燈管&60000元  \\\\ \\hline \\end{array}  \\end{array}$$</h2><h2 style='font-size:28px;'>$$\\begin{array}{lr} 已知n支功率皆為w瓦的燈管都使用t小時後消耗的電能(度)= \\frac{n}{1000}\\times w \\times t,\\\\ 若每支燈管使用時間皆相同,且只考慮燈管消耗的電能並以每度5元計算電費,\\\\ 則兩種方案相比,燈管使用時間至少要超過多少小時,\\\\ 採用省電方案所節省的電費才會高於兩者相差的施工費用? \\end{array}\\\\$$</h2><h1>$$\\begin{array}{lr} (A)12200\\\\ (B)12300\\\\ (C)12400\\\\ (D)12500\\\\ \\end{array}$$</h1>",
+    "answer": "D"
+  },
+  {
+    "id": 26,
+    "type": "非選擇題",
+    "content": "<h1><p>$ \\color{red}{非選擇}$_第 1 題：</p></h1><h2>$$\\begin{array}{lr} \\large\\underline{健康生技公司}培養綠藻以製作「綠藻粉」,\\\\ \\large再經過後續的加工步驟,製成綠藻相關的保健食品。\\\\ \\large已知該公司製作每1公克的「綠藻粉」需要60億個綠藻細胞。\\\\ \\end{array}$$ $$請根據上述資訊回答下列問題,完整寫出你的解題過程並詳細解釋:$$</h2><h2>$$ \\begin{array}{lr} \\large(1)假設在光照充沛的環境下,1個綠藻細胞每20小時\\\\ \\large\\quad\\;可分裂成 4 個綠藻細胞,且分裂後的細胞亦可繼續分裂。\\\\ \\large\\quad\\;今從 1 個綠藻細胞開始培養,若培養期間綠藻細胞皆未死亡\\\\ \\large\\quad\\;且培養環境的光照充沛,經過 15 天後,共分裂成4^k個綠藻細胞,\\\\ \\end{array}$$ $\\large\\quad\\;則 k 之值為何?$<select><option hidden>答案：</option><option>k＝18</option></select><br><br> $\\large(2)承(1),已知60億介於2^{32}與2^{33}之間,$<br> $\\large\\quad\\;請判斷4^k個綠藻細胞是否足夠製作8公克的「綠藻粉」$ <select><option hidden>答案：</option><option>足夠製作</option></select> </h2>",
+    "answer": {
+    }
+  },
+  {
+    "id": 27,
+    "type": "非選擇題",
+    "content": "<h1><p>$ \\color{red}{非選擇}$_第 2 題：</p></h1><h1>$$ \\begin{array}{lr} 小儀利用一副撲克牌摺疊出一個環套,如圖(十六)所示。\\\\ 環套的上視圖為邊長6公分的正八邊形,如圖(十七)所示。 \\end{array}$$</h1><div class=\"right-00\"> <img src=\"ppicture/112-27-1.jpg\" width=\"230\" height=\"80\" style=\"margin-right: 40px;\"><img src=\"ppicture/112-27-2.png\" width=\"230\" height=\"80\"></div><h2>$$ \\begin{array}{lr} 請根據上述資訊回答下列問題，完整寫出你的解題過程並詳細解釋： \\end{array}$$</h2><h1>$(1)圖(十七)的正八邊形的一個內角度數為多少?$<select><option hidden>答案：</option><option>135°</option></select></h1><h1>$ (2)已知有一個圓柱形花瓶其底面半徑為8公分,$ $\\quad\\;假設不考慮花瓶與環套厚度,$ $\\quad\\;判斷圖(十六)的環套是否能在不變形的前提下, $ $\\quad\\;套在此圓柱形花瓶側面外圍?$<select><option hidden>答案：</option><option>不能</option></select></h1><div class=\"right-00\"> <img src=\"ppicture/112-27-3.jpg\" width=\"500\" height=\"80\"></div>",
+    "answer": {
+    }
+  }
+
+  
+]

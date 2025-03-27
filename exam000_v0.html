@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathJax_Demo</title>
+
+  <!-- MathJax 配置 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']], // 行內公式
+        displayMath: [['$$', '$$'], ['\\[', '\\]']], // 區塊公式
+        displayAlign: 'left',
+        displayIndent: "0em",
+        displayWidth: "100%"
+      },
+      chtml: {
+        displayAlign: 'left'
+      },
+      svg: {
+        displayAlign: 'left'
+      }
+    };
+  </script>
+  <script type="text/javascript" src="mathjax/es5/tex-svg.js"></script> 
+
+  <style>
+    body {
+      font-family: Arial, sans-serif; /* 設定全站字型為 Arial 或 sans-serif 類型 */
+      background: #d5d4d4; /* 設定頁面背景顏色 */
+      margin: 0; /* 移除預設邊距 */
+      padding: 20px; /* 設定內距，讓內容不會貼齊頁面邊緣 */
+      text-align: center; /* 讓頁面內容置中對齊 */
+    }
+
+
+    .tabs {
+      display: grid; /* 使用 Grid 佈局來排列 tab */
+      flex-wrap: wrap; /* 允許 tab 在超出範圍時自動換行 */
+      justify-content: center; /* 讓所有 tab 水平置中 */
+      align-items: center; /* 保證每行的 tab 垂直置中對齊 */
+      margin-bottom: 10px; /* 與下方內容保留間距 */
+      gap: 0px; /* 控制 tab 之間的間隔 */
+      max-width: 100%; /* 確保 tab 不會超出容器範圍 */
+     /*border: 2px solid #d61020;*/
+    }
+
+    .tab {
+      background: #007bff; /* 設定 tab 預設背景顏色（藍色） */
+      color: white; /* 設定 tab 文字顏色為白色 */
+      border-radius: 45%; /* 讓 tab 呈現圓角 */
+      cursor: pointer; /* 設定滑鼠游標為可點擊狀態 */
+      transition: background 0.3s ease, border 0.3s ease; /* 添加 hover 過渡效果 */
+      display: flex; /* 使用 flex 佈局來置中內容 */
+      align-items: center; /* 讓 tab 內的數字垂直置中 */
+      justify-content: center; /* 讓 tab 內的數字水平置中 */
+      width: 45px; /* 設定 tab 的寬度 */
+      height: 45px; /* 設定 tab 的高度 */
+      font-size: 20px; /* 設定 tab 內文字大小 */
+      box-sizing: border-box; /* 讓寬高計算包含 padding 和 border */
+      margin: 4px; /* 控制 tab 之間的間距 */
+    }
+
+    .tab:hover {
+      background: #0056b3; /* 滑鼠懸停時變深藍色 */
+    }
+
+    .tab.active {
+      background: white; /* 當 tab 被選取時變為白色 */
+      color: #007bff; /* 文字顏色變為藍色 */
+      border: 2px solid #007bff; /* 加上藍色邊框 */
+    }
+
+    .tab-content {
+      display: none; /* 預設隱藏 tab 內容 */
+      background: #ffffff; /* 設定內容背景顏色為白色 */
+      padding: 20px; /* 設定內距，讓內容有適當空間 */
+      border: 8px solid #e35f00; /* 設定內容的外框顏色（橙色） */
+      border-radius: 20px; /* 設定圓角邊框 */
+      margin-top: 10px; /* 與上方 tab 保留間距 */
+      max-width: 1000px; /* 限制內容最大寬度 */
+      margin: 10px auto; /* 讓內容置中 */
+      text-align: left; /* 讓內容靠左對齊 */
+      overflow-wrap: break-word; /* 讓長單字或網址自動換行 */
+      word-break: break-word; /* 讓內容在必要時自動換行 */
+      white-space: normal; /* 設定空白處理方式，讓文字正常換行 */
+      overflow-x: hidden; /* 隱藏超出範圍的水平滾動條 */
+      min-height: 200px; /* 設定最小高度 */
+      height: auto; /* 讓高度自適應內容 */
+    }
+
+    .tab-content.active {
+      display: block; /* 當 tab 被選取時，顯示內容 */
+    }
+
+    .question-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .question-title {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .select-container {
+      margin-left: 10px;
+    }
+
+    select {
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+
+    .question-content {
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .wrapper-00 {
+      display: block; /* 設定為區塊元素 */
+      width: 100%; /* 讓區塊佔滿容器寬度 */
+      max-width: 1200px; /* 設定最大寬度為 1200px */
+      min-width: 300px; /* 設定最小寬度為 300px */
+      resize: horizontal; /* 允許使用者水平縮放區塊 */
+      overflow: hidden; /* 隱藏超出內容 */
+      margin-top: 10px; /* 與上方內容保留間距 */
+      overflow-wrap: break-word; /* 讓內容在必要時換行 */
+      white-space: normal; /* 讓文字正常換行 */
+    }
+
+    .container-00 {
+      display: flex; /* 使用 flex 佈局讓子元素並排 */
+      width: 100%; /* 設定容器寬度為 100% */
+      border-radius: 10px; /* 設定圓角 */
+      background: white; /* 設定背景顏色為白色 */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 添加陰影效果 */
+      overflow: hidden; /* 隱藏超出內容 */
+      padding: 5px; /* 設定內距 */
+      margin: 0px; /* 移除外距 */
+      align-items: stretch; /* 讓內部元素填滿容器 */
+    }
+
+    .left-00 {
+      width: 40%;
+      min-width: 100px;
+      max-width: 500px;
+      resize: horizontal;
+      overflow: auto;
+      padding: 0px;
+      margin: 0px;
+      background-color: white;
+    }
+
+    .right-00 {
+      flex: 1; /* 讓 right-00 佔滿剩餘空間 */
+      display: flex; /* 使用 flex 佈局 */
+      justify-content: center; /* 讓內容水平置中 */
+      align-items: center; /* 讓內容垂直置中 */
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .left-01 {
+      width: 20%;
+      min-width: 100px;
+      max-width: 300px;
+      resize: horizontal;
+      overflow: auto;
+      padding: 0px;
+      margin: 0px;
+    }
+    .left-02 {
+      width: 50%;
+      min-width: 100px;
+      max-width: 400px;
+      resize: horizontal;
+      overflow: auto;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .right-01 {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .right-00 img {
+      max-width: 100%; /* 讓圖片不超出容器 */
+      height: auto; /* 讓圖片高度自適應 */
+    }
+
+    .img-container {                              
+      display: flex;  /*讓圖片以彈性佈局排列 */     
+      gap: 10px;        /*設定圖片間距 */                               
+      flex-wrap: wrap;  /*讓圖片超出範圍時換行 */                   
+      max-width: 100%;  /*讓容器適應父元素 */
+    }
+    .img-container-grid {                              
+        display: grid;
+        grid-template-columns: repeat(4, auto); /* 4 列 */
+        grid-template-rows: repeat(2, auto); /* 2 行 */
+        column-gap: 0px; /* 縮小欄之間的距離 */
+        row-gap: 10px; /* 控制行之間的距離 */
+        align-items: left; /* 讓文字與圖片垂直置中 */
+    }
+    
+    /* 新增每 10 題換行容器 */
+    .tab-row {
+      display: flex;/* 使用Flexbox布局，使子元素可以靈活排列 */
+      flex-wrap: wrap;/* 子元素超出容器寬度時，允許自動換行 */
+      justify-content: flex-start; /* 保證每行的tab數字都居中 */
+      width: 100%;/* 設定容器寬度為100%，即充滿其父元素 */
+      margin-bottom: 5px; /* 設定容器底部的外邊距為5px */
+    }
+
+    .tab-row > .tab {
+      margin-left: 0; 
+    }
+
+    /* 使每個tab數字上下對齊 */
+    .tab-row > .tab:nth-child(n+11) {
+      margin-left: 0px; /* 適當調整每行位置 */
+    }
+
+    /* 使title標題和下拉選單位置擺放一起 */
+    .title-container {
+      display: flex; /* 讓標題與下拉選單並排 */
+      align-items: center; /* 讓內容垂直置中 */
+      justify-content: center; /* 讓標題與選單置中對齊 */
+      gap: 35px; /* 控制 h1 和 select 之間的距離 *//* 設定標題與選單之間的間距 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="title-container">
+    <h1 id="title">歷屆會考試題</h1>
+    <select id="yearSelect">
+      <option value="" selected disabled>請選擇年度</option>
+      <option value="S_QA113.json">113 年</option>
+      <option value="S_QA112.json">112 年</option>
+      <option value="S_QA111.json">111 年</option>
+      <option value="S_QA110.json">110 年</option>
+    </select>
+  </div>
+  <div class="tabs"></div>
+  <div class="tab-contents"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabsContainer = document.querySelector(".tabs");
+      const contentsContainer = document.querySelector(".tab-contents");
+      const yearSelect = document.getElementById("yearSelect");
+      const title = document.getElementById("title");
+
+      function loadQuestions(jsonFile) {
+        fetch(jsonFile)
+          .then(response => response.json())
+          .then(data => {
+            tabsContainer.innerHTML = "";
+            contentsContainer.innerHTML = "";
+            let tabRow; // 用來存放每 10 題一行
+            
+            data.forEach((item, index) => {
+              if (index % 15 === 0) {
+                tabRow = document.createElement('div');
+                tabRow.classList.add('tab-row');
+                tabsContainer.appendChild(tabRow);
+              }
+              
+              const tab = document.createElement("div");
+              tab.classList.add("tab");
+              tab.setAttribute("data-tab", `tab${index + 1}`);
+              tab.innerText = index + 1;
+              tabRow.appendChild(tab);
+              
+              const content = document.createElement("div");
+              content.classList.add("tab-content");
+              content.setAttribute("id", `tab${index + 1}`);
+
+              const correctAnswer = item.answer;
+
+              let options = `<option hidden>答案:</option>`;
+              options += `<option>${correctAnswer}</option>`;
+
+              content.innerHTML = `
+              <div class="question-container">
+                <div class="question-title"><h1>第 \\( ${index + 1} \\) 題</h1></div>
+                <div class="select-container">
+                  <p><select>
+                    ${options}
+                  </select></p>
+                </div>
+              </div>
+              <div class="question-content">
+                <h2>${item.content}</h2>
+              </div>
+            `;
+              contentsContainer.appendChild(content);
+            });
+            
+            document.querySelectorAll(".tab").forEach(tab => {
+              tab.addEventListener("click", function() {
+                document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+                document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+                this.classList.add("active");
+                document.getElementById(this.getAttribute("data-tab")).classList.add("active");
+                MathJax.typesetPromise();
+              });
+            });
+          });
+      }
+
+      yearSelect.addEventListener("change", function() {
+        title.innerText = this.options[this.selectedIndex].text + "會考試題";
+        loadQuestions(this.value);
+      });
+
+      /*loadQuestions(yearSelect.value);*/
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>數學題庫系統 - 整合版</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    body { font-family: "Microsoft JhengHei", sans-serif; background: #f9f9f9; margin: 0; padding: 0; }
+    .container { display: flex; height: 100vh; }
+    .sidebar { width: 300px; background: #34495e; color: #fff; overflow-y: auto; padding: 20px; }
+    .sidebar h2 { font-size: 20px; margin-bottom: 15px; }
+    .accordion-item { margin-bottom: 10px; }
+    .accordion-header { cursor: pointer; background: #2c3e50; padding: 10px; border-radius: 5px; }
+    .accordion-content { display: none; padding-left: 20px; }
+    .accordion-content div { cursor: pointer; padding: 8px; background: #3c5a73; border-radius: 5px; margin-bottom: 5px; }
+    .accordion-content div:hover { background: #4b6a87; }
+    .content { flex: 1; padding: 20px; overflow-y: auto; }
+    .question-container { background: #fff; border-radius: 10px; box-shadow: 0 0 10px #ccc; margin-bottom: 20px; overflow: hidden; }
+    .question-header { padding: 10px; background: #3498db; color: #fff; font-size: 18px; }
+    .resizable { display: flex; }
+    .question-image-container, .question-options { padding: 15px; overflow: auto; min-width: 150px; }
+    .question-image-container { background: #f0f0f0; width: 50%; }
+    .question-options { background: #fefefe; width: 50%; }
+    .drag-handle { cursor: ew-resize; width: 8px; background: #ccc; }
+    .option { margin-bottom: 10px; padding: 8px; border-radius: 5px; background: #ecf0f1; }
+    .load-more { display: flex; justify-content: center; align-items: center; margin: 20px auto; width: 60px; height: 60px; background: #3498db; color: #fff; border-radius: 50%; cursor: pointer; font-size: 24px; }
+    .answer-select { margin: 10px; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 左側目錄 -->
+    <div class="sidebar">
+      <h2>內容目錄</h2>
+      <div id="accordion"></div>
+    </div>
+
+    <!-- 右側題目內容 -->
+    <div class="content">
+      <div id="questions"></div>
+      <div class="load-more"><i class="fas fa-plus"></i></div>
+    </div>
+  </div>
+
+  <script>
+    const units = 8;
+    const batchSize = 3;
+    let currentData = [], currentIndex = 0;
+
+    // 動態產生目錄
+    $(function() {
+      for (let i = 1; i <= units; i++) {
+        let unitHtml = `
+          <div class="accordion-item">
+            <div class="accordion-header">✔ 單元 ${i}</div>
+            <div class="accordion-content">
+              <div data-json="S_QA${110 + i - 1}.json">載入題庫</div>
+            </div>
+          </div>`;
+        $('#accordion').append(unitHtml);
+      }
+    });
+
+    // 目錄展開收合
+    $(document).on('click', '.accordion-header', function() {
+      $(this).next('.accordion-content').slideToggle();
+    });
+
+    // 點擊載入題庫
+    $(document).on('click', '.accordion-content div', function() {
+      let jsonFile = $(this).data('json');
+      loadJson(jsonFile);
+    });
+
+    // 載入JSON
+    function loadJson(file) {
+      $.getJSON(file, function(data) {
+        currentData = data;
+        currentIndex = 0;
+        $('#questions').empty();
+        loadNextBatch();
+      });
+    }
+
+    // 批次載入題目
+    function loadNextBatch() {
+      let endIndex = Math.min(currentIndex + batchSize, currentData.length);
+      for (let i = currentIndex; i < endIndex; i++) renderQuestion(currentData[i]);
+      currentIndex = endIndex;
+      MathJax.typeset();
+    }
+
+    // 顯示單題
+    function renderQuestion(q) {
+      let questionHtml = `
+        <div class="question-container">
+          <div class="question-header">第 ${q.id} 題</div>
+          <div class="resizable">
+            <div class="question-image-container">${q.content}${q.image ? `<img src="${q.image}" width="${q.width}" height="${q.height}">` : ''}</div>
+            <div class="drag-handle"></div>
+            <div class="question-options">${q.options.map(opt => `<div class="option">${opt}</div>`).join('')}</div>
+          </div>
+          <div class="answer-select">正確答案：${q.answer}</div>
+        </div>`;
+      $('#questions').append(questionHtml);
+    }
+
+    // 批次載入按鈕
+    $('.load-more').click(() => {
+      if (currentIndex < currentData.length) loadNextBatch();
+    });
+
+    // 拉動功能
+    $(document).on('mousedown', '.drag-handle', function(e) {
+      const $resizable = $(this).closest('.resizable');
+      const $left = $resizable.find('.question-image-container');
+      const $right = $resizable.find('.question-options');
+      const startX = e.pageX;
+      const startLeftWidth = $left.width();
+
+      $(document).on('mousemove.drag', function(e) {
+        let newLeftWidth = startLeftWidth + (e.pageX - startX);
+        $left.css('width', newLeftWidth);
+        $right.css('width', `calc(100% - ${newLeftWidth + 8}px)`);
+      }).on('mouseup.drag', function() {
+        $(document).off('.drag');
+      });
+    });
+  </script>
+</body>
+</html>

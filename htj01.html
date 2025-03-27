@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>單元</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; }
+    .question-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
+    .question-top { font-size: 18px; margin-bottom: 10px; border: 4px solid #06e311;}
+    .option-image-container {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      border: 16px solid #d61020;
+      position: relative;
+    }
+    .question-options {
+      width: 30%; 
+      font-size: 18px; 
+      line-height: 1.8;
+      word-break: break-word;
+      border: 18px solid #2c0695;
+      min-width: 150px;
+    }
+    .question-image-container {
+      width: 45%; 
+      text-align: left;
+      border: 12px solid #eaf204;
+      min-width: 150px;
+    }
+    .question-image {
+      max-width: 100%; 
+      max-height: 300px;
+      height: auto; 
+      border: 10px solid #1b1a1a;
+      object-fit: contain;
+    }
+    .answer-select {
+      margin-left: 20px;
+      font-size: 16px;
+      padding: 4px 8px;
+      color: #d9534f;
+    }
+    #loadMoreBtn {
+      background-color: #007bff; 
+      color: white; 
+      border: none; 
+      border-radius: 5px; 
+      cursor: pointer; 
+      padding: 10px 20px;
+    }
+    #loadMoreBtn:hover { background-color: #0056b3; }
+    .resizer {
+      width: 8px;
+      cursor: ew-resize;
+      background-color: #aaa;
+      z-index: 10;
+    }
+  </style>
+
+  <!-- Polyfill -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- MathJax 設定 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        displayAlign: 'left'
+      },
+      chtml: { displayAlign: 'left' },
+      svg: { displayAlign: 'left' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <h1>📚 單元</h1>
+  <label for="jsonSelector">選擇單元：</label>
+  <select id="jsonSelector">
+    <option value="htj01.json">htj01.json</option>
+    <option value="htj02.json">htj02.json</option>
+  </select>
+  <button onclick="loadSelectedJSON()">載入題庫</button>
+
+  <div id="question-container"></div>
+  <button id="loadMoreBtn" style="display:none;" onclick="loadMoreQuestions()">載入更多題目</button>
+
+  <script>
+    let allQuestions = [];
+    let currentIndex = 0;
+    const batchSize = 3;
+
+    function loadSelectedJSON() {
+      const selectedFile = document.getElementById('jsonSelector').value;
+      fetch(selectedFile)
+        .then(response => response.json())
+        .then(data => {
+          allQuestions = data;
+          currentIndex = 0;
+          document.getElementById('question-container').innerHTML = '';
+          loadMoreQuestions();
+        })
+        .catch(error => {
+          document.getElementById('question-container').innerHTML = `<p style="color:red;">載入失敗：${error.message}</p>`;
+        });
+    }
+
+    function loadMoreQuestions() {
+      const container = document.getElementById('question-container');
+      const batch = allQuestions.slice(currentIndex, currentIndex + batchSize);
+
+      batch.forEach((q, index) => {
+        let imgWidth = /^\d+$/.test(q.width) ? `${q.width}px` : q.width || '250px';
+        let imgHeight = /^\d+$/.test(q.height) ? `${q.height}px` : q.height || 'auto';
+        let imageHTML = q.image ? `<img src="${q.image}" class="question-image" style="width:${imgWidth}; height:${imgHeight};">` : '';
+
+        container.innerHTML += `
+          <div class="question-card">
+            <div>
+              <span style='font-size:30px;'>第 ${currentIndex + index + 1} 題</span>
+              <select class="answer-select">
+                <option hidden>答案</option>
+                <option>${q.answer}</option>
+              </select>
+            </div>
+            <div class="question-top">${q.content}</div>
+            <div class="option-image-container">
+              <div class="question-options">${(q.options || []).map(opt => `<div>${opt}</div>`).join('')}</div>
+              <div class="resizer"></div>
+              <div class="question-image-container">${imageHTML}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      currentIndex += batchSize;
+      document.getElementById('loadMoreBtn').style.display = (currentIndex < allQuestions.length) ? 'inline-block' : 'none';
+      MathJax.typesetPromise();
+      initResizers();
+    }
+
+    // 拉伸功能
+    function initResizers() {
+      let isResizing = false, currentResizer, leftBox, rightBox, startX, startWidth;
+
+      document.querySelectorAll('.resizer').forEach(resizer => {
+        resizer.onmousedown = e => {
+          isResizing = true;
+          currentResizer = resizer;
+          leftBox = resizer.previousElementSibling;
+          rightBox = resizer.nextElementSibling;
+          startX = e.clientX;
+          startWidth = leftBox.offsetWidth;
+          document.body.style.cursor = 'ew-resize';
+          e.preventDefault();
+        };
+      });
+
+      window.onmousemove = e => {
+        if (!isResizing) return;
+        const dx = e.clientX - startX;
+        const newWidth = startWidth + dx;
+        if (newWidth > 100) { // 限制最小寬度
+          leftBox.style.width = `${newWidth}px`;
+        }
+      };
+
+      window.onmouseup = () => {
+        if (isResizing) {
+          isResizing = false;
+          document.body.style.cursor = 'default';
+        }
+      };
+    }
+  </script>
+</body>
+</html>

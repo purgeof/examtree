@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <title>數學題庫系統</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      font-family: "微軟正黑體", sans-serif;
+      background: #f9f9f9;
+    }
+
+    /* 目錄外框 */
+    #toc {
+      width: 200px;
+      background: #fff;
+      border: 1px solid #333;
+      padding: 5px;
+      margin: 10px;
+    }
+
+    /* 標題 */
+    #toc-title {
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .menu-icon::before {
+      content: "≣";
+      font-size: 24px;
+      margin-right: 5px;
+    }
+
+    .collapse-btn {
+      font-size: 24px;
+      cursor: pointer;
+      transform: rotate(0deg);
+      transition: transform 0.3s;
+    }
+
+    .collapsed .collapse-btn {
+      transform: rotate(-90deg);
+    }
+
+    /* 內層樣式 */
+    .toc-item {
+      margin-left: 20px;
+      line-height: 1.8;
+    }
+
+    /* 展開按鈕改版：圓圈+箭頭 */
+    .toggle-sub {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 1px solid #555;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-right: 5px;
+      user-select: none;
+    }
+
+    .toggle-sub.collapsed::after {
+      content: "►";
+    }
+
+    .toggle-sub.expanded::after {
+      content: "▼";
+    }
+
+    /* 編號 */
+    .toc-number {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .toc-link {
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .toc-link:hover {
+      color: green;
+      text-decoration: underline;
+    }
+
+    /* 題目區塊 */
+    #questions-container {
+      margin: 10px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #aaa;
+      max-width: 800px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 目錄 -->
+  <div id="toc">
+    <div id="toc-title">
+      <span class="menu-icon"></span> 內容目錄
+      <span class="collapse-btn">⌄</span>
+    </div>
+
+    <div id="toc-content">
+      <div class="toc-item">
+        <span class="toggle-sub collapsed"></span><span class="toc-number">1</span><strong> jQuery 的 $.ajax 方法</strong>
+        <div class="toc-item" style="display:none;">
+          <a class="toc-link" data-json="HTJ.json">1.1 $.ajax 的基本語法</a><br>
+          <a class="toc-link" data-json="HTJ1.json">1.2 $.ajax 參數說明及預設值</a>
+        </div>
+      </div>
+
+      <div class="toc-item">
+        <span class="toggle-sub collapsed"></span><span class="toc-number">2</span><strong> jQuery 的 .get 與 .post 方法</strong>
+        <div class="toc-item" style="display:none;">
+          <a class="toc-link" data-json="HTJ2.json">2.1 .get 方法</a><br>
+          <a class="toc-link" data-json="HTJ3.json">2.2 .post 方法</a>
+        </div>
+      </div>
+
+      <div class="toc-item">
+        <span class="toggle-sub collapsed"></span><span class="toc-number">3</span><strong> .done() 方法與 $.ajax 搭配使用</strong>
+        <div class="toc-item" style="display:none;">
+          <a class="toc-link" data-json="HTJ4.json">3.1 什麼是 .done() 方法？</a><br>
+          <a class="toc-link" data-json="HTJ5.json">3.2 .done() 方法的參數</a><br>
+          <a class="toc-link" data-json="HTJ6.json">3.3 .done() 的基本使用</a><br>
+          <a class="toc-link" data-json="HTJ7.json">3.4 .done() 的應用場景</a>
+        </div>
+      </div>
+
+      <div class="toc-item">
+        <span class="toggle-sub collapsed"></span><span class="toc-number">4</span><strong> 比較 $.ajax.done 與 fetch</strong>
+        <div class="toc-item" style="display:none;">
+          <a class="toc-link" data-json="HTJ8.json">4.1 $.ajax.done 代碼範例</a><br>
+          <a class="toc-link" data-json="HTJ9.json">4.2 fetch 代碼範例</a><br>
+          <a class="toc-link" data-json="HTJ10.json">4.3 差異比較</a><br>
+          <a class="toc-link" data-json="HTJ11.json">4.4 總結</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 題目顯示區 
+  <div id="questions-container">請點擊左側目錄讀取題庫</div>-->
+
+  <script>
+    // 收合總目錄
+    $('#toc-title').click(function () {
+      $('#toc').toggleClass('collapsed');
+      $('#toc-content').slideToggle();
+    });
+
+    // 子目錄展開收合
+    $('.toggle-sub').click(function (e) {
+      e.stopPropagation();
+      const $sub = $(this).nextAll('.toc-item').first();
+      if ($sub.is(':visible')) {
+        $(this).removeClass('expanded').addClass('collapsed');
+        $sub.slideUp();
+      } else {
+        $(this).removeClass('collapsed').addClass('expanded');
+        $sub.slideDown();
+      }
+    });
+
+    // 點擊載入 JSON
+    $('.toc-link').click(function () {
+      const file = $(this).data('json');
+      loadJSON(file);
+    });
+
+    // AJAX 讀 JSON 題庫
+    function loadJSON(file) {
+      $.getJSON(file, function (data) {
+        let html = '';
+        data.forEach(q => {
+          html += `
+            <div class="question-block">
+              <div><strong>題目 ${q.id}：</strong>${q.content}</div>
+              <div><img src="${q.image}" width="${q.width}" height="${q.height}"></div>
+              <div>${q.options[0]}</div>
+            </div><hr>`;
+        });
+        $('#questions-container').html(html);
+      }).fail(function () {
+        $('#questions-container').html('<p style="color:red;">讀取失敗，請確認 JSON 檔案位置！</p>');
+      });
+    }
+  </script>
+
+</body>
+
+</html>

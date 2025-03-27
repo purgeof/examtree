@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathJax_Demo</title>
+
+  <!-- MathJax 配置 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']], // 行內公式
+        displayMath: [['$$', '$$'], ['\\[', '\\]']], // 區塊公式
+        displayAlign: 'left'
+      },
+      svg: {
+        displayAlign: 'left'
+      }
+    };
+  </script>
+  <script type="text/javascript" src="mathjax/es5/tex-svg.js"></script> 
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #d5d4d4;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    #fontSizeSlider {
+      width: 200px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .tab {
+      background: #007bff;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      margin: 4px;
+    }
+
+    .tab:hover {
+      background: #0056b3;
+    }
+
+    .tab.active {
+      background: white;
+      color: #007bff;
+      border: 2px solid #007bff;
+    }
+
+    .tab-content {
+      display: none;
+      background: #ffffff;
+      padding: 20px;
+      border: 8px solid #e35f00;
+      border-radius: 20px;
+      margin-top: 10px;
+      max-width: 1000px;
+      margin: 10px auto;
+      text-align: left;
+      word-break: break-word;
+      white-space: normal;
+      min-height: 200px;
+      font-size: 28px; /* 預設字體大小 */
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .question-title {
+      font-size: 20px;
+    }
+
+    .question-content {
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="title-container">
+    <h1 id="title">歷屆會考試題</h1>
+    <select id="yearSelect">
+      <option value="" selected disabled>請選擇年度</option>
+      <option value="S_QA113.json">113 年</option>
+      <option value="S_QA112.json">112 年</option>
+      <option value="S_QA111.json">111 年</option>
+      <option value="S_QA110.json">110 年</option>
+    </select>
+    <div>
+      <label for="fontSizeSlider">字體大小：</label>
+      <input type="range" id="fontSizeSlider" min="16" max="48" value="28">
+      <span id="fontSizeValue">28</span>px
+    </div>
+  </div>
+
+  <div class="tabs"></div>
+  <div class="tab-contents"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabsContainer = document.querySelector(".tabs");
+      const contentsContainer = document.querySelector(".tab-contents");
+      const yearSelect = document.getElementById("yearSelect");
+      const title = document.getElementById("title");
+      const fontSizeSlider = document.getElementById("fontSizeSlider");
+      const fontSizeValue = document.getElementById("fontSizeValue");
+
+      function wrapText(text, maxLength) {
+        let result = "";
+        let count = 0;
+        for (let i = 0; i < text.length; i++) {
+          result += text[i];
+          if (text[i].match(/[\u4e00-\u9fa5]/)) { // 只計算中文字
+            count++;
+          }
+          if (count >= maxLength) {
+            result += "<br>";
+            count = 0;
+          }
+        }
+        return result;
+      }
+
+      function loadQuestions(jsonFile) {
+        fetch(jsonFile)
+          .then(response => response.json())
+          .then(data => {
+            tabsContainer.innerHTML = "";
+            contentsContainer.innerHTML = "";
+
+            data.forEach((item, index) => {
+              const tab = document.createElement("div");
+              tab.classList.add("tab");
+              tab.setAttribute("data-tab", `tab${index + 1}`);
+              tab.innerText = index + 1;
+              tabsContainer.appendChild(tab);
+
+              const content = document.createElement("div");
+              content.classList.add("tab-content");
+              content.setAttribute("id", `tab${index + 1}`);
+
+              const correctAnswer = item.answer;
+              let options = `<option hidden>答案:</option><option>${correctAnswer}</option>`;
+
+              content.innerHTML = `
+                <div class="question-container">
+                  <div class="question-title"><h1>第 \\( ${index + 1} \\) 題</h1></div>
+                  <div class="select-container">
+                    <select>${options}</select>
+                  </div>
+                </div>
+                <div class="question-content">
+                  <h2>${wrapText(item.content, 30)}</h2>
+                </div>
+              `;
+
+              contentsContainer.appendChild(content);
+            });
+
+            document.querySelectorAll(".tab").forEach(tab => {
+              tab.addEventListener("click", function() {
+                document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+                document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+                this.classList.add("active");
+                document.getElementById(this.getAttribute("data-tab")).classList.add("active");
+                MathJax.typesetPromise();
+              });
+            });
+          });
+      }
+
+      yearSelect.addEventListener("change", function() {
+        title.innerText = this.options[this.selectedIndex].text + " 會考試題";
+        loadQuestions(this.value);
+      });
+
+      fontSizeSlider.addEventListener("input", function() {
+        const size = this.value + "px";
+        fontSizeValue.innerText = this.value;
+        document.querySelectorAll(".tab-content").forEach(content => {
+          content.style.fontSize = size;
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>

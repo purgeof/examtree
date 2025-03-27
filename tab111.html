@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>111MathJax</title>
+
+  <!-- MathJax 配置 -->
+  <script>
+    window.MathJax = {
+      
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']], // 行內公式
+        displayMath: [['$$', '$$'], ['\\[', '\\]']], // 區塊公式
+        displayAlign: 'left',   // 設定塊級公式左對齊
+        displayIndent: "0em",  // 移除縮排
+        displayWidth: "100%"   // 讓公式適應區域大小
+      },
+      chtml: {
+        displayAlign: 'left'    // 使用 CHTML 時左對齊
+      },
+      svg: {
+        displayAlign: 'left'    // 使用 SVG 時左對齊
+      }
+    };
+  </script>
+  <!-- 引入 MathJax -->
+       <script type="text/javascript" src="mathjax/es5/tex-svg.js"></script> 
+      <!--<script type="text/javascript" src="mathjax/es5/tex-mml-svg.js"></script>-->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      text-align: left; /* 確保整體內容左對齊 */
+    }
+    .tabs {
+      display: grid;
+      gap: 5px;
+      justify-content: center;
+      margin-bottom: 5px;
+      grid-template-columns: repeat(15, 50px);
+    }
+    .tab {
+      background: #007bff;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease, border 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+      box-sizing: border-box;
+      margin: 0;
+      
+    }
+    .tab:hover {
+     background: #0056b3;
+    }
+    .tab.active {
+      background: white;
+      color: #007bff;
+      border: 2px solid #007bff;
+    }
+    .tab-content {
+        display: none;
+        background: #ffffff;
+        padding: 14px;
+        border: 10px solid #ee6307;
+        border-radius: 20px;
+        margin-top: 10px;
+        width: 100%; /* 調整整個題目內容寬度 */
+        max-width: 1000px; /* 限制最大寬度 */
+        margin: 10px auto;
+        text-align: left; /* 確保內容文字左對齊 */
+        box-sizing: border-box; /* ✅ 避免 padding 影響寬度 */
+        
+        /* ✅ 防止內容超出框框 */
+        overflow-wrap: break-word; /* 讓長字串換行 */
+        word-break: break-word; /* 強制換行 */
+        white-space: normal; /* 確保換行 */
+        overflow-x: hidden; /* 禁止橫向溢出 */
+        
+        /* ✅ 高度自適應，不讓內容被遮住 */
+        min-height: 200px; /* 設定最小高度，避免內容過少時變形 */
+        height: auto; /* 高度根據內容自動增長 */
+        max-height: none; /* 取消最大高度限制 */
+        overflow-y: visible; /* 讓高度隨內容增長 */
+      }
+
+      @media (max-width: 500px) {
+      .tab-content mjx-container {
+        transform: scale(0.8); /* 縮小 80% */
+      }
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+    /* 強制 MathJax 塊級公式左對齊 */
+        .MathJax_Display {
+          width: 100% !important;
+          max-width: 100% !important;
+          /*overflow-x: auto;*/
+          text-align: left !important;
+          margin-left: 0 !important;
+        }
+        /* 覆蓋 MathJax 容器的默認樣式 */
+        mjx-container[jax="CHTML"][display="true"],
+        mjx-container[jax="SVG"][display="true"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        /*overflow-x: auto;*/
+        text-align: left !important;
+  }
+  </style>
+  <style>/* 題目內容的style */
+            /* 外部包裹層，讓 .container 可以調整水平寬度 */
+            .wrapper-00 {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            min-width: 300px;
+            resize: horizontal;  /* 允許左右調整 */
+            overflow: hidden;  /* 避免超出 */
+            /*border: 2px solid #d41010; */
+            margin-top: 10px;  /* ✅ 往下移動 wrapper */
+            overflow-wrap: break-word; /* 文字自動換行 */
+            white-space: normal; /* 確保換行 */
+            
+        }
+
+        .container-00 {
+            display: flex;
+            width: 100%;  /* 讓寬度跟隨 wrapper 變化 */
+            /*border: 3px solid #333;*/
+            border-radius: 10px;
+            background: white;
+            
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 5px;
+            margin: 0px;
+            align-items: stretch;  /* 讓左右區塊的高度隨內容增加 */           
+        }
+
+        .left-00 {
+            width: 40%;
+            min-width: 100px;
+            max-width: 500px;
+            resize: horizontal;  /* 允許左右調整 */
+            overflow: auto;
+            /* border: 3px solid #f71d1d; */
+            padding: 0px;
+            margin: 0px;
+            background-color: white;
+        }
+
+        .right-00 {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .left-01 {
+            width: 20%;
+            min-width: 100px;
+            max-width: 300px;
+            resize: horizontal;  /* 允許左右調整 */
+            overflow: auto;
+             /*border: 3px solid #f71d1d; */
+            padding: 0px;
+            margin: 0px;            
+        }
+
+        .right-00 img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .img-container {
+            display: flex;
+            gap: 20px; /* 直接設定圖片間距 */
+            flex-wrap: wrap; 
+            width: 600px; /* 控制寬度確保換行 */
+        }
+       
+
+  </style>
+</head>
+<body>
+ 
+    <h1>111年會考試題</h1>
+  <div class="tabs">
+    <!-- 這裡會動態生成 tabs -->
+  </div>
+
+  <!-- 這裡會動態生成 tab 對應內容 -->
+  <div class="tab-contents">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabsContainer = document.querySelector(".tabs");
+      const contentsContainer = document.querySelector(".tab-contents");
+      const tabs = [];
+      const contents = [];
+
+      const totalTabs = 27; // 調整增加題目數量-- tab的數量
+
+      // 動態生成 tabs 和對應的內容區塊
+      for (let i = 1; i <= totalTabs; i++) {
+        // 創建 tab
+        const tab = document.createElement("div");
+        tab.classList.add("tab");
+        tab.setAttribute("data-tab", `tab${i}`);
+        tab.innerText = i;
+        tabs.push(tab);
+        tabsContainer.appendChild(tab);
+
+        // 創建對應的內容區塊
+        const content = document.createElement("div");
+        content.classList.add("tab-content");
+        content.setAttribute("id", `tab${i}`);
+
+        // 使用條件語句為特定的題目設定不同的內容
+        if (i === 1) {
+          content.innerHTML = `
+          <h1><div>
+              <p>第 1 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              <p>$$圖（一）數線上的A、B、C、D四點所表示的數分別為$$
+                 $$a、b、c、d,且O為原點。根據圖中各點的位置判斷,$$
+                 $$下列何者的值最小?$$
+              </p>
+                <div class="container-00">
+                <div class="left-01">
+                      $$(A)\\large \\left| a \\right|$$
+                      $$(B)\\large \\left| b \\right|$$
+                      $$(C)\\large \\left| c \\right|$$
+                      $$(D)\\large \\left| d \\right|$$
+                </div>
+                <div class="right-01">
+                    <img src="ppicture/111-1.jpg" width="600" height="180" >
+                </div>
+              </div>
+            </div></h1>
+          `;
+        } else if (i === 2) {
+          content.innerHTML = `
+          <h1><div>
+              <p>第 2 題：<select><option hidden>答案：</option><option>D</option></select></p>
+              $$計算多項式 6x^2 + 4x 除以 2x^2 後，得到的餘式為何?$$
+              $$(A)2$$
+              $$(B)4$$
+              $$(C)2x$$
+              $$(D)4x$$
+            </div></h1>
+          `;
+        } else if (i === 3) {
+          content.innerHTML = `
+          <!-- 題目文字 -->
+          <h1><p>第 3 題：<select><option hidden>答案：</option><option>C</option></select></p>
+              $$下列何者為156的質因數？$$
+              
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+                      $$(A)11$$
+                      $$(B)12$$
+                      $$(C)13$$
+                      $$(D)14$$
+                </div>
+                <div class="right-00">
+                    
+                </div>
+              </div>
+            </div>
+            </h1>
+          `;
+        } else if (i === 4) {
+          content.innerHTML = `
+          <!-- 題目文字 -->
+          <h1><p>第 4 題：<select><option hidden>答案：</option><option>B</option></select></p>
+            $$圖(二)為一個長方體的展開圖,且長方體的底面為正方形。$$
+            $$根據圖中標示的長度,求此長方體的體積為何?$$
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-01">
+                  $$(A) 144$$
+                  $$(B) 224$$
+                  $$(C) 264$$
+                  $$(D) 300$$
+                </div>
+              <div class="right-00"> 
+                  <img src="ppicture/111-4.jpg" width="400" height="80" >
+              </div>
+            </div></h1>
+          `;
+        } else if (i === 5) {
+          content.innerHTML = `
+            <div>
+              <h1><p>第 5 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              $$算式\\frac{9}{22}+\\frac{11}{18}-(\\frac{23}{22}-\\frac{7}{18})之值為何?$$
+                    $$(A)\\frac{4}{11}$$ 
+                    $$(B)\\frac{9}{10}$$ 
+                    $$(C)\\frac{1}{9}$$
+                    $$(D)\\frac{5}{4}$$
+              </h1>
+            </div>
+          `;
+        } else if (i === 6) {
+          content.innerHTML = `
+            <div>
+              <h1><p>第 6 題：<select><option hidden>答案：</option><option>D</option></select></p>
+               $$\\sqrt{2022}的值介於下列哪兩個數之間？$$
+              $$(A)25,30$$
+              $$(B)30,35$$
+              $$(C)35,40$$
+              $$(D)40,45$$</h1>
+            </div>
+          `;
+        } else if (i === 7) {
+          content.innerHTML = `
+              <h1><p>第 7 題：<select><option hidden>答案：</option><option>D</option></select></p>
+                $$已知坐標平面上有一直線L與一點A。$$
+                $$若L的方程式為x＝-2,\\;A點坐標為(6,5)，$$
+                $$則A點到直線L的距離為何?$$
+                <div class="left-00">
+                    $$(A)3$$
+                    $$(B)4$$
+                    $$(C)7$$
+                    $$(D)8$$
+                </div>
+              </h1>
+          `;
+        } else if (i === 8) {
+          content.innerHTML = `
+              <h1><p>第 8 題：<select><option hidden>答案：</option><option>A</option></select></p>
+                $$多項式39x^2+5x-14可因式分解成(3x+a)(bx+c),$$
+                $$其中a、b、c均為整數,求a+2c之值為何?$$
+                <div class="left-00">
+                    $$(A)-12$$
+                    $$(B)-3$$
+                    $$(C)3$$
+                    $$(D)12$$
+                </div>
+              </h1>
+          `;
+        } else if (i === 9) {
+          content.innerHTML = `
+            <h1><div>
+              第 9 題：<select><option>答案：</option><option>C</option></select></p>
+               $$\\begin{array}{l}
+               箱子內有分別標示號碼1～6的球,每個號碼各2顆,總共12顆。\\\\
+               已知小茹先從箱內抽出5顆球且不將球放回箱內,\\\\
+               這5顆球的號碼分別是1、2、2、3、5。\\\\
+               今阿純打算從此箱內剩下的球中抽出1顆球,\\\\
+               若箱內剩下的每顆球被他抽出的機會相等,\\\\
+               則他抽出的球的號碼,與小茹已抽出的5顆球中\\\\
+               任意一顆球的號碼相同的機率是多少?
+               \\end{array}              
+               $$
+               <div class="left-00">
+                  $$(A)\\frac{3}{6}$$
+                  $$(B)\\frac{4}{6}$$
+                  $$(C)\\frac{3}{7}$$
+                  $$(D)\\frac{4}{7}$$
+              </div>
+            </div></h1>
+          `;
+        } else if (i === 10) {
+          content.innerHTML = `
+            <div>
+             <h1><p>第 10 題：<select><option hidden>答案：</option><option>C</option></select></p>
+             $$已知一元二次方程式(x-2)^2=3的兩根為a、b,$$
+             $$且a>b，求2a+b之值為何?$$
+               <div class="left-00">
+               $$(A)9$$
+               $$(B)-3$$
+               $$(C)6+\\sqrt{3}$$
+               $$(D)-6+\\sqrt{3}$$
+              </div>
+            </div></h1>
+          `;
+        } else if (i === 11) {
+          content.innerHTML = `
+          <!-- 題目文字start -->
+              <h1><p>第 11 題：<select><option hidden>答案：</option><option>C</option></select></p>
+                $根據圖(三)中兩人的對話紀錄,$
+                $求出哥哥買遊戲機的預算為多少元?$
+              <div class="wrapper-00">
+              <div class="container-00">
+                    <div class="left-01">
+                        $$(A) 3800$$
+                        $$(B) 4800$$
+                        $$(C) 5800$$
+                        $$(D) 6800$$
+                    </div> 
+                    <div class="right-00">
+                        <img src="ppicture/111-11.jpg" width="400" height="80" >
+                    </div>  
+              </div>  <!-- container-00 結束 -->
+              </div> <!-- wrapper選項+圖片 END-->       
+              </h1>                                           
+          <!-- 題目文字end --> 
+          `;
+        } else if (i === 12) {
+          content.innerHTML = `
+            <div>
+              <h1><p>第 12 題：<select><option hidden>答案：</option><option>B</option></select></p>
+                    $$已知p = 7.52 \\times 10^{-6},下列關於p值的敘述何者正確?$$
+                        $$(A) 小於0$$
+                        $$(B) 介於0與1兩數之間,兩數中比較接近0$$
+                        $$(C) 介於0與1兩數之間,兩數中比較接近1$$
+                        $$(D) 大於1$$
+              </h1>
+            </div>
+          `;
+        } else if (i === 13) {
+          content.innerHTML = `
+              <h1><p>第 13 題：<select><option hidden>答案：</option><option>D</option></select></p>
+              <div> 
+              $如圖(四),\\overline{AB}為圓O的一弦,且C點在\\overline{AB}上。$
+              $若\\overline{AC}＝6,\\;\\overline{BC}=2,\\;\\overline{AB}的弦心距為3,$<br>
+              $則\\overline{OC}的長度為何?$
+              </div></h1>
+            
+              <div class="container-00">
+                <div class="left-01"><h1>
+                      $$(A)3$$
+                      $$(B)4$$
+                      $$(C)\\sqrt{11}$$
+                      $$(D)\\sqrt{13}$$</h1>
+                </div>
+                <div class="right-00">
+                  <img src="ppicture/111-13.jpg" width="280" height="80" >
+                </div>
+              </div>
+            
+          `;
+        } else if (i === 14) {
+          content.innerHTML = `
+             <h1><p>第 14 題：<select><option hidden>答案：</option><option>C</option></select></p>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                      某國主計處調查年該國所有受僱員工的年薪資料，\\\\
+                      並公布調查結果如圖(五)的直方圖所示。                      
+                      \\end{array}
+                    $$</h1>
+                    <div > 
+                        <img src="ppicture/111-14.jpg" width="700" height="400" >
+                    </div>
+                        <h1>$$\\begin{array}{lr}
+                        已知總調查人數為 750 萬人，根據圖中資訊計算\\\\
+                        該國受僱員工年薪低於平均數的人數占總調查人數的\\\\
+                        百分率為下列何者?\\\\
+                        (A) 6\\%\\\\
+                        (B) 50\\%\\\\
+                        (C) 68\\%\\\\
+                        (D) 73\\%\\\\
+                        \\end{array}
+                        $$</h1>
+                                    
+                    </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 15) {
+          content.innerHTML = `
+               <h1><p>第 15 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+                   <!-- 題目內容 -->
+                        $$
+                          \\begin{array}{lr}
+                          如圖(六)，\\triangle{ABC}中,D點在\\overline{AB}上,E點在\\overline{BC}上,\\\\
+                          \\overline{DE}為\\overline{AB}的中垂線。若\\angle{B}=\\angle{C},且\\angle{EAC}>90^{\\circ},\\\\
+                          則根據圖中標示的角,判斷下列敘述何者正確？
+                          \\end{array}
+                        $$   </h1>
+                        <div class="container-00">
+                          <div class="left-00"><h2>
+                              $$  
+                                \\begin{array}{lr}                       
+                                (A)\\large \\angle{1}=\\angle{2}，\\angle{1}<\\angle{3}\\\\
+                                (B)\\large \\angle{1}=\\angle{2}，\\angle{1}>\\angle{3}\\\\
+                                (C)\\large \\angle{1}\\ne\\angle{2}，\\angle{1}<\\angle{3}\\\\
+                                (D)\\large \\angle{1} \\ne \\angle{2}，\\angle{1}<\\angle{3}
+                                \\end{array}
+                              $$
+                          </div>
+                          <div class="right-00">
+                              <img src="ppicture/111-15.jpg" width="600" height="80" >
+                          </div></h2>
+                    </div>
+                </h2>
+          `;
+        } else if (i === 16) {
+          content.innerHTML = `
+             <h1><p>第 16 題：<select><option hidden>答案：</option><option>A</option></select></p></h1>
+                   <!-- 題目內容 -->
+                  <h2>$$
+                    \\begin{array}{lr}
+                    \\large緩降機是火災發生時避難的逃生設備,
+                    \\large圖(七)是廠商提供的緩降機\\\\
+                    \\large安裝示意圖,圖中呈現在三樓安裝緩降機時,\\\\
+                    \\large使用此緩降機直接緩降到一樓地面的所需繩長(不計安全帶)。\\\\
+                    \\large若某棟建築的每個樓層高度皆為3公尺，\\\\
+                    \\large則根據圖(七)的安裝方式在該建築八樓安裝緩降機時,\\\\
+                    \\large使用此緩降機直接緩降到一樓地面的所需繩長(不計安全帶)\\\\\\large為多少公尺？
+                    \\end{array}
+                  $$
+                  </h2>
+                  <div class="container-00">
+                          <div class="left-01"><h1>
+                            $$
+                              \\begin{array}{lr}
+                                (A)21.7\\\\
+                                (B)22.6\\\\
+                                (C)24.7\\\\
+                                (D)25.6
+                              \\end{array}
+                            $$
+                          </div>
+                          <div class="right-00">
+                              <img src="ppicture/111-16.jpg" width="400" height="50" >
+                          </div></h1>
+                    </div>
+                   
+          `;
+        } else if (i === 17) {
+          content.innerHTML = `
+             <h1><p>第 17 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                      圖(八)為兩直線L、M與\\triangle{ABC}相交的情形,\\\\
+                      其中L、M分別與\\overline{BC}、\\overline{AB}平行。\\\\
+                      根據圖中標示的角度,求\\angle{B}的度數為何?
+                      \\end{array}
+                    $$</h1>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h1>$$
+                                        \\begin{array}{lr}
+                                        (A) 55\\\\
+                                        (B) 60\\\\
+                                        (C) 65\\\\
+                                        (D) 70 
+                                        \\end{array}
+                                      $$</h1>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                  <img src="ppicture/111-17.jpg" width="400" height="50" >
+                                </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 18) {
+          content.innerHTML = `
+             <h1><p>第 18 題：<select><option hidden>答案：</option><option>B</option></select></p></h1>
+              <!-- 題目內容 -->
+              <h1>
+                    $$某鞋店正舉辦開學特惠活動，圖(九)為活動說明。$$
+                    <div>
+                      <img src="ppicture/111-18.jpg" width="700" height="300" >
+                    </div>          
+                    $$          
+                      \\begin{array}{lr}
+                        \\underline{小徹}打算在該店同時購買一雙球鞋及一雙皮鞋,\\\\
+                        且他有一張所有購買的商品定價皆打8折的折價券。\\\\
+                        若\\underline{小徹}計算後發現\\\\使用折價券與參加特惠活動兩者的花費相差50元,\\\\
+                        則下列敘述何者正確?
+                      \\end{array}
+                    $$</h1>
+                            <div class="right-00">   <!-- 選項 -->
+                                <h1>$$
+                                  \\begin{array}{lr}
+                                  (A)使用折價券的花費較少，且兩雙鞋的定價相差100 元 \\\\
+                                  (B)使用折價券的花費較少，且兩雙鞋的定價相差250 元\\\\
+                                  (C)參加特惠活動的花費較少，且兩雙鞋的定價相差 100 元\\\\
+                                  (D)參加特惠活動的花費較少，且兩雙鞋的定價相差 250 元\\\\
+                                  \\end{array}
+                                $$</h1>
+                            </div>
+          `;
+        } else if (i === 19) {
+          content.innerHTML = `
+             <h1><p>第 19 題：<select><option hidden>答案：</option><option>B</option></select></p>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                      圖(十)，\\triangle{ABC}的重心為G,\\overline{BC}的中點為D,今以G為圓心,\\\\
+                      \\overline{GD}長為半徑畫一圓,且作A點到圓G的兩切線段\\overline{AE}、\\overline{AF},\\\\
+                      其中E、F均為切點。根據圖中標示的角與角度,\\\\
+                      求\\angle{1}與\\angle{2}的度數和為多少?
+                      \\end{array}
+                    $$
+               <!--  wrapper選項+圖片   Start-->    
+                      
+                          <div class="container-00">
+                                <div class="left-01">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)30\\\\
+                                        (B)35\\\\
+                                        (C)40\\\\
+                                        (D)45\\\\
+                                        \\end{array}
+                                      $$</h1>
+                                </div>
+                                <div class="right-01">  <!-- 圖片 -->
+                                  <img src="ppicture/111-19.jpg" width="700" height="400" >
+                                </div>
+                          </div>
+                      
+          `;
+        } else if (i === 20) {
+          content.innerHTML = `
+             <h1><p>第 20 題：<select><option hidden>答案：</option><option>C</option></select></p>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                      圖(十一) 為一張正三角形紙片ABC，其中D點在\\overline{AB}上，\\\\
+                      E點在\\overline{BC}上。今以\\overline{DE}為摺線將B點往右摺後,\\\\
+                      \\overline{BD}、\\overline{BE}分別與\\overline{AC}相交於F點、G點，如圖(十二) 所示。\\\\
+                      若\\overline{AD}=10，\\overline{AF}=16，\\overline{DF}=14，\\overline{BF}=8,\\\\
+                      則\\overline{CG}的長度為多少？
+                      \\end{array}
+                    $$
+               <!--  wrapper選項+圖片   Start-->                        
+                          <div class="container-00">
+                                <div class="left-01">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)7\\\\
+                                        (B)8\\\\
+                                        (C)9\\\\
+                                        (D)10\\\\
+                                        \\end{array}
+                                      $$</h1>
+                                </div>
+                                <div class="right-01">  <!-- 圖片 -->
+                                  <img src="ppicture/111-20.jpg" width="700" height="300" >
+                                </div>
+                          </div>                      
+          `;
+        } else if (i === 21) {
+          content.innerHTML = `
+              <h1><p>第 21 題：<select><option hidden>答案：</option><option>B</option></select></p>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                      有一直徑為\\overline{AB}的圓，且圓上有C、D、E、F四點，\\\\
+                      其位置如圖(十三) 所示。若\\overline{AC}=6，\\overline{AD}=8，\\overline{AE}=5，\\\\
+                      \\overline{AF}=9,\\overline{AB}=10,則下列弧長關係何者正確？
+                      \\end{array}
+                    $$</h1>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                      \\begin{array}{lr}                                        
+                                      \\large(A)\\overset{\\frown}{AC}+\\overset{\\frown}{AD}=\\overset{\\frown}{AB},\\\\
+                                      \\large\\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF}=\\overset{\\frown}{AB}\\\\
+                                      \\large(B)\\overset{\\frown}{AC}+\\overset{\\frown}{AD}=\\overset{\\frown}{AB},\\\\
+                                      \\large\\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF} \\ne \\overset{\\frown}{AB}\\\\
+                                      \\large(C)\\overset{\\frown}{AC}+\\overset{\\frown}{AD} \\ne \\overset{\\frown}{AB},\\\\
+                                      \\large\\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF} = \\overset{\\frown}{AB}\\\\
+                                      \\large(D)\\overset{\\frown}{AC}+\\overset{\\frown}{AD} \\ne \\overset{\\frown}{AB},\\\\
+                                      \\large\\\quad\\;\\;\\overset{\\frown}{AE}+\\overset{\\frown}{AF} \\ne \\overset{\\frown}{AB}\\\\
+	                                    \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                  <img src="ppicture/111-21.jpg" width="400" height="80" >
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 22) {
+          content.innerHTML = `
+             <h1><p>第 22 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                      已知坐標平面上有二次函數y=-(x+6)^2+5的圖形，\\\\
+                      函數圖形與x軸相交於(a,0)、(b,0)兩點,其中a &lt; b。\\\\
+                      今將此函數圖形往上平移,平移後函數圖形與x軸相交於\\\\
+                      (c,0)、(d,0)兩點，其中c &lt; d,\\\\
+                      判斷下列敘述何者正確?
+                      \\end{array}
+                    $$
+                        <div class="container-00">
+                                <div class="right-00">   <!-- 選項 -->
+                                  $$
+                                        \\begin{array}{lr}
+                                        (A)(a+b)=(c+d)\\;,(b &minus; a)&lt;(d &minus;c)\\\\
+                                        (B)(a+b)=(c+d)\\;,(b &minus; a) &gt; (d &minus; c)\\\\
+                                        (C)(a+b)&lt;(c+d)\\;,(b &minus; a) &lt; (d &minus; c)\\\\
+                                        (D)(a+b)&lt;(c+d)\\;,(b &minus; a) &gt; (d &minus; c)\\\\
+                                  \\end{array}
+                                    $$</h1>
+                                </div>                               
+                        </div>
+                   
+          `;
+        } else if (i === 23) {
+          content.innerHTML = `
+             <h1><p>第 23 題：<select><option hidden>答案：</option><option>D</option></select></p>
+                  <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                      \\triangle{ABC}的邊上有D、E、F三點,各點位置如圖(十四)所示。\\\\
+                      若\\angle{B}=\\angle{FAC},\\;\\overline{BD}=\\overline{AC},\\;\\angle{BDE}=\\angle{C},\\\\
+                      則根據圖中標示的長度,\\\\
+                      求四邊形ADEF與\\triangle{ABC}的面積比為何?
+                      \\end{array}
+                    $$</h1>
+
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-01">   <!-- 選項 -->
+                                      <h1>$$
+                                        \\begin{array}{lr}
+                                        (A)1:3\\\\
+                                        (B)1:4\\\\
+                                        (C)2:5\\\\
+                                        (D)3:8\\\\
+                                        \\end{array}
+                                      $$</h1>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                  <img src="ppicture/111-23.jpg" width="500" height="80" >
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 24) {
+          content.innerHTML = `
+             <h1>$$ {\\color{red}\\blacksquare}請閱讀下列敘述後，回答(24)～(25)題,$$</h1>
+              <!-- 題目內容 -->
+            <h2>
+                $$
+                  \\boxed{
+                  \\begin{array}{c}
+                  \\large \\text{表（一）} \\\\
+                  \\begin{array}{|c|c|c|c|c|}
+                  \\hline
+                  \\large PA燈管類別 & 直徑(毫米) & 長度(毫米) & 功率(瓦) & 光通量(流明) \\\\
+                  \\hline
+                  \\large PA-20 & 25.4 & 580 & 20 &1440  \\\\
+                  \\hline
+                  \\large PA-30 & 25.4 & 895 &30  &2340  \\\\
+                  \\hline
+                  \\large PA-40 & 25.4 & 1198 &40  &3360  \\\\
+                  \\hline
+                  \\end{array}  \\\\
+                  \\large \\text{表（二）} \\\\
+                  \\begin{array}{|c|c|c|c|c|}
+                  \\hline
+                  \\large PA燈管類別 & 直徑(毫米) & 長度(毫米) &功率(瓦)&光通量(流明) \\\\
+                  \\hline
+                  \\large PB-14 &15.8&549&14&1200\\\\
+                  \\hline
+                  \\large PB-28 &15.8&1149&28&2600 \\\\
+                  \\hline
+                  \\end{array} 
+                  \\end{array}
+                  }
+                  $$             
+            </h2>
+                  
+            <h2><p>$ \\color{red}{第 24 題}$：<select><option hidden>答案：</option><option>D</option></select></p>
+                    $$    
+                      \\begin{array}{lr}
+                      \\large已知日光燈管的發光效率為光通量與功率的比值,\\\\
+                      \\large甲、 乙兩人根據表(一)、表(二) 的資訊提出以下看法:\\\\
+                      \\large甲、乙兩人根據表(一)、表(二)的資訊提出以下看法:\\\\
+                      \\large(甲)PA-20日光燈管的發光效率比PB-14日光燈管高。\\\\
+                      \\large(乙)PA日光燈管中，功率較大的燈管其發光效率較高。\\\\
+                      \\large關於甲、乙兩人的看法,下列敘述何者正確？
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        \\large(A)甲、乙皆正確\\\\
+                                        \\large(B)甲、乙皆錯誤\\\\
+                                        \\large(C)甲正確，乙錯誤\\\\
+                                        \\large(D)甲錯誤，乙正確\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                     
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 25) {
+          content.innerHTML = `
+             <h1><p>$ \\color{red}{第 25 題}$：<select><option hidden>答案：</option><option>D</option></select></p></h1>
+              <!-- 題目內容 -->
+                    <h2>$$
+                      \\begin{array}{c}
+                      \\text{有一間公司請水電工程廠商安裝日光燈管,廠商提供兩種方案如表(三) 所示。}\\\\
+                      \\large\\text{表(三)} \\\\
+                      \\begin{array}{|c|c|c|}
+                      \\hline
+                        \\large 方案 & 施工內容 & 施工費用(含材料費) \\\\
+                      \\hline
+                        \\large 基本方案	 & 安裝90支 PA-40日光燈管 &45000元 \\\\
+                      \\hline
+                        \\large 省電方案 & 安裝120支 PB-28日光燈管&60000元  \\\\
+                      \\hline
+                      \\end{array}  
+                      \\end{array}  
+                    $$</h2>
+                          <h2>$$\\begin{array}{lr}
+                            已知n支功率皆為w瓦的燈管都使用t小時後消耗的電能(度)= \\frac{n}{1000}\\times w \\times t,\\\\
+                            若每支燈管使用時間皆相同,且只考慮燈管消耗的電能並以每度5元計算電費,\\\\
+                            則兩種方案相比,燈管使用時間至少要超過多少小時,\\\\
+                            採用省電方案所節省的電費才會高於兩者相差的施工費用？
+                            \\end{array}\\\\
+                          $$</h2>
+                               
+                          <h1>$$
+                            \\begin{array}{lr}
+                            (A)12200\\\\
+                            (B)12300\\\\
+                            (C)12400\\\\
+                            (D)12500\\\\
+                            \\end{array}
+                          $$</h1>        
+                   
+          `;
+        } else if (i === 26) {
+          content.innerHTML = `
+             <h1><p>$ \\color{red}{非選擇}$_第 1 題：</p></h1>
+              <!-- 題目內容 -->
+                    <h2>$$\\begin{array}{lr}
+                       \\large\\underline{健康生技公司}培養綠藻以製作「綠藻粉」,\\\\
+                       \\large再經過後續的加工步驟,製成綠藻相關的保健食品。\\\\
+                       \\large已知該公司製作每1公克的「綠藻粉」需要60億個綠藻細胞。\\\\
+                      \\end{array}
+                    $$
+                   $$請根據上述資訊回答下列問題,完整寫出你的解題過程並詳細解釋:$$
+                   </h2>
+                    <h2>$$
+                      \\begin{array}{lr}
+                      \\large(1)假設在光照充沛的環境下,1個綠藻細胞每20小時\\\\
+                      \\large\\quad\\;可分裂成 4 個綠藻細胞,且分裂後的細胞亦可繼續分裂。\\\\
+                      \\large\\quad\\;今從 1 個綠藻細胞開始培養,若培養期間綠藻細胞皆未死亡\\\\
+                      \\large\\quad\\;且培養環境的光照充沛,經過 15 天後,共分裂成4^k個綠藻細胞,\\\\
+                       \\end{array}
+                       $$
+                       $\\large\\quad\\;則 k 之值為何?$<select><option hidden>答案：</option><option>k＝18</option></select>
+                      <BR><BR>
+                        $\\large(2)承(1),已知60億介於2^{32}與2^{33}之間,$<BR>
+                        $\\large\\quad\\;請判斷4^k個綠藻細胞是否足夠製作8公克的「綠藻粉」$
+                        <select><option hidden>答案：</option><option>足夠製作</option></select>
+                    </h2>
+          `;
+        } else if (i === 27) {
+          content.innerHTML = `
+             <B><h2><p>$ \\color{red}{非選擇}$_第 2 題：</p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        小儀利用一副撲克牌摺疊出一個環套,如圖(十六)所示。\\\\
+                        環套的上視圖為邊長6公分的正八邊形,如圖(十七)所示。
+                      \\end{array}
+                    $$                          
+                    <div class="right-00">  <!-- 圖片 -->
+                      <img src="ppicture/112-27-1.jpg" width="230" height="80"  style="margin-right: 40px;">
+                      <img src="ppicture/112-27-2.png" width="230" height="80"  >
+                    </div>
+                    $$
+                      \\begin{array}{lr}
+                        請根據上述資訊回答下列問題，完整寫出你的解題過程並詳細解釋：
+                      \\end{array}
+                    $$
+                    $(1)圖(十七)的正八邊形的一個內角度數為多少？$<select><option hidden>答案：</option><option>135°</option></select>
+                    $$(2)已知有一個圓柱形花瓶其底面半徑為8公分,假設不考慮花瓶與環套厚度,$$
+                    $$\\quad\\;判斷圖(十六)的環套是否能在不變形的前提下,$$
+                    $\\quad\\;套在此圓柱形花瓶側面外圍?$<select><option hidden>答案：</option><option>不能</option></select>
+                    <div class="right-00">  <!-- 圖片 -->
+                      <img src="ppicture/112-27-3.jpg" width="500" height="80">
+                     
+                    </div>
+                    </h2> 
+                     
+          `;
+        }
+        else {
+          // 其他題目默認內容
+          content.innerHTML = `
+          /div>  <div>
+              <p>這是第 ${i} 題，您可以在這裡輸入您的內容。</p>
+              <p>例如，您可以加入數學公式：</p>
+              <p>$$E = mc^2$$</p>
+            </div>
+          `;
+        }
+
+        contents.push(content);
+        contentsContainer.appendChild(content);
+      }
+
+      // 不預設任何 active 的 tab 和內容
+
+      // 處理 tab 點擊事件
+      tabs.forEach(tab => {
+        tab.addEventListener("click", function() {
+          const target = this.getAttribute("data-tab");
+
+          tabs.forEach(t => t.classList.remove("active"));
+          contents.forEach(c => c.classList.remove("active"));
+
+          this.classList.add("active");
+          document.getElementById(target).classList.add("active");
+
+          // 重新渲染 MathJax，以顯示新的公式
+          MathJax.typesetPromise();
+        });
+      });
+    });
+    MathJax.typeset();
+  </script>
+</body>
+</html>

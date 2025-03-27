@@ -1,0 +1,149 @@
+[
+  {
+    "id": 1,
+    "content": "<h1><div>$$\\begin{array}{lr}圖(一)的坐標平面上有A、B、C、D四點。\\\\根據圖(一)中各點位置判斷,哪一個點在第二象限?\\end{array}$$<div class='container-00'><div class='left-01'>$$\\begin{array}{lr}(A)A\\\\(B)B\\\\(C)C\\\\(D)D\\end{array}$$</div><div class='right-00'><img src='ppicture/110-1.jpg' width='400' height='180'></div></div></div></h1>",
+    "answer": "A"
+  },
+  {
+    "id": 2,
+    "content": "<h1><div>$$\\begin{array}{lr}算式(－8)+(-2)\\times(-3)之值為何?\\\\ (A)-14\\\\(B)-2\\\\(C) 18\\\\(D) 30\\end{array}$$</div></h1>",
+    "answer": "B"
+  },
+  {
+    "id": 3,
+    "content": "<h1>$$\\begin{array}{lr}若二元一次聯立方程式\\begin{cases}x=4y\\\\6y-x=10\\end{cases}的解為x＝a,y＝b,\\\\則a+b之值為何?\\\\(A)-15\\\\(B)-3\\\\(C)5\\\\(D)25\\end{array}$$</h1>",
+    "answer": "D"
+  },
+  {
+    "id": 4,
+    "content": "<h1>$$\\begin{array}{lr}如圖(二), 矩形 ABCD、\\triangle{BDE} 中,A 點在\\overline{BE} 上。\\\\若矩形ABCD的面積為20,\\;\\triangle{BDE}的面積為24, \\\\則\\triangle{ADE}的面積為何?\\end{array}$$<div class='container-00'><div class='left-01'>$$ \\begin{array}{lr}(A)10\\\\ (B)12\\\\ (C)14 \\\\ (D)16\\\\ \\end{array}$$</div><div class='right-00'><img src='ppicture/110-4.jpg' width='280' ></div>",
+    "answer": "C"
+  },
+  {
+    "id": 5,
+    "content": "<h1><div>$$\\begin{array}{lr}5^6是5^3的多少倍?\\\\(A) 2\\\\(B) 3\\\\(C) 25\\\\(D)125\\end{array}$$</div> </h1>",
+    "answer": "D"
+    
+  },
+  {
+    "id": 6,
+    "content": "<div><h2>$$\\begin{array}{lr}下列等式何者\\underline{\\underline{不成立}}?\\\\(A)4\\sqrt{3}+2\\sqrt{3}=6\\sqrt{3}\\\\(B)4\\sqrt{3}-2\\sqrt{3}=2\\sqrt{3}\\\\(C)4\\sqrt{3}\\times2\\sqrt{3}=8\\sqrt{3}\\\\(D)4\\sqrt{3}\\div2\\sqrt{3}=2\\end{array}$$</h2></div>",
+    "answer": "C"
+  },
+  {
+    "id": 7,
+    "content": "<h1>$$\\begin{array}{lr}已知纜車從起點行駛到終點需花費8分鐘,\\\\圖(三)表示行駛過程中纜車的海拔高度與行駛時間的關係。\\end{array}$$<div class='img-container'><img src='ppicture/110-7.jpg' width='700' ></div>$$\\begin{array}{lr}根據圖(三)判斷,下列敘述何者正確?\\\\(A)終點的海拔高度比起點高300公尺,行駛時間的前4分鐘都在上升\\\\(B)終點的海拔高度比起點高300公尺,行駛時間的末4分鐘都在上升\\\\(C)終點的海拔高度比起點高350公尺,行駛時間的前4分鐘都在上升\\\\ (D)終點的海拔高度比起點高350公尺,行駛時間的末4分鐘都在上升\\end{array}$$</h1>",
+    "answer": "B"
+  },
+  {
+    "id": 8,
+    "content": "<h1>$$\\begin{array}{lr}利用乘法公式判斷,下列等式何者成立?\\\\(A)248^2+248\\times52+52^2=300^2\\\\(B)248^2-248×48-48^2＝200^2\\\\(C)248^2+2\\times248\\times52+52^2＝300^2\\\\(D) 248^2-2\\times248\\times48-48^2=200^2\\end{array}$$</h1>",
+    "answer": "C"
+  },
+  {
+    "id": 9,
+    "content": "<h1><div>$$\\begin{array}{l}圖(四)為甲城市6月到9月外國旅客人數的折線圖。\\\\根據圖(四)判斷,哪一個月到甲城市的外國旅客中,\\\\旅客人數最少的國家是美國?\\end{array}$$<div class='container-00'><div class='left-01'>$$\\begin{array}{l}(A)6\\\\(B)7\\\\(C)8\\\\(D)9\\end{array}$$</div><div class='right-00'><img src='ppicture/110-9.jpg' width='600'></div></div></div></h1>",
+    "answer": "C"
+  },
+  {
+    "id": 10,
+    "content": "<h1><div>$$\\begin{array}{l}將一半徑為6的圓形紙片,沿著兩條半徑剪開形成兩個扇形。\\\\若其中一個扇形的弧長為5\\pi,\\;則另一個扇形的圓心角度數是多少?\\\\(A) 30\\\\(B) 60\\\\(C) 105\\\\(D) 210\\end{array}$$</h1>",
+    "answer": "D"
+  },
+  {
+    "id": 11,
+    "content": "<h2 style='font-size:30px;'>$$\\begin{array}{lr}動物園準備了100張刮刮樂,打算送給開幕當日的前100位遊客每人一張,\\\\其中可刮中獎品的刮刮樂共有32張,表(一)為獎品的種類及數量。\\\\若\\underline{小柏}為開幕當日的第一位遊客,且每張刮刮樂被\\underline{小柏}拿到的機會相等,\\\\則\\underline{小柏}刮中玩偶的機率為何?\\end{array}$$<div class='container-00'><div class='left-01'>$$\\begin{array}{l}(A)\\large\\frac{1}{2}\\\\(B)\\large\\frac{1}{16}\\\\(C)\\large\\frac{8}{25}\\\\(D)\\large\\frac{1}{50}\\end{array}$$</div><div class='right-00'><img src='ppicture/110-11.jpg' width='500'></div></h2></div>",
+    "answer": "D"
+  },
+  {
+    "id": 12,
+    "content": "<h1>$$\\begin{array}{lr}美美和小儀到超市購物,且超市正在舉辦摸彩活動,\\\\單次消費金額每滿100元可以拿到1張摸彩券。\\\\已知美美一次購買5盒餅乾拿到3張摸彩券;\\\\小儀一次購買5盒餅乾與1個蛋糕拿到4張摸彩券。\\\\若每盒餅乾的售價為x元,每個蛋糕的售價為150元,\\\\則x的範圍為下列何者?\\\\(A)50\\le x<60\\\\(B)60\\le x<70\\\\(C)70\\le x<80\\\\(D)80\\le x<90\\end{array}$$</h1>",
+    "answer": "B"
+  },
+  {
+    "id": 13,
+    "content": "<h1>$$\\begin{array}{lr}已知a_1,a_2,…,a_{40}為一等差數列,其中a_1為正數,\\\\且a_{20}+a_{22}=0。判斷下列敘述何者正確?\\\\(A)a_{21}+a_{22}>0\\\\(B)a_{21}+a_{22}<0\\\\(C)a_{21}\\times a_{22}>0\\\\(D)a_{21}\\times a_{22}<0\\end{array}$$</h1>",
+    "answer": "B"
+  },
+  {
+    "id": 14,
+    "content": "<h1>$$已知a=-\\frac{5}{223},\\;b=\\frac{6}{263},\\;c=-\\frac{7}{293},$$ $判斷下列各式之值何者最大?$ $$\\begin{array}{lr}(A)|a+b+c|\\\\(B)|a+b-c|\\\\(C)|a-b+c|\\\\(D)|a-b-c|\\end{array}$$</h1>",
+    "answer": "C"
+  },
+  {
+    "id": 15,
+    "content": "<h1>$$\\begin{array}{lr}已知\\triangle{ABC}與\\triangle{DEF}全等,A、B、C的對應點分別為D、E、F,\\\\且E點在AC上,B、F、C、D四點共線,如圖(五)所示。\\\\若\\angle{A}=40^{\\circ},\\angle{CED}=35^{\\circ},則下列敘述何者正確?\\end{array}\\\\$$</h1><div class='container-00'><div class='left-00'><h2>$$ \\begin{array}{lr} (A)\\large\\overline{EF}=\\overline{EC},\\;\\overline{AE}=\\overline{FC}\\\\ (B)\\large\\overline{EF}=\\overline{EC},\\;\\overline{AE}\\ne\\overline{FC}\\\\ (C)\\large\\overline{EF}\\ne\\overline{EC},\\;\\overline{AE}=\\overline{FC}\\\\(D)\\large\\overline{EF}\\ne\\overline{EC},\\;\\overline{AE}\\ne\\overline{FC}\\\\ \\end{array} $$</h2></div><div class='right-00'><img src='ppicture/110-15.jpg' width='400'></div></div>",
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "content": "<h2 style='font-size:30px;'>$$\\begin{array}{lr}圖(六)為某超商促銷活動的內容,\\\\今阿賢到該超商拿相差4元的2種飯糰各1個結帳時,\\\\店員說:「要不要多買2瓶指定飲料?搭配促銷活動後2組優惠價的金額,\\\\只比你買2個飯糰的金額多30元。」\\\\若阿賢只多買1瓶指定飲料,且店員會以對消費者最便宜的方式結帳,\\\\則與原本只買2個飯糰相比,他要多付多少元？\\end{array}$$</h2><div class='container-00'><div class='left-01'>$$\\begin{array}{lr} \\huge(A)12\\\\ \\huge(B)13\\\\ \\huge(C)15\\\\ \\huge(D)16 \\end{array}$$</div><div class='right-00'><img src='ppicture/110-16.jpg' width='500'></div></div>",
+    "answer": "B"
+  },
+  {
+    "id": 17,
+    "content": "<h1>$$\\begin{array}{lr}如圖(七),梯形ABCD中,\\overline{AD}//\\overline{BC},有一圓O通過A、B、C三點,\\\\且\\overline{AD}與圓O相切於A點。若\\angle{B}=58^{\\circ},則\\overset{\\frown}{BC}的度數為何?\\end{array}$$</h1><div class='wrapper-00'><div class='container-00'><div class='left-01'><h1>$$ \\begin{array}{lr} (A)116\\\\ (B) 120\\\\ (C)122\\\\ (D)128\\end{array} $$</h1></div><div class='right-00'><img src='ppicture/110-17.jpg' width='400' height='50'></div></div></div>",
+    "answer": "D"
+  },
+  {
+    "id": 18,
+    "content": "<h1>$$\\begin{array}{lr}若坐標平面上二次函數y=a(x+b)^2+c的圖形,\\\\經過平移後可與y=(x+3)^2的圖形完全疊合,\\\\則a、b、c的值可能為下列哪一組?\\\\(A)a=1,\\;\\;\\;b=0,\\;\\;\\;c=−2\\\\(B)a=2,\\;\\;\\;b=6,\\;\\;\\;c=0\\\\(C)a=−1,b=−3,\\;c=0\\\\(D)a=−2,b=3,\\;\\;\\;c=−2\\end{array} $$</h1>",
+    "answer": "A"
+  },
+  {
+    "id": 19,
+    "content":  "<h1>$$\\begin{array}{lr}如圖(八),\\triangle{ABC}中,D、E、F三點分別在\\overline{AB}、\\overline{BC}、\\overline{AC}上,\\\\且四邊形BEFD是以\\overline{DE}為對稱軸的線對稱圖形,\\\\四邊形CFDE是以\\overline{FE}為對稱軸的線對稱圖形。\\\\若\\angle{C}=40^{\\circ},則\\angle{DFE}的度數為何?\\end{array}$$</h1><div class='container-00'><div class='left-01'><h1>$$\\begin{array}{lr} (A)65\\\\ (B)70\\\\ (C)75\\\\ (D)80\\\\ \\end{array}$$</h1></div><div class='right-01'><img src='ppicture/110-19.jpg' width='500' ></div></div>",
+    "answer": "D"
+  },
+  {
+    "id": 20,
+    "content": "<h2 style='font-size:32px;'>$$\\begin{array}{lr}已知捷立租車行有甲、乙兩個營業據點,\\\\顧客租車後當日須於營業結束前在任意一個據點還車。\\\\某日營業結束清點車輛時,發現在甲歸還的自行車比從甲出租的多4輛。\\\\若當日從甲出租且在甲歸還的自行車為15輛,\\\\從乙出租且在乙歸還的自行車為13輛,\\\\則關於當日從甲、乙出租的自行車數量,\\\\下列比較何者正確?\\\\(A)從甲出租的比從乙出租的多2輛\\\\(B)從甲出租的比從乙出租的少2輛\\\\(C)從甲出租的比從乙出租的多6輛\\\\(D)從甲出租的比從乙出租的少6輛\\end{array}$$</h2>",
+    "answer": "B"
+  },
+  {
+    "id": 21,
+    "content": "<h2 style='font-size:30px;'>$$\\begin{array}{lr}圖(九),四邊形ABCD中,\\angle{1}、\\angle{2}、\\angle{3}分別為\\angle{A}、\\angle{B}、\\angle{C}\\\\的外角。判斷下列大小關係何者正確?\\end{array}$$</h2><div class='container-00'><div class='left-02'><h2 style='font-size:26px;'>$$\\begin{array}{lr} (A)\\angle{1}+\\angle{3}=\\angle{ABC}+\\angle{D}\\\\ (B)\\angle{1}+\\angle{3}<\\angle{ABC}+\\angle{D}\\\\ (C)\\angle{1}+\\angle{2}+\\angle{3}=360^{\\circ}\\\\ (D)\\angle{1}+\\angle{2}+\\angle{3}>360^{\\circ}\\end{array}$$</h2></div><div class='right-01'><img src='ppicture/110-21.jpg' width='300'></div></div>",
+    "answer": "A"
+  },
+  {
+    "id": 22,
+    "content": "<h1>$$\\begin{array}{l}若a、b為正整數，且a×b＝2^5\\times3^2\\times5,\\\\則下列何者不可能為a、b的最大公因數?\\\\(A)1\\\\(B)6\\\\(C)8\\\\(D)12\\end{array}$$</h1>",
+    "answer": "C"
+  },
+  {
+    "id": 23,
+    "content": "<h1>$$\\begin{array}{l}圖(十),菱形ABCD中,E點在\\overline{BC}上,F點在\\overline{CD}上,\\\\G點、H點在\\overline{AD}上,且\\overline{AE}//\\overline{HC}//\\overline{GF}。\\\\若\\overline{AH}=8,\\overline{HG}=5,\\overline{GD}=4,則下列選項中的線段,\\\\何者的長度最長?\\end{array}$$</h1><div class='wrapper-00'><div class='container-00'><div class='left-01'><h1>$$\\begin{array}{lr} (A)\\overline{CF}\\\\(B)\\overline{FD}\\\\ (C)\\overline{BE}\\\\ (D)\\overline{EC}\\end{array}$$</h1></div><div class='right-00'><img src='ppicture/110-23.jpg' width='300'></div></div></div>",
+    "answer": "A"
+  },
+  {
+    "id": 24,
+    "content": "<h1>$$\\begin{array}{l}\\underline{小文}原本計畫使用甲、乙兩臺影印機於10:00開始一起印製文件\\\\並持續到下午,但10:00時有人正在使用乙,於是他先使用甲印製,\\\\於10:05才開始使用乙一起印製,且到10:15時乙印製的總張數\\\\與甲相同,到10:45時甲、乙印製的總張數合計為2100張。\\\\若甲、乙的印製張數與印製時間皆成正比,則依照\\underline{小文}原本的計畫,\\\\甲、乙印製的總張數會在哪個時間達到2100張?\\\\(A)10:40\\\\(B)10:41\\\\(C)10:42\\\\(D)10:43\\end{array}$$",
+    "answer": "C"
+  },
+  {
+    "id": 25,
+    "content": "<h2 style='font-size:30px;'>$$\\begin{array}{lr}圖(十一),銳角三角形ABC中,D點在\\overline{BC}上,\\angle{B}=\\angle{BAD}=\\angle{CAD}。\\\\今欲在\\overline{AD}上找一點P,使得\\angle{APC}=\\angle{ADB},\\\\以下是甲、乙兩人的作法:\\\\(甲)作\\overline{AC}的中垂線交\\overline{AD}於P點,則P即為所求\\\\(乙)以C為圓心,\\overline{CD}長為半徑畫弧,交\\overline{AD}於異於D點的一點P,\\\\\\;\\;\\quad則P即為所求\\\\對於甲、乙兩人的作法,下列判斷何者正確?\\end{array}$$<div class='container-00'><div class='left-00'>\\begin{array}{lr}(A)兩人皆正確\\\\ (B)兩人皆錯誤\\\\(C)甲正確，乙錯誤\\\\(D)甲錯誤，乙正確\\end{array}</div><div class='right-00'><img src='ppicture/110-25.jpg' width='400'></div></div></h2>",
+    "answer": "A"
+  },
+  {
+    "id": 26,
+    "content": "<h2 style='font-size:30px;'>$$\\begin{array}{lr}圖(十二),I為\\triangle{ABC}的內心,有一直線通過I點且分別與\\overline{AB}、\\overline{AC}\\\\相交於D點、E點。若\\overline{AD}=\\overline{DE}=5,\\overline{AE}=6,\\\\則I點到\\overline{BC}的距離為何?\\end{array}$$<div class='container-00'><div class='left-00'>\\begin{array}{lr}(A)\\large\\frac{24}{11}\\\\(B)\\large\\frac{30}{11}\\\\(C)\\large2\\\\(D)\\large3\\end{array}</div><div class='right-00'><img src='ppicture/110-26.jpg' width='400'></div></div></h2>",
+    "answer": "A"
+  },
+  {
+    "id": 27,
+    "type": "非選擇題1",
+    "content": "<h2 style='font-size:28px;'><p>$ \\color{red}{非選擇}$_第 1 題：</p>$$\\begin{array}{lr}碳足跡標籤是一種碳排放量的標示方式,讓大眾了解某一產品或服務\\\\所產生的碳排放量多寡,如圖(十三)所示。\\end{array}$$<div class='right-00'> <img src='ppicture/110-27-1.jpg' width='150'></div>$$\\begin{array}{lr}碳足跡標籤的數據標示有其規定,以「碳排放量大於20公克且不超過40公克」為例,\\\\此範圍內的碳足跡數據標示只有20、22、24、…、38、40公克等11個偶數;\\\\碳足跡數據標示決定於「碳排放量與這11個偶數之中的哪一個差距最小」,\\\\兩者對應標示的範例如表(二)所示。\\end{array}$$ $$\\begin{array}{c}\\text{表(二)}\\\\\\begin{array}{|c|c|}\\hline\\textbf{碳排放量}&\\textbf{碳足跡數據標示}\\\\\\hline20.2公克&20公克\\\\\\hline20.8公克&20公克\\\\\\hline21.0公克&20公克或22公克皆可\\\\\\hline23.1公克&24公克\\\\\\hline\\end{array}\\end{array}$$ $$\\begin{array}{lr}{\\color{red}\\blacksquare}請根據上述資訊,回答下列問題,並詳細解釋或完整寫出你的解題過程\\end{array}$$ $(1)若有一個產品的碳足跡數據標示為38公克,$<BR>$\\quad\\;則它可能的碳排放量之最小值與最大值分別為多少公克?$<select><option hidden>答案：</option><option>最小值37g，最大值39g</option></select>$(2)承(1),當此產品的碳排放量減少為原本的90\\%時,$<BR>$\\quad\\;請求出此產品碳足跡數據標示的所有可能情形$<select><option hidden>答案：</option><option>4公克或36公克</option></select></h2>",
+    "answer": {
+    }
+  },
+  {
+    "id": 28,
+    "type": "非選擇題2",
+    "content": "<h2 style='font-size:28px;'><p>$ \\color{red}{非選擇}$_第 2 題：</p>$$\\begin{array}{lr}\\underline{凱特}平時常用底面為矩形的模具製作蛋糕,\\\\並以「平行於模具任一邊」的方式進行橫切或縱切,\\\\橫切都是從模具的左邊切割到模具的右邊,\\\\縱切都是從模具的上邊切割到模具的下邊。\\\\用這種方式,可以切出數個大小完全相同的小塊蛋糕。\\\\在切割後,他發現小塊蛋糕接觸模具的地方外皮比較焦脆,\\\\以圖(十四)為例:\\\\橫切2刀,縱切3刀,共計5刀,切出(2+1)\\times(3+1)=12個小塊蛋糕,\\\\其中側面有焦脆的小塊蛋糕共有10個,所有側面都不焦脆的小塊蛋糕共有2個。\\end{array}$$<div class='right-00'> <img src='ppicture/110-28.jpg' width='450'></div>$$\\begin{array}{lr}{\\color{red}\\blacksquare}請根據上述切割方式,回答下列問題,並詳細解釋或完整寫出你的解題過程\\end{array}$$  $(1)若對一塊蛋糕切了4刀,則可切出幾個小塊蛋糕?$<BR>$\\quad\\;請寫出任意\\underline{\\underline{一種}}可能的蛋糕塊數即可。$<select><option hidden>答案：</option><option>9塊</option></select>$(2)今\\underline{凱特}根據一場聚餐的需求,打算製作出恰好60個所有側面都不焦脆的$<BR>$\\quad\\;小塊蛋糕,為了避免勞累並加快出餐速度,在不超過20刀的情況下,$<BR>$\\quad\\;請問凱特需要切幾刀,才可以達成需求?請寫出所有可能的情形。$<select><option hidden>答案：</option><option>19刀或18刀</option></select></h2>",
+    "answer": {
+    }
+  }
+
+  
+]

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>範例</title>
+    <!-- 引入 jstree 樣式 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css" />
+    <!-- 自定義 CSS -->
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }
+        #sidebar {
+            width: 250px;
+            min-height: 100vh;
+            background-color: #9b9b9e;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #fff;
+        }
+        #sidebar .jstree-default .jstree-anchor {
+            color: #00050a; /*-- 樹狀字體顏色--*/
+            font-size: 20px;
+        }
+        #sidebar .jstree-default .jstree-anchor:hover {
+            color: #fff;
+            background-color: #636e72;
+        }
+        #content {
+            flex: 1;
+            background-color: #9bd2ea;
+            padding: 18px;
+            box-sizing: border-box;
+        }
+        iframe {
+            width: 100%;
+            height: calc(100vh - 40px);
+            border: none;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <!-- 樹狀選單 -->
+        <div id="jstree"></div>
+    </div>
+    <div id="content">
+        <!-- 顯示外部 HTML 檔案的 iframe -->
+        <iframe id="iframeContent" src="home.html"></iframe>
+    </div>
+
+    <!-- 引入 jQuery 和 jstree -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"></script>
+    <!-- 自定義 JS -->
+    <script>
+        $(function() {
+            $('#jstree').jstree({
+                'core': {
+                    'data': [
+                        {
+                            "id": "node1",
+                            "parent": "#",
+                            "text": "🏠 首頁",
+                            "a_attr": { "href": "home.html" }
+                        },
+                        {
+                            "id": "node2",
+                            "parent": "#",
+                            "text": "📖 關於我們",
+                            "a_attr": { "href": "about.html" }
+                        },
+                        {
+                            "id": "node3",
+                            "parent": "#",
+                            "text": "💼 服務項目",
+                            "a_attr": { "href": "services.html" }
+                        },
+                                {
+                                    "id": "node4",
+                                    "parent": "node3",
+                                    "text": "📚 歷屆試題",
+                                    "a_attr": { "href": "exam000_v0.html" }
+                                },
+
+                                            {
+                                                "id": "node41",
+                                                "parent": "node4",
+                                                "text": "📙1️⃣1️⃣3️⃣",
+                                                "a_attr": { "href": "tab113.html" }
+                                            },
+                                            {
+                                                "id": "node42",
+                                                "parent": "node4",
+                                                "text": "📗1️⃣1️⃣2️⃣",
+                                                "a_attr": { "href": "tab112.html" }
+                                            },
+                                            {
+                                                "id": "node43",
+                                                "parent": "node4",
+                                                "text": "📕1️⃣1️⃣1️⃣",
+                                                "a_attr": { "href": "tab111.html" }
+                                            },
+                                            {
+                                                "id": "node44",
+                                                "parent": "node4",
+                                                "text": "📒1️⃣1️⃣0️⃣",
+                                                "a_attr": { "href": "tab110.html" }
+                                            },
+                                            {
+                                                "id": "node45",
+                                                "parent": "node4",
+                                                "text": "📔1️⃣0️⃣9️⃣",
+                                                "a_attr": { "href": "htj.html" }
+                                            },
+                                            {
+                                                "id": "node46",
+                                                "parent": "node4",
+                                                "text": "📓1️⃣0️⃣8️⃣",
+                                                "a_attr": { "href": "cmenu02.html" }
+                                            },
+                                            {
+                                                "id": "node47",
+                                                "parent": "node4",
+                                                "text": "📃1️⃣0️⃣7️⃣",
+                                                "a_attr": { "href": "cmenu2.html" }
+                                            },
+                                            {
+                                                "id": "node48",
+                                                "parent": "node4",
+                                                "text": "📑1️⃣0️⃣6️⃣",
+                                                "a_attr": { "href": "tab106.html" }
+                                            },
+                                            {
+                                                "id": "node49",
+                                                "parent": "node4",
+                                                "text": "📕1️⃣0️⃣5️⃣",
+                                                "a_attr": { "href": "tab105.html" }
+                                            },
+                                            {
+                                                "id": "node410",
+                                                "parent": "node4",
+                                                "text": "📗1️⃣0️⃣4️⃣",
+                                                "a_attr": { "href": "tab104.html" }
+                                            },
+                                            {
+                                                "id": "node411",
+                                                "parent": "node4",
+                                                "text": "📕1️⃣0️⃣3️⃣",
+                                                "a_attr": { "href": "tab103.html" }
+                                            },
+
+                        {
+                            "id": "node6",
+                            "parent": "node3",
+                            "text": "📱 行動應用",
+                            "a_attr": { "href": "mobileapp.html" }
+                        },
+                        {
+                            "id": "node7",
+                            "parent": "#",
+                            "text": "✉️ 聯絡我們",
+                            "a_attr": { "href": "contact.html" }
+                        }
+                    ]
+                },
+                'themes': {
+                    'variant': 'large',
+                    'icons': false
+                }
+            });
+
+            $('#jstree').on("select_node.jstree", function (e, data) {
+                var href = data.node.a_attr.href;
+                // 在 iframe 中載入對應的 HTML 檔案
+                $('#iframeContent').attr('src', href);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>內容目錄 </title>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        // 設定行內數學公式的符號
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        // 設定區塊數學公式的符號
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        // 移除導致警告的選項
+        displayAlign: 'left',
+        displayIndent: "0em",
+        displayWidth: "100%"
+      },
+      chtml: {
+        // 設定 chtml 輸出的縮放比例，調整字體大小
+        //scale: 1.2
+        // 移除導致警告的選項
+         displayAlign: 'left'
+      },
+      svg: {
+        // 設定 svg 輸出的縮放比例，調整字體大小
+        // scale: 1.2
+        // 移除導致警告的選項
+        displayAlign: 'left'
+      }
+    };
+  </script>
+  <script type="text/javascript" src="mathjax/es5/tex-svg.js"></script>
+
+  <style>
+    /* 整體字型與背景 */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      padding-top: 60px; /* 增加頂部內距，根據你的目錄高度調整 */
+    }
+
+    /* 整個目錄外框 */
+    .menu-container {
+      width: 180px;
+      border-radius: 25px;
+      background-color: #fff;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      border: 0.8px solid #0e0e0e;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: fixed; /* 修改為 fixed 定位，使其固定在視窗中 */
+      top: 20px;
+      left: 20px;
+      z-index: 999; /* 設定較高的 z-index，確保目錄在其他內容之上 */
+    }
+
+    /* 目錄標題區塊 */
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      color: #333;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 4px 6px;
+      border-bottom: 1px solid #ccc;
+      letter-spacing: 0.5px;
+      /*border:3px solid #28a745;*/
+    }
+
+    /* 左側 List Icon */
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border: 2px solid #dd0606;
+      cursor: pointer;
+    }
+
+    /* 右側總開關按鈕 */
+    .toggle-all-btn {
+      width: 40px;
+      height: 40px;
+      background-color: #d10707;
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    /* 滑鼠移上微放大 */
+    .toggle-all-btn:hover {
+      transform: scale(0.5.1);
+    }
+
+    /* 點擊後旋轉動畫 */
+    .toggle-all-btn.rotate {
+      transform: rotate(-90deg);
+    }
+
+    /* 中間標題字（內容目錄） */
+    .menu-title {
+      flex: 1;
+      text-align: center;
+    }
+
+    /* 每個單元區塊 */
+    .accordion-item {
+      border-bottom: 1px solid #eee;
+    }
+
+    /* 單元標題樣式 */
+    .accordion-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background-color: #f7f3ef;  /* 淺米色、奶茶色背景 */
+      padding: 4px 6px;          /* 稍微放大 padding，增加手感 */
+      border-radius: 8px;
+      font-size: 16px;
+      color: #4e4e4e;            /* 穩重深灰文字 */    /* 深一點的文字色，易讀 */
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    /* 滑鼠滑過時的美化效果 */
+    .accordion-title:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);  /* 微陰影增加立體感 */
+      background-color: #f5e0c8;  /* 柔和的淡橘米色，溫暖有質感 */
+      color: #a0522d;            /* 巧克力棕 / 金棕，點出重點 */
+
+    }
+
+    /* 展開狀態 */
+    .accordion-title.active {
+      background-color: #c9c7c7;
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* 右側箭頭 */
+    .arrow-btn {
+      width: 30px;
+      height: 30px;
+      background-color: #007BFF;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+    }
+
+    /* 展開時，箭頭轉向 */
+    .accordion-title.active .arrow-btn {
+      transform: rotate(90deg);
+      background-color: #28a745;
+    }
+
+    /* 單元內容 */
+    .accordion-content {
+      display: none;
+      padding: 10px 15px;
+      background-color: #f9f9f9;
+      border-left: 3px solid #007BFF;
+      border-radius: 0 0 6px 6px;
+    }
+
+    /* 題庫連結 */
+    .accordion-content a {
+      display: block;
+      padding: 6px 0;
+      color: #333;
+      text-decoration: none;
+    }
+
+    /* 滑鼠移上去 */
+    .accordion-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* 功能一：縮小狀態下 menu-container 樣式 */
+    .menu-container.minimized {
+      width: auto;
+      height: auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    /* 功能一：縮小時，只顯示icon */
+    .menu-container.minimized .menu-header span,
+    .menu-container.minimized .toggle-all-btn,
+    .menu-container.minimized .accordion-section {
+      display: none;
+    }
+
+    /* 保證 icon 不會被縮小不見 */
+    .menu-container.minimized .menu-icon i {
+      font-size: 24px;
+    }
+
+    /* 用於顯示 JSON 內容的容器 */
+    #question-container {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    /* 下拉標準答案 */
+    .answer-select {
+      margin-left: 20px;
+      font-size: 16px;
+      padding: 4px 8px;
+      color: #d9534f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="menu-container minimized">
+    <div class="menu-header">
+      <div class="menu-icon"><i class="fa-solid fa-list"></i></div>
+      <span class="menu-title">內容目錄</span>
+      <div class="toggle-all-btn" id="toggleMenuBtn">
+        <i class="fa-solid fa-angles-down"></i>
+      </div>
+    </div>
+
+    <div class="accordion-section" style="display: none;">
+      <div class="accordion-item">
+        <div class="accordion-title">單元1
+          <span class="arrow-btn"><i class="fa-solid fa-chevron-right"></i></span>
+        </div>
+        <div class="accordion-content">
+          <a href="cmenu02.json" class="load-json">題庫 cmenu02.json</a>
+          <a href="cmenu03.json" class="load-json">題庫 cmenu03.json</a>
+          <a href="cmenu04.json" class="load-json">題庫 cmenu04.json</a>
+          <a href="cmenu05.json" class="load-json">題庫 cmenu05.json</a>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-title">單元2
+          <span class="arrow-btn"><i class="fa-solid fa-chevron-right"></i></span>
+        </div>
+        <div class="accordion-content">
+          <a href="S_QA201.json" class="load-json">題庫 S_QA201.json</a>
+          <a href="S_QA202.json" class="load-json">題庫 S_QA202.json</a>
+          <a href="S_QA203.json" class="load-json">題庫 S_QA203.json</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="question-container">
+  </div>
+
+  <script>
+   $(document).ready(function() {
+    // 動態產生單元，這裡產生單元 3 到 5
+    let content = '';
+    for (let i = 3; i <= 5; i++) {
+      content += `
+      <div class="accordion-item">
+        <div class="accordion-title">單元${i}
+          <span class="arrow-btn"><i class="fa-solid fa-chevron-right"></i></span>
+        </div>
+        <div class="accordion-content">
+          <a href="S_QA${i}01.json" class="load-json">題庫 S_QA${i}01.json</a>
+          <a href="S_QA${i}02.json" class="load-json">題庫 S_QA${i}02.json</a>
+        </div>
+      </div>`;
+    }
+    // 將動態產生的單元內容添加到手風琴列表中
+    $(".accordion-section").append(content);
+
+    // 手風琴展開與收合功能
+    $(document).on('click', '.accordion-title', function() {
+      // 如果點擊的標題不是已展開的標題
+      if (!$(this).hasClass('active')) {
+        // 移除所有標題的 active 類別
+        $('.accordion-title').removeClass('active');
+        // 收合所有內容區塊
+        $('.accordion-content').slideUp();
+      }
+      // 切換點擊標題的 active 類別
+      $(this).toggleClass('active');
+      // 展開/收合點擊標題對應的內容區塊
+      $(this).next('.accordion-content').slideToggle();
+    });
+
+    // 右側總開關按鈕的展開收合功能
+    let isAllOpen = false; // 追蹤所有單元是否展開的狀態
+    $('#toggleMenuBtn').click(function(e) {
+      e.stopPropagation(); // 阻止事件冒泡，避免觸發其他點擊事件
+      isAllOpen = !isAllOpen; // 切換展開/收合狀態
+      $(this).toggleClass('rotate'); // 切換箭頭的旋轉樣式
+      if (isAllOpen) {
+        $('.accordion-section').slideDown(); // 展開所有內容區塊
+      } else {
+        $('.accordion-section').slideUp(); // 收合所有內容區塊
+      }
+    });
+
+    // 左側 icon 點擊：縮小 or 還原 目錄功能
+    $('.menu-icon').click(function(e) {
+      e.stopPropagation(); // 阻止事件冒泡
+      $('.menu-container').toggleClass('minimized'); // 切換目錄的 minimized 類別，改變其樣式
+    });
+
+    // 讀取 JSON 檔案的邏輯並顯示，並在讀取後收合單元列表
+    $(document).on('click', '.accordion-content a.load-json', function(e) {
+      e.preventDefault(); // 阻止預設的連結行為（導航到新頁面）
+      const jsonUrl = $(this).attr('href'); // 獲取連結中的 JSON 檔案 URL
+      const questionContainer = $('#question-container'); // 獲取顯示題目的容器元素
+      questionContainer.empty(); // 清空之前的內容
+
+      // 使用 fetch API 載入 JSON 檔案
+      fetch(jsonUrl)
+        .then(response => {
+          // 檢查回應狀態是否成功
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json(); // 將回應解析為 JSON 格式
+        })
+        .then(data => {
+          console.log('讀取到的 JSON 資料:', data);
+
+          // 檢查 JSON 資料是否為陣列且不為空
+          if (Array.isArray(data) && data.length > 0) {
+            // 遍歷 JSON 資料中的每個題目物件
+            data.forEach((question, index) => {
+              console.log('處理題目:', question);
+              console.log('題目內容:', question.content);
+
+              let questionHTML = ''; // 儲存單個題目的 HTML 結構
+              // 在每個題目之間添加分隔線（除了第一個）
+              if (index > 0) {
+                questionHTML += '<hr>';
+              }
+              // 顯示題目 ID 和答案在同一行
+              questionHTML += `<div>
+                                   <span style='font-size:30px;'>第${question.id} 題</span>
+                                   <select class="answer-select" style="margin-left: 10px;">
+                                     <option hidden>答案</option>
+                                     <option>${question.answer}</option>
+                                   </select>
+                                 </div><br>`;
+              // 直接將題目內容插入 HTML，不再使用 <h3> 包裹，以處理 JSON 中的 HTML 標籤
+              questionHTML += `${question.content}`;
+
+              // 根據 question.id_item 的值判斷不同的排版方式
+              if (question.id_item === 4) {
+                questionHTML += `<div style="display: flex;">`; // 使用 flexbox 佈局
+                questionHTML += `<div style="flex: 1; margin-right: 20px;">`; // 左側區域佔據剩餘空間，並留出右邊距
+                if (question.options && Array.isArray(question.options)) {
+                  questionHTML += `<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">`; // 選項兩欄顯示
+                  question.options.forEach(option => {
+                    questionHTML += `<div><b>${option.label}</b><br>`;
+                    questionHTML += `<img src="${option.image}" width="${option.width || 'auto'}" height="${option.height || 'auto'}"></div>`;
+                  });
+                  questionHTML += `</div>`;
+                }
+                questionHTML += `</div>`; // 左側區域結束
+                // 右側顯示主要圖片
+                if (question.main_image && question.main_image.src) {
+                  questionHTML += `<div><img src="${question.main_image.src}" width="${question.main_image.width || 'auto'}" height="${question.main_image.height || 'auto'}"></div>`;
+                }
+                questionHTML += `</div><br>`; // flexbox 結束並換行
+              } else if (question.id_item === 3) {
+                // 針對 id_item 為 3 的題目調整選項排版為兩欄 grid
+                if (question.options && Array.isArray(question.options)) {
+                  questionHTML += `<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">`;
+                  question.options.forEach(option => {
+                    questionHTML += `<div><b>${option.label}</b><br>`;
+                    questionHTML += `<img src="${option.image}" width="${option.width || 'auto'}" height="${option.height || 'auto'}"></div>`;
+                  });
+                  questionHTML += `</div><br>`;
+                }
+              } else if (question.id_item === 2) {
+                // 針對 id_item 為 2 的題目調整排版為圖片在左，選項在右的 flexbox
+                questionHTML += `<div style="display: flex; align-items: flex-start;">`;
+                if (question.image) {
+                  questionHTML += `<img src="${question.image}" width="${question.width || 'auto'}" height="${question.height || 'auto'}" style="margin-right: 20px;">`;
+                }
+                if (question.options && typeof question.options === 'string') {
+                  questionHTML += `<div style="flex: 1;">${question.options}</div>`;
+                }
+                questionHTML += `</div><br>`;
+              } else { // id_item 為 1 或其他值時的預設排版
+                if (question.image) {
+                  questionHTML += `<img src="${question.image}" width="${question.width || 'auto'}" height="${question.height || 'auto'}"><br>`;
+                }
+                if (question.options && typeof question.options === 'string') {
+                  questionHTML += question.options;
+                }
+              }
+
+              // 將單個題目的 HTML 添加到題目容器中
+              questionContainer.append(questionHTML);
+              // 告訴 MathJax 處理新添加的數學公式
+              MathJax.typeset();
+            });
+
+            // 讀取 JSON 後收合單元列表
+            $('.accordion-section').slideUp();
+            $('#toggleMenuBtn').removeClass('rotate'); // 同步總開關按鈕的狀態
+            isAllOpen = false; // 更新總開關的狀態變數
+
+          } else {
+            questionContainer.text('JSON 檔案中沒有題目資料或格式不正確。');
+          }
+        })
+        .catch(error => {
+          console.error('讀取 JSON 檔案時發生錯誤:', error);
+          questionContainer.text(`讀取 JSON 檔案時發生錯誤：${error.message}`);
+        });
+    });
+  });
+  </script>
+
+</body>
+</html>

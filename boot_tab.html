@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>美化的Bootstrap圓形Tabs</title>
+  <!-- 引入Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 引入Bootstrap JS和依賴項 -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    /* 使標籤置中對齊 */
+    .nav-tabs {
+      justify-content: center;
+    }
+    /* 標籤樣式 */
+    .nav-tabs .nav-link {
+      border-radius: 50%;  /* 使標籤圓角 */
+      width: 50px;        /* 調整圓圈大小 */
+      height: 50px;       /* 調整圓圈大小 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0;
+      margin: 3px;        /* 設定標籤間距 */
+      font-size: 16px;    /* 調整字體大小 */
+      font-weight: bold;
+      background-color: #f8f9fa;
+      border: 2px solid #007bff;
+      color: #007bff;
+    }
+    /* 滑鼠懸停標籤樣式 */
+    .nav-tabs .nav-link:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+    /* 活動標籤樣式 */
+    .nav-tabs .nav-link.active {
+      background-color: #007bff;
+      color: #fff;
+      border: 12px solid #0056b3;
+    }
+    /* 標籤內容樣式 */
+    .tab-content .tab-pane {
+      padding: 20px;
+      border: 1px solid #031220;
+      border-top: none;
+    }
+    /* 第三列標籤向左對齊 */
+    .nav-tabs#tabs3 {
+      display: flex; /* 使標籤容器使用Flexbox */
+      justify-content: flex-start; /* 將標籤向左對齊 */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <!-- 第一排標籤 -->
+    <div class="row">
+      <ul class="nav nav-tabs col-12" id="tabs1"></ul>
+    </div>
+    <!-- 第二排標籤 -->
+    <div class="row mt-3">
+      <ul class="nav nav-tabs col-12" id="tabs2"></ul>
+    </div>
+    <!-- 第三排標籤 -->
+    <div class="row mt-3">
+      <ul class="nav nav-tabs col-12" id="tabs3"></ul>
+    </div>
+    <!-- 標籤內容 -->
+    <div class="tab-content mt-3" id="tab-content"></div>
+  </div>
+
+  <script>
+    // 獲取標籤容器
+    const tabsContainer1 = document.getElementById('tabs1');
+    const tabsContainer2 = document.getElementById('tabs2');
+    const tabsContainer3 = document.getElementById('tabs3');
+    const tabContentContainer = document.getElementById('tab-content');
+
+    // 動態生成標籤和內容
+    for (let i = 1; i <= 27; i++) {
+      // 創建標籤
+      const tab = document.createElement('li');
+      tab.className = 'nav-item';
+      const tabLink = document.createElement('a');
+      tabLink.className = 'nav-link' + (i === 1 ? ' active' : '');
+      tabLink.id = `tab${i}`;
+      tabLink.setAttribute('data-toggle', 'tab');
+      tabLink.href = `#tab${i}Content`;
+      tabLink.role = 'tab';
+      tabLink.setAttribute('aria-controls', `tab${i}Content`);
+      tabLink.setAttribute('aria-selected', i === 1 ? 'true' : 'false');
+      tabLink.textContent = i;
+      tab.appendChild(tabLink);
+      
+      // 將標籤添加到相應的容器
+      if (i <= 10) {
+        tabsContainer1.appendChild(tab);
+      } else if (i <= 20) {
+        tabsContainer2.appendChild(tab);
+      } else {
+        tabsContainer3.appendChild(tab);
+      }
+
+      // 創建標籤內容
+      const tabPane = document.createElement('div');
+      tabPane.className = 'tab-pane fade' + (i === 1 ? ' show active' : '');
+      tabPane.id = `tab${i}Content`;
+      tabPane.role = 'tabpanel';
+      tabPane.setAttribute('aria-labelledby', `tab${i}`);
+      tabPane.textContent = `這是 Tab ${i} 的內容。`;
+      tabContentContainer.appendChild(tabPane);
+    }
+
+    // 將標籤21到27向上對齊標籤11到20
+    for (let i = 21; i <= 27; i++) {
+      const tab = document.getElementById(`tab${i}`);
+      const refTab = document.getElementById(`tab${i - 10}`);
+      if (tab && refTab) {
+        tab.style.marginLeft = refTab.offsetLeft - tab.offsetLeft + 'px';
+      }
+    }
+  </script>
+</body>
+</html>

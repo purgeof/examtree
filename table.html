@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Animated Table</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .animated-table tbody tr {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .animated-table tbody tr:hover {
+            background-color: #ffe5b4; /* Hover color */
+            transform: scale(1.02);
+        }
+
+        .animated-table tbody tr:nth-child(odd) {
+            background-color: #4c2c89; /* Odd rows color */
+        }
+
+        .animated-table tbody tr:nth-child(even) {
+            background-color: #d7870e; /* Even rows color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <table class="table table-hover animated-table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">網址</th>
+                    <th scope="col">網址</th>
+            
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td><a href="https://www.youtube.com/watch?v=Vuwv7SSH6vc&list=PLqv-F3WW8SNL-Qaqx_ax66JXJgVtlXzET" target="_blank">表演1</a><br></td>
+                    <td>30</td>
+                 
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td><a href="https://www.youtube.com/watch?v=h6j9n3caBFY" target="_blank">表演2</a><br></td>
+                    <td>25</td>
+                  
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td><a href="https://www.youtube.com/watch?v=92fRB6lnq-4&list=PLCyO5ffop_xah7XHfg7NvZErZcgmpxDra" target="_blank">表演3</a><br></td>
+                    <td>35</td>
+                   
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td><a href="https://www.youtube.com/watch?v=McTlHEwABzs" target="_blank">表演4</a><br></td>
+                    <td>30</td>
+                   
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td><a href="https://www.youtube.com/watch?v=sFL9uUubivQ" target="_blank">表演5</a><br></td>
+                    <td>25</td>
+                   
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <<td><a href="https://www.youtube.com/watch?v=M8P_47YtjUM" target="_blank">表演6</a><br></td>
+                    <td>35</td>                   
+                </tr> 
+                <tr>
+                    <th scope="row">7</th>
+                    <<td><a href="https://www.youtube.com/watch?v=kdyUTfcotEA" target="_blank">表演7</a><br></td>
+                    <td>35</td>                   
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

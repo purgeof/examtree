@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "id_item": 1,
+    "content": "<h2>$$下列何者為質數?$$</h2>",
+    "answer": "C",
+    "options": "$$\\begin{array}{l}(A)4\\\\(B)6\\\\(C)7\\\\(D)8\\end{array}$$"
+  },
+  {
+    "id": 2,
+    "id_item": 2,
+    "content": "<h2>$$\\begin{array}{l}圖(一)為一個直三角柱的展開圖,其中三個面被標示為甲、乙、丙。\\\\將此展開圖摺成直三角柱後,判斷下列敘述何者正確?\\end{array}$$</h2>",
+    "image": "ppicture/113-2.jpg",
+    "width": 400,
+    "height": 300,
+    "answer": "A",
+    "options": "<h1>$$ \\begin{array}{lr}(A)甲與乙平行,甲與丙垂直 \\\\ (B) 甲與乙平行,甲與丙平行 \\\\ (C)甲與乙垂直,甲與丙垂直 \\\\ (D)甲與乙垂直,甲與丙平行\\\\ \\end{array} $$</h1>"
+  },
+  {
+    "id": 3,
+    "id_item": 3,
+    "content": "$$ \\begin{array}{lr}圖一是由白色紙板拼成的立體圖形,將此立體圖形中的兩面塗上顏色,\\\\如圖二所示。下列四個圖形中哪一個是圖二的展開圖?\\end{array}$$",
+    "answer": "D",
+    "options": [
+      { "label": "$$(A)$$", "image": "ppicture/ctest001.jpg", "width": 300, "height": 250 },
+      { "label": "$$(B)$$", "image": "ppicture/ctest002.jpg", "width": 300, "height": 250 },
+      { "label": "$$(C)$$", "image": "ppicture/ctest003.jpg", "width": 300, "height": 250 },
+      { "label": "$$(D)$$", "image": "ppicture/ctest004.jpg", "width": 300, "height": 250 }
+    ]
+  },
+  {
+    "id": 4,
+    "id_item": 4,
+    "content": "$$ \\begin{array}{lr}請選出對應的展開圖?\\end{array}$$",
+    "main_image": { "src": "ppicture/ctest005.jpg", "width": 300, "height": 300 },
+    "answer": "C",
+    "options": [
+      { "label": "$$(A)$$", "image": "ppicture/ctest001.jpg", "width": 300, "height": 250 },
+      { "label": "$$(B)$$", "image": "ppicture/ctest002.jpg", "width": 300, "height": 250 },
+      { "label": "$(C)$", "image": "ppicture/ctest003.jpg", "width": 300, "height": 250 },
+      { "label": "$(D)$", "image": "ppicture/ctest004.jpg", "width": 300, "height": 250 }
+    ]
+  },
+  {
+    "id": 5,
+    "id_item": 1,
+    "content": "$$\\begin{array}{lr}算式(-8)+(-2)\\times(-3)之值為何?\\end{array}$$",
+    "answer": "B",
+    "options": "$$\\begin{array}{l}(A)-14\\\\(B)-2\\\\(C)18\\\\(D)30\\end{array}$$"
+  }
+]

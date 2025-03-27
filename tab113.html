@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>113MathJax</title>
+
+  <!-- MathJax 配置 -->
+  <script>
+    window.MathJax = {      
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']], // 行內公式
+        displayMath: [['$$', '$$'], ['\\[', '\\]']], // 區塊公式
+        displayAlign: 'left',   // 設定塊級公式左對齊
+        displayIndent: "0em",  // 移除縮排
+        displayWidth: "100%"   // 讓公式適應區域大小
+      },
+      chtml: {
+        displayAlign: 'left'    // 使用 CHTML 時左對齊
+      },
+      svg: {
+        displayAlign: 'left'    // 使用 SVG 時左對齊
+      }
+    };
+  </script>
+  <!-- 引入 MathJax -->
+      <script type="text/javascript" src="mathjax/es5/tex-svg.js"></script>
+      <script type="text/javascript" src="mathjax/es5/tex-mml-svg.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      text-align: left; /* 確保整體內容左對齊 */
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(15, 50px);
+      gap: 5px;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    .tab {
+      background: #007bff;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease, border 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+    .tab:hover {
+     background: #0056b3;
+    }
+    .tab.active {
+      background: white;
+      color: #007bff;
+      border: 2px solid #007bff;
+    }
+    .tab-content {
+        display: none;
+        background: #ffffff;
+        padding: 10px;
+        border: 12px solid #ee6307;
+        border-radius: 20px;
+        margin-top: 10px;
+        width: 100%; /* 調整整個題目內容寬度 */
+        max-width: 1000px; /* 限制最大寬度 */
+        margin: 10px auto;
+        text-align: left; /* 確保內容文字左對齊 */
+        box-sizing: border-box; /* ✅ 避免 padding 影響寬度 */
+        
+        /* ✅ 防止內容超出框框 */
+        overflow-wrap: break-word; /* 讓長字串換行 */
+        word-break: break-word; /* 強制換行 */
+        white-space: normal; /* 確保換行 */
+        overflow-x: hidden; /* 禁止橫向溢出 */
+        
+        /* ✅ 高度自適應，不讓內容被遮住 */
+        min-height: 200px; /* 設定最小高度，避免內容過少時變形 */
+        height: auto; /* 高度根據內容自動增長 */
+        max-height: none; /* 取消最大高度限制 */
+        overflow-y: visible; /* 讓高度隨內容增長 */
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+    /* 強制 MathJax 塊級公式左對齊 */
+        .MathJax_Display {
+          width: 100% !important;
+          max-width: 100% !important;
+          /*overflow-x: auto;*/
+          text-align: left !important;
+          margin-left: 0 !important;
+        }
+        /* 覆蓋 MathJax 容器的默認樣式 */
+    
+
+
+    mjx-container[jax="CHTML"][display="true"],
+    mjx-container[jax="SVG"][display="true"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    /*overflow-x: auto;*/
+    text-align: left !important;
+  }
+    
+  </style>
+  <style>/* 題目內容的style */
+            /* 外部包裹層，讓 .container 可以調整水平寬度 */
+            .wrapper-00 {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            min-width: 300px;
+            resize: horizontal;  /* 允許左右調整 */
+            overflow: hidden;  /* 避免超出 */
+            /*border: 2px solid #d41010; */
+            margin-top: 10px;  /* ✅ 往下移動 wrapper */
+            overflow-wrap: break-word; /* 文字自動換行 */
+            white-space: normal; /* 確保換行 */
+            
+        }
+
+        .container-00 {
+            display: flex;
+            width: 100%;  /* 讓寬度跟隨 wrapper 變化 */
+            /*border: 3px solid #333;*/
+            border-radius: 10px;
+            background: white;
+            
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 5px;
+            margin: 0px;
+            align-items: stretch;  /* 讓左右區塊的高度隨內容增加 */           
+        }
+
+        .left-00 {
+            width: 40%;
+            min-width: 100px;
+            max-width: 500px;
+            resize: horizontal;  /* 允許左右調整 */
+            overflow: auto;
+            /* border: 3px solid #f71d1d; */
+            padding: 0px;
+            margin: 0px;
+            background-color: white;
+        }
+
+        .right-00 {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .right-00 img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .img-container {
+            display: flex;
+            gap: 20px; /* 直接設定圖片間距 */
+            flex-wrap: wrap; 
+            width: 600px; /* 控制寬度確保換行 */
+        }
+       
+
+  </style>
+</head>
+<body>
+ 
+    <h1>113年會考試題</h1>
+  <div class="tabs">
+    <!-- 這裡會動態生成 tabs -->
+  </div>
+
+  <!-- 這裡會動態生成 tab 對應內容 -->
+  <div class="tab-contents">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabsContainer = document.querySelector(".tabs");
+      const contentsContainer = document.querySelector(".tab-contents");
+      const tabs = [];
+      const contents = [];
+
+      const totalTabs = 27; // 調整增加題目數量-- tab的數量
+
+      // 動態生成 tabs 和對應的內容區塊
+      for (let i = 1; i <= totalTabs; i++) {
+        // 創建 tab
+        const tab = document.createElement("div");
+        tab.classList.add("tab");
+        tab.setAttribute("data-tab", `tab${i}`);
+        tab.innerText = i;
+        tabs.push(tab);
+        tabsContainer.appendChild(tab);
+
+        // 創建對應的內容區塊
+        const content = document.createElement("div");
+        content.classList.add("tab-content");
+        content.setAttribute("id", `tab${i}`);
+
+        // 使用條件語句為特定的題目設定不同的內容
+        if (i === 1) {
+          content.innerHTML = `
+          <h2><div>
+              <p>第 1 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              $$算式\\frac{3}{7}-\\left(-\\frac{1}{4}\\right) 之值為何?$$
+              $$(A)\\frac{19}{28}$$
+              $$(B)\\frac{5}{28}$$
+              $$(C)\\frac{4}{11}$$
+              $$(D)\\frac{2}{3}$$
+            </div></h2>
+          `;
+        } else if (i === 2) {
+          content.innerHTML = `
+          <h2><div>
+              <p>第 2 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              $圖 (一)為一個直三角柱的展開圖, 其中三個面被標示為甲、乙、丙。$
+              $將此展開圖摺成直三角柱後,判斷下列敘述何者正確?$
+
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+              $$
+                \\begin{array}{lr}
+                    (A) 甲與乙平行,甲與丙垂直 \\\\
+                    (B) 甲與乙平行,甲與丙平行 \\\\
+                    (C) 甲與乙垂直,甲與丙垂直 \\\\
+                    (D) 甲與乙垂直,甲與丙平行\\\\
+                \\end{array}
+              $$
+                </div>
+                <div class="right-00">
+                    <img src="ppicture/113-2.jpg" width="280" height="80" >
+                </div>
+              </div>
+            </div>
+            </div></h2>
+          `;
+        } else if (i === 3) {
+          content.innerHTML = `
+          <!-- 題目文字 -->
+          <h2><p>第 3 題：<select><option hidden>答案：</option><option>C</option></select></p>
+              $$若二元一次聯立方程式\\left\\{\\begin{array}{l}5 x-3 y=28 \\\\ y=-3 x\\end{array}\\right.
+              的解為\\left\\{\\begin{array}{l}x=a \\\\ y=b\\end{array}\\right.
+              ,則 \(a+b\) 之值為何?$$
+             
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+                      $$(A)-28$$
+                      $$(B)-14$$
+                      $$(C)-4$$
+                      $$(D)\\quad14$$
+                </div>
+                <div class="right-00">
+              </div>
+            </div>
+            </h2>
+          `;
+        } else if (i === 4) {
+          content.innerHTML = `
+          <!-- 題目文字 -->
+          <h2><p>第 4 題：<select><option hidden>答案：</option><option>D</option></select></p>
+            $$\\begin{array}{lr}
+             若想在圖 (二)的方格紙上沿著格線畫出坐標平面的 x 軸、 y 軸並標記原點,\\\\ 
+             且以小方格邊長作為單位長, 則下列哪一種畫法可在方格紙的範圍内\\\\ 
+             標出 (5,3)、(-4,-4)、(-3,4)、(3,-5) 四點?\\end{array}$$
+              <div class="container-00">
+                <div class="img-container">
+                    $(A)$<img src="ppicture/113-4-1.jpg" width="200" height="200">
+                    $(B)$<img src="ppicture/113-4-2.jpg" width="200" height="200">
+                    $(C)$<img src="ppicture/113-4-3.jpg" width="200" height="200">
+                    $(D)$<img src="ppicture/113-4-4.jpg" width="200" height="200">
+                </div>
+               <div class="right-00">
+                    <img src="ppicture/113-4-demo.jpg" width="200" height="80" >
+                </div>
+              </div>
+            </h2>
+          `;
+        } else if (i === 5) {
+          content.innerHTML = `
+            <div>
+              <h2><p>第 5 題：<select><option hidden>答案：</option><option>B</option></select></p>
+                  $$\\underline{阿賢}利用便利貼拼成一個聖誕樹圖案,聖誕樹圖案共有10層,$$
+                  $$每一層由三列的便利貼拼成,前3層如圖(三)所示。$$
+                  $$若同一層中每一列皆比前一列多2張,$$
+                  $$且每一層第一列皆比前一層第一列多2張,$$
+                  $$則此聖誕樹圖案由多少張便利貼拼成??$$
+                  <div class="container-00">
+                    <div class="left-00">
+                    $$(A)354$$ 
+                    $$(B)360$$ 
+                    $$(C)384$$
+                    $$(D)390$$
+                  </div>
+                  <div class="right-00">
+                    <img src="ppicture/113-5.jpg" width="550" height="100" >
+                  </div>
+                  </div>
+              </h2>
+            </div>
+          `;
+        } else if (i === 6) {
+          content.innerHTML = `
+            <div>
+              <h2><p>第 6 題：<select><option hidden>答案：</option><option>D</option></select></p>
+               $$
+               \\begin{array}{lr}
+                箱內有50顆白球和10顆紅球,\\underline{小慧}打算從箱內抽球31次,\\\\
+                每次從箱內抽出一球，如果抽出白球則將白球放回箱內,\\\\
+                如果抽出紅球則不將紅球放回箱內。\\\\
+                已知\\underline{小慧}在前30次抽球中共抽出紅球4次,\\\\
+                若她第31次抽球時箱內的每顆球被抽出的機會相等,\\\\
+                則這次她抽出紅球的機率為何?
+               \\end{array}
+               $$
+                  $$(A)\\frac{1}{5}$$
+                  $$(B)\\frac{1}{6}$$
+                  $$(C)\\frac{5}{12}$$
+                  $$(D)\\frac{3}{28}$$</h2>
+            </div>
+          `;
+        } else if (i === 7) {
+          content.innerHTML = `
+           <!-- 題目文字 -->
+              <h2><p>第 7 題：<select><option hidden>答案：</option><option>D</option></select></p>
+                $$
+                  \\begin{array}{lr}
+                    圖(四)有A、B兩種圖案，其中A經過上下翻轉後與B相同,且圖案的外圍是正方形,\\\\
+                    圖(五)是將四個A圖以緊密且不重疊的方式排列成大正方形,\\\\
+                    圖(六)是將兩個A圖與兩個B圖以緊密且不重疊的方式排列成大正方形。\\\\
+                    判斷圖(五)、圖(六)是否為線對稱圖形?
+                  \\end{array}
+                $$
+              <div class="container-00">
+                <div class="left-00">
+                    $$(A) 圖(五)、圖(六)皆是 $$
+                    $$(B) 圖(五)、圖(六)皆不是 $$
+                    $$(C) 圖(五)是，圖(六)不是 $$
+                    $$(D) 圖(五)不是，圖(六)是$$
+                </div>
+                <div class="right-00">
+                    <div class="img-container">
+                      <img src="ppicture/113-7.jpg" width="600" height="80">
+                    </div>
+                </div>
+              </div>
+            </h2>
+          `;
+        } else if (i === 8) {
+          content.innerHTML = `
+           <!-- 題目文字 start-->
+              <h2><p>第 8 題：<select><option hidden>答案：</option><option>C</option></select></p>
+                $$若 a=3.2 \\times 10^{-5}，b=7.5 \\times 10^{-5}，c=6.3 \\times 10^{-6}$$
+                $$ 則 a 、 b 、 c 三數的大小關係為何? $$
+              <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00">
+                    $$(A) a＜b＜c  $$
+                    $$(B) a＜c＜b $$
+                    $$(C) c＜a＜b  $$
+                    $$(D) c＜b＜a $$
+                </div>
+                <div class="right-00">
+                </div>
+              </div>
+            </div>
+            </h2></B>
+            <!-- 題目文字 END-->
+          `;
+        } else if (i === 9) {
+          content.innerHTML = `
+            <div>
+              <h2>第 9 題：<select><option>答案：</option><option>C</option></select></p>
+               $$
+               \\begin{array}{lr}
+                癌症分期是為了區別惡性腫瘤影響人體健康的程度,\\\\
+                某國統計2011年確診四種癌症一到四期的患者在3年後存活的比率(3年存活率),\\\\
+                並依據癌症類別與不同分期將資料整理成圖(七)。 
+               \\end{array}
+               $$
+                <div class="img-container">
+                  <img src="ppicture/113-9.jpg" width="900" height="300">
+                </div>              
+                $$\\begin{array}{lr}
+                  甲、乙兩人對該國2011年確診上述四種癌症的患者\\\\
+                  提出看法如下：\\\\
+                  (甲) 一到四期的乳癌患者的3年存活率皆高於50\\%\\\\
+                  (乙) 在這四種癌症中，三期與四期的3年存活率相差最多的是胃癌\\\\
+                  對於甲、乙兩人的看法，下列判斷何者正確?\\\\
+                  \\end{array}
+                $$
+                $$
+                  \\begin{array}{le}
+                    (A) 甲、乙皆正確 \\\\
+                    (B) 甲、乙皆錯誤 \\\\
+                    (C) 甲正確，乙錯誤 \\\\
+                    (D) 甲錯誤，乙正確 \\\\
+                  \\end{array}
+                $$  
+                </h2>
+            </div>
+          `;
+        } else if (i === 10) {
+          content.innerHTML = `
+            <div>
+             <h2><p>第 10 題：<select><option hidden>答案：</option><option>C</option></select></p></h2>
+             <h1>$$\\begin{array}{le}
+                下列何者為多項式 5x(5 x-2)-4(5x-2)^{2}的因式分解?\\\\
+                (A) (5x-2)(25x-8) \\\\
+                (B) (5x-2)(5x-4) \\\\
+                (C) (5x-2)(-15x+8) \\\\
+                (D) (5x-2)(-20x+4) \\\\
+              \\end{array}
+              $$ 
+            </div></h1>
+          `;
+        } else if (i === 11) {
+          content.innerHTML = `
+          <!-- 題目文字start -->
+              <h2><p>第 11 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              $$將\\frac{9}{4-\\sqrt{7}}化簡為 a+b\\sqrt{7}, 其中a,\\;b為整數, 求a+b之值為何?$$
+             
+              <div class="container-00">
+                    <div class="left-00">
+                       $$(A) 5 $$
+                       $$(B) 3$$
+                       $$(C) -9 $$
+                       $$(D) -15  $$
+                    </div> 
+              </div>  <!-- container-00 結束 -->
+              </h2>
+                                                       
+          <!-- 題目文字end --> 
+          `;
+        } else if (i === 12) {
+          content.innerHTML = `
+            <div>
+            <h2><p>第 12 題：<select><option hidden>答案：</option><option>C</option></select></p>
+                $$甲、乙兩個二次函數分別為 y=(x+20)^{2}+60,\\;\\;y=-(x-30)^{2}+60,$$
+                $$ 判斷下列敘述何者正確?$$ 
+                $$(A) 甲有最大值，且其值為x＝20時的y值$$
+                $$(B) 甲有最小值，且其值為x＝20時的y值$$
+                $$(C) 乙有最大值，且其值為x＝30時的y值$$
+                $$(D) 乙有最小值，且其值為x＝30時的y值$$
+            </h2>
+            </div>
+          `;
+        } else if (i === 13) {
+          content.innerHTML = `
+            <div>
+             <h2><p>第 13 題：<select><option hidden>答案：</option><option>B</option></select></p>
+              $$\\begin{array}{le}
+                圖(八)為阿成調整他的電腦畫面的解析度時看到的選項,\\\\
+                當他從建議選項1920×1080調整成1400×1050時,\\\\
+                由於比例改變(1920:1080≠1400:1050),畫面左右會出現黑色區域,\\\\
+                當比例不變就不會有此問題。\\\\
+                判斷阿成將他的電腦畫面解析度從1920×1080調整成下列哪一種時,\\\\
+                畫面左右不會出現黑色區域?
+              \\end{array}
+              $$
+            </div></h2></B>
+            <div class="wrapper-00">  <!-- wrapper 往下移動 -->
+              <div class="container-00">
+                <div class="left-00"><h2>
+                      $$(A) 1680×1050 $$
+                      $$(B) 1600×900$$
+                      $$(C) 1440×900$$
+                      $$(D) 1280×1024 $$</h2>
+                </div>
+                <div class="right-00">
+                  <img src="ppicture/113-8.jpg" width="400" height="80">
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (i === 14) {
+          content.innerHTML = `
+             <B><h2><p>第 14 題：<select><option hidden>答案：</option><option>C</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        小玲搭飛機出國旅遊,已知她搭飛機產生的碳排放量為800公斤,\\\\
+                        為了彌補這些碳排放量,她決定上下班時從駕駛汽車改成搭公車。\\\\
+                        依據圖(九)的資訊,假設小玲每日上下班駕駛汽車或搭公車的來回總距離\\\\
+                        皆為20公里,則與駕駛汽車相比,她至少要改搭公車上下班幾天,\\\\
+                        減少產生的碳排放量才會超過她搭飛機產生的碳排放量?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A) 310天\\\\
+                                        (B) 309天\\\\
+                                        (C) 308天\\\\
+                                         (D) 307天 
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img src="ppicture/113-14.jpg" width="500" height="100">
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 15) {
+          content.innerHTML = `
+               <h2><p>第 15 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+                   <!-- 題目內容 -->
+                        $$甲、乙雨個最簡分數分別為\\frac{10}{a} 、\\frac{18}{b},其中a、b為正整數。$$
+                        $$若將甲 、乙通分化成相同的分母後,甲的分子變為50,乙的分子變為 54,$$
+                        $$則下列關於a的敘述,何者正確?$$  
+                        $$(A) a是3的倍數，也是5的倍數     $$
+                        $$(B) a是3的倍數，但不是5的倍數 $$
+                        $$(C) a是5的倍數，但不是3的倍數 $$
+                        $$(D) a不是3的倍數，也不是5的倍數 $$   
+                </h2>
+          `;
+        } else if (i === 16) {
+          content.innerHTML = `
+             <h2><p>第 16 題：<select><option hidden>答案：</option><option>B</option></select></p>
+                   <!-- 題目內容 -->
+                  $$
+                    \\begin{array}{lr}
+                      有研究報告指出, 1880 年至 2020 年全球平均氣温上升趨勢約為每十年上升 0.08^{\\circ}C。\\\\
+                      已知 2020 年全球平均氣温為14.88^{\\circ}C, 假設未來的全球平均氣温上升趨勢\\\\
+                      與上述趨勢相同,且每年上升的度數相同, \\\\
+                      則預估2020年之後第x年的全球平均氣温為多少^{\\circ}C?(以x表示)
+                    \\end{array}
+                  $$
+                  $$(A) 14.88+0.08x $$
+                  $$(B) 14.88+0.008x $$
+                  $$(C) 14.88+0.08[x+(2020-1880)] $$
+                  $$(D) 14.88+0.008[x+(2020-1880)]  $$ </h2>
+          `;
+        } else if (i === 17) {
+          content.innerHTML = `
+             <B><h2><p>第 17 題：<select><option hidden>答案：</option><option>A</option></select></p>
+              <!-- 題目內容 -->
+                        $$\\triangle A B C中, \\angle B=55^{\\circ},\\angle C=65^{\\circ}。今分別以B、C為圓心,$$
+                        $$\\overline{BC}長為半徑畫圓B、圓C,\\;關於A點位置,$$
+                        $$下列敘述何者正確?$$
+                      
+                      $$(A) 在圓B外部，在圓C內部$$
+                      $$(B) 在圓B外部，在圓C外部$$
+                      $$(C) 在圓B內部，在圓C內部$$
+                      $$(D) 在圓B內部，在圓C外部$$
+               </h2></B>
+          `;
+        } else if (i === 18) {
+          content.innerHTML = `
+             <B><h2><p>第 18 題：<select><option hidden>答案：</option><option>A</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        如圖(十),平行四邊形ABCD與平行四邊形EFGH全等,\\\\
+                        且A、B、C、D的對應頂點分別是H、E、F、G,\\\\
+                        其中E在\\overline{DC}上,\\;F在\\overline{BC}上,\\;C在\\overline{FG}上。若\\overline{AB}=7,\\overline{AD}=5,\\overline{FC}=3,\\\\
+                        則四邊形ECGH的周長為何?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start--> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A)21\\\\
+                                        (B)20\\\\
+                                        (C)19\\\\
+                                        (D)18\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                   <img src="ppicture/113-18.jpg" width="500" height="100">
+                                </div>
+                          </div>
+                      
+          `;
+        } else if (i === 19) {
+          content.innerHTML = `
+             <B><h2><p>第 19 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$圖(十一)的數線上有A(-2)、O(0)、B(2)三點。$$
+                    $$今打算在此數線上標示P(p)、Q(q)兩點,$$
+                    $$且p、q互為倒數,若P在A的左側,則下列敘述何者正確?
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                          (A)Q在\\overline{A O}上,且\\overline{A Q}&lt;\\overline{Q O}\\\\
+                                          (B)Q在\\overline{A O}上,且\\overline{A Q}&gt;\\overline{Q O}\\\\
+                                          (C)Q在\\overline{O B}上,且\\overline{O Q}&lt;\\overline{Q B}\\\\
+                                          (D)Q在\\overline{O B}上,且\\overline{O Q}&gt;\\overline{Q B}\\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                    <img src="ppicture/113-19.jpg" width="500" height="100">
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 20) {
+          content.innerHTML = `
+             <B><h2><p>第 20 題：<select><option hidden>答案：</option><option>D</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        四邊形ABCD中,E、F兩點在\\overline{BC}上,\\;G點在\\overline{AD}上,\\\\
+                        各點位置如圖(十二)所示。連接\\overline{GE}、\\overline{GF}後,\\\\
+                        根據圖(十二)中標示的角與角度,判斷下列關係何者正確?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>
+                                        $$(A)\\angle 1+\\angle 2&lt;\\angle 3+\\angle 4$$
+                                        $$(B)\\angle 1+\\angle 2&gt;\\angle 3+\\angle 4$$
+                                        $$(C)\\angle 1+\\angle 4&lt;\\angle 2+\\angle 3$$
+                                        $$(D)\\angle 1+\\angle 4&gt;\\angle 2+\\angle 3$$
+                                      </h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                     <img src="ppicture/113-20.jpg" width="500" height="100">
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 21) {
+          content.innerHTML = `
+              <B><h2><p>第 21 題：<select><option hidden>答案：</option><option>D</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                       如圖(十三) ,\\overset{\\frown}{AC}、\\overset{\\frown}{BD}皆為半圓,\\overset{\\frown}{AC}與\\overset{\\frown}{BD}相交於E點,\\\\
+                       其中A、B、C、D在同一直線上,\\;且B為\\overline{AC}的中點。\\\\
+                       若\\overset{\\frown}{CE}=58^{\\circ},\\;則\\overset{\\frown}{BE}的度數為何?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>
+                                      $$(A)58$$
+                                      $$(B)60$$
+                                      $$(C)62$$                                        
+                                      $$(D)64$$
+                                      </h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img src="ppicture/113-21.jpg" width="700" height="100">
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 22) {
+          content.innerHTML = `
+             <B><h2><p>第 22 題：<select><option hidden>答案：</option><option>A</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        如圖(十四),\\triangle ABC内部有一點D,\\\\
+                        且\\triangle DAB、\\triangle DBC、\\triangle DCA的面積分別為5、4、3。\\\\
+                        若\\triangle ABC的重心為G,則下列敘述何者正確?
+                      \\end{array}
+                    $$
+               <!--  wrapper選項+圖片   Start    
+                      <div class="wrapper-00"> -->
+                            <div class="container-00">
+                              <div class="right-00">  <!-- 圖片 -->
+                                 <img src="ppicture/113-22.jpg" width="300" height="80" >
+                              </div>
+                            </div>
+                          
+                              $$(A)\\triangle GBC與\\triangle DBC的面積相同,且\\overline{DG}與\\overline{BC}平行$$
+                              $$(B)\\triangle GBC與\\triangle DBC的面積相同,且\\overline{DG}與\\overline{BC}不平行$$
+                              $$(C)\\triangle GCA與\\triangle DCA的面積相同,且\\overline{DG}與\\overline{AC}平行$$
+                              $$(D)\\triangle GCA與\\triangle DCA的面積相同,且\\overline{DG}與\\overline{AC}不平行 $$ 
+                    </h2>
+                     <!-- </div>  wrapper選項+圖片 END-->
+          `;
+        } else if (i === 23) {
+          content.innerHTML = `
+             <B><h2><p>第 23 題：<select><option hidden>答案：</option><option>B</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        如圖(十五),等腰梯形紙片ABCD中,\\\\
+                        \\overline{AD}//\\overline{BC},\\;\\overline{AB}=\\overline{DC},\\;\\angle B=\\angle C,且E點在\\overline{BC}上,\\;\\overline{DE}//\\overline{AB}。\\\\
+                        今以\\overline{DE}為摺線將C點向左摺後,\\;C點恰落在\\overline{AB}上, 如圖(十六)所示。\\\\
+                        若\\overline{CE}=2,\\;\\overline{DE}=4,\\;則圖(十六)的 \\overline{BC}與\\overline{AC}的長度比為何?
+                      \\end{array}
+                    $$</h2>
+
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>
+                                        $$(A) 1:2 $$
+                                        $$(B) 1:3 $$
+                                        $$(C) 2:3 $$
+                                        $$(D) 3:5$$
+                                      </h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                      <img src="ppicture/113-23.jpg" width="700" height="100">
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 24) {
+          content.innerHTML = `
+             <h2>$$ {\\color{red}\\blacksquare}請閱讀下列敘述後，回答(24)～(25)題,$$
+
+              <!-- 題目內容 -->
+                    $$
+                      
+                      \\boxed{
+                      \\begin{array}{l}
+                      \\text{體重為衡量個人健康的重要指標之一,} \\\\
+                      \\text{表(一)為成年人利用身高(公尺)計算理想體重(公斤)的三種方式,} \\\\
+                      \\text{由於這些計算方式沒有考慮脂肪及肌肉重量占體重的比例,} \\\\
+                      \\text{因此結果僅供參考。}\\\\
+                     
+                      \\hspace{9cm} \\text{表(一)} \\\\  
+                     
+                      \\begin{array}{|c|c|c|}
+                      \\hline
+                      \\textbf{} & \\textbf{女性理想體重} & \\textbf{男性理想體重} \\\\
+                      \\hline
+                      算法\\bigcirc \\hspace{-0.96em}1 & 身高×身高×22 & 身高×身高×22 \\\\
+                      \\hline
+                      算法\\bigcirc \\hspace{-0.96em}2 & (100×身高－70)×0.6  & (100×身高－80)×0.7  \\\\
+                      \\hline
+                      算法\\bigcirc \\hspace{-0.96em}3 & (100×身高－158)×0.5+52 & (100×身高－170)×0.6+62\\\\
+                      \\hline
+                      \\end{array}
+                      \\end{array}
+                      }
+                    $$</h2>
+                    <B><h2><p>$ \\color{red}{第 24 題}$：<select><option hidden>答案：</option><option>D</option></select></p><B>
+                    $$    
+                      \\begin{array}{lr}
+                      以下為甲、乙兩個關於成年女性理想體重的敘述:\\\\
+                      (甲) 有的女性使用算法\\bigcirc\\hspace{-0.96em}1\\;與算法\\bigcirc\\hspace{-0.96em}2\\;算出的理想體重會相同\\\\
+                      (乙) 有的女性使用算法\\bigcirc\\hspace{-0.96em}2\\;與算法\\bigcirc\\hspace{-0.96em}3\\;算出的理想體重會相同\\\\
+                      對於甲、乙兩個敘述,下列判斷何者正確?
+                      \\end{array}
+                    $$</h2>
+               <!--  wrapper選項+圖片   Start-->    
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                        (A) 甲、乙皆正確 \\\\
+                                        (B) 甲、乙皆錯誤 \\\\
+                                        (C) 甲正確,乙錯誤 \\\\
+                                        (D) 甲錯誤,乙正確 \\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                </div>
+                          </div>
+                      </div> <!-- wrapper選項+圖片 END-->
+          `;
+        } else if (i === 25) {
+          content.innerHTML = `
+             <B><h2><p>$ \\color{red}{第 25 題}$：<select><option hidden>答案：</option><option>B</option></select></p><B>
+              <!-- 題目內容 -->
+                    $$
+                      \\begin{array}{lr}
+                        無論我們使用哪一種算法計算理想體重,\\\\
+                        都可將個人的實際體重歸類為表(二)的其中一種類別。\\\\
+                        當身高1.8公尺的成年男性使用算法②計算理想體重並根據表(二)歸類,\\\\
+                        實際體重介於70×90\\%公斤至70×110\\%公斤之間會被歸類為正常。\\\\
+                        若將上述身高1.8公尺且實際體重被歸類為正常的成年男性,\\\\
+                        重新以算法③計算理想體重並根據表(二)歸類,\\\\
+                        則所有可能被歸類的類別為何? 
+                      \\end{array}
+                    $$</h2>
+                      <div class="wrapper-00"> 
+                          <div class="container-00">
+                                <div class="left-00">   <!-- 選項 -->
+                                      <h2>$$
+                                        \\begin{array}{lr}
+                                          (A) 正常 \\\\
+                                          (B) 正常、過重 \\\\
+                                          (C) 正常、過輕 \\\\
+                                          (D) 正常、過重、過輕 \\\\
+                                        \\end{array}
+                                      $$</h2>
+                                </div>
+                                <div class="right-00">  <!-- 圖片 -->
+                                  <h2>$$
+                                      \\begin{array}{c}
+                                      \\text{表(二)} \\\\
+                                      \\begin{array}{|l|l|}
+                                      \\hline
+                                      \\textbf{實際體重} & \\textbf{類別} \\\\
+                                      \\hline
+                                      大於理想體重的120\\% & 肥胖  \\\\
+                                      \\hline
+                                      介於理想體重的110\\%～120\\% & 過重  \\\\
+                                      \\hline
+                                      介於理想體重的90\\%～110\\% & 正常  \\\\
+                                      \\hline
+                                      介於理想體重的80\\%～90\\%  & 過輕  \\\\
+                                      \\hline
+                                      小於理想體重的80\\% & 消瘦  \\\\
+                                      \\hline
+                                      \\end{array}
+                                      \\end{array}
+                                    $$</h2>
+                                </div>
+                          </div>
+          `;
+        } else if (i === 26) {
+          content.innerHTML = `
+             <B><h2><p>$ \\color{red}{非選擇}$_第 1 題：</p><B>
+              <!-- 題目內容 -->
+                    $$\\begin{array}{lr}
+                      「健康飲食餐盤」是一種以圖畫呈現飲食指南的方式，\\\\
+                      圖畫中各類食物區塊的面積比,表示一個人每日所應攝取各類食物的份量比。\\\\
+                      某研究機構對於一般人如何搭配「穀類」、「蛋白質」、「蔬菜」、「水果」\\\\
+                      這四大類食物的攝取份量,以「健康標語」說明這四大類食物所應攝取份量\\\\
+                      的關係如圖(十七),並繪製了「健康飲食餐盤」如圖(十八)。
+                      \\end{array}
+                    $$
+                    <div class="img-container">
+                      <img src="ppicture/113-26.jpg" width="800" height="300">
+                    </div>
+                    <br>                    
+                    $請根據上述資訊回答下列問題,完整寫出你的解題過程並詳細解釋:$</h2>
+                    <h2>$(1)請根據圖(十七)的「健康標語」,判斷一個人每日所應攝取的$
+                      $\\quad「水果」和「蛋白質」份量之間的大小關係。$
+                      <select><option hidden>答案：</option><option>水果＝蛋白質</option></select>
+                      <BR><BR>
+                        $(2)將圖(十八)的「健康飲食餐盤」簡化為一個矩形，$
+                        $\\quad且其中四大類食物的區塊皆為矩形,如圖(十九)所示。$
+                        $\\quad若要符合圖(十七)的「健康標語」,在紙上畫出圖(十九)的圖形,$
+                        $\\quad其中餐盤長為16公分,寬為10公分,$<BR>
+                        $\\quad則\\;a、b\\;是否可能同時為正整數?$
+                        <select><option hidden>答案：</option><option>a、b 不可能同時為正整數</option></select>
+                        <div class="container-00">
+                              <div class="right-00">  <!-- 圖片 -->
+                                 <img src="ppicture/113-26-1.jpg" width="400" height="100" >
+                              </div>
+                            </div>
+                    </h2>
+          `;
+        } else if (i === 27) {
+          content.innerHTML = `
+             <B><h2><p>$ \\color{red}{非選擇}$_第 2 題：</p><B>
+              <!-- 題目內容 -->
+                    <h3>$$
+                      \\begin{array}{lr}
+                        某教室內的桌子皆為同一款多功能桌,\\\\
+                        4張此款桌子可緊密拼接成中間有圓形鏤空的大圓桌,\\\\
+                        上視圖如圖(二十)所示,其外圍及鏤空邊界為一大一小的同心圓,\\\\
+                        其中大圓的半徑為80公分,小圓的半徑為20公分,\\\\
+                        且任兩張相鄰桌子接縫的延長線皆通過圓心。
+                      \\end{array}
+                    $$                          
+                    <div class="right-00">  <!-- 圖片 -->
+                      <img src="ppicture/113-27-1.jpg" width="230" height="80"  style="margin-right: 40px;">
+                    </div>
+                    
+                        $$\\begin{array}{lr}
+                          為了有效運用教室空間，老師考慮了圖(二十一)及圖(二十二)
+                          \\\\兩種拼接此款桌子的方式。 
+                        \\end{array}
+                      $$
+                    
+                    <div class="right-00">  <!-- 圖片 -->
+                      <img src="ppicture/113-27-2.jpg" width="800" height="80"  style="margin-right: 40px;">
+                    </div>
+                    $$
+                      \\begin{array}{lr}
+                        這兩種方式皆是將2張桌子的一邊完全貼合進行拼接。\\\\ 
+                        A、B兩點為圖(二十一)中距離最遠的兩個桌角， \\\\
+                        C、D兩點為圖(二十二)中距離最遠的兩個桌角，\\\\
+                        且\\overline{CD}與2張桌子的接縫\\overline{EF}相交於G點，G為\\overline{EF}中點。\\\\
+                        請根據上述資訊及圖(二十一)、圖(二十二)中的標示回答下列問題,\\\\
+                        完整寫出你的解題過程並詳細解釋：
+                      \\end{array}
+                    $$
+                    $(1)\\overline{GF}的長度為多少公分?$<select><option hidden>答案：</option><option>30公分</option></select>
+                    $(2)判斷\\overline{CD}與\\overline{AB}的長度何者較大？請說明理由。$
+                    <select><option hidden>答案：</option><option>AB小於CD</option></select>
+                   </h3>
+                 
+                      
+                    
+                         
+                     
+          `;
+        }
+        else {
+          // 其他題目默認內容
+          content.innerHTML = `
+           <div>
+              <p>這是第 ${i} 題，您可以在這裡輸入您的內容。</p>
+              <p>例如，您可以加入數學公式：</p>
+              <p>$$E = mc^2$$</p>
+            </div>
+          `;
+        }
+
+        contents.push(content);
+        contentsContainer.appendChild(content);
+      }
+
+      // 不預設任何 active 的 tab 和內容
+
+      // 處理 tab 點擊事件
+      tabs.forEach(tab => {
+        tab.addEventListener("click", function() {
+          const target = this.getAttribute("data-tab");
+
+          tabs.forEach(t => t.classList.remove("active"));
+          contents.forEach(c => c.classList.remove("active"));
+
+          this.classList.add("active");
+          document.getElementById(target).classList.add("active");
+
+          // 重新渲染 MathJax，以顯示新的公式
+          MathJax.typesetPromise();
+        });
+      });
+    });
+    MathJax.typeset();
+  </script>
+</body>
+</html>

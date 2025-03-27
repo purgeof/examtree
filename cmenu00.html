@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>內容目錄 - 20 個單元</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+
+    .menu-container {
+      width: 200px;
+      border: 1px solid #0e0e0e;
+      border-radius: 20px;
+      background-color: #fff;
+      padding: 0px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      color: #333;
+      font-weight: 600;
+      font-size: 20px;
+      padding: 6px 8px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      letter-spacing: 3px;
+    }
+
+    .menu-header .menu-icon {
+      width: 40px;
+      height: 40px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.2s;
+      border: 15px dashed #e81616;
+    }
+
+    .menu-header .menu-icon:hover {
+      background-color: #e81616;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .toggle-all-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background-color: #28a745;
+      color: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s;
+      border: 0px solid #ef040c;
+    }
+
+    .toggle-all-btn.rotate {
+      transform: rotate(180deg);
+    }
+
+    .accordion-item {
+      margin-top: 0px;
+      border-bottom: 1px solid #ddd;
+    }
+
+
+    .accordion-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .accordion-title:hover {
+      background-color: #e0e0e0;
+    }
+
+    .arrow-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background-color: #007BFF;
+      color: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 10px 15px;
+      background-color: #f9f9f9;
+      border-left: 3px solid #007BFF;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .accordion-content a {
+      display: block;
+      padding: 6px 0;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .accordion-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* 箭頭旋轉特效 */
+    .arrow-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-title.active .arrow-btn i {
+      transform: rotate(90deg);
+    }
+    .json-data {
+      font-size: 14px;
+      color: #555;
+      background-color: #fff;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="menu-container">
+  <div class="menu-header">
+    <div class="toggle-all-btn"><i class="fa-solid fa-list"></i></div>
+    內容目錄
+    <div class="toggle-all-btn">
+      <i class="fa-solid fa-angles-down"></i>
+    </div>
+  </div>
+
+  <!-- 預設隱藏的 20 個單元 -->
+  <div class="accordion-section" style="display: none;">
+    <!-- 單元一 -->
+    <div class="accordion-item">
+      <div class="accordion-title">單元一
+        <span class="arrow-btn"><i class="fa-solid fa-chevron-right"></i></span>
+      </div>
+      <div class="accordion-content">
+        <a href="S_QA101.json">題庫 S_QA101.json</a>
+        <a href="S_QA102.json">題庫 S_QA102.json</a>
+      </div>
+    </div>
+
+    <!-- 單元二 -->
+    <div class="accordion-item">
+      <div class="accordion-title">單元二
+        <span class="arrow-btn"><i class="fa-solid fa-chevron-right"></i></span>
+      </div>
+      <div class="accordion-content">
+        <a href="S_QA201.json">題庫 S_QA201.json</a>
+        <a href="S_QA202.json">題庫 S_QA202.json</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    // 動態生成單元三到單元二十
+    for (let i = 3; i <= 7; i++) {
+      $('.accordion-section').append(`
+        <div class="accordion-item">
+          <div class="accordion-title">單元${i}
+            <span class="arrow-btn"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
+          <div class="accordion-content">
+            <a href="S_QA${i}01.json">題庫 S_QA${i}01.json</a>
+            <a href="S_QA${i}02.json">題庫 S_QA${i}02.json</a>
+          </div>
+        </div>
+      `);
+    }
+    
+
+    // 單一展開/收合，箭頭平滑旋轉
+    $(document).on('click', '.accordion-title', function () {
+      $(this).toggleClass('active');
+      $(this).next('.accordion-content').slideToggle();
+    });
+
+    // 全部展開/收合（綠色按鈕控制整塊顯示）
+    let isAllOpen = false;
+    $('.toggle-all-btn').click(function () {
+      isAllOpen = !isAllOpen;
+      $(this).toggleClass('rotate');
+
+      if (isAllOpen) {
+        $('.accordion-section').slideDown();
+      } else {
+        $('.accordion-section').slideUp();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

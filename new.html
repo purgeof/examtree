@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數學題目</title>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            background-color: #f1f1f1;
+            padding: 10px 0;
+            justify-content: center;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #ddd;
+            margin: 0 5px;
+        }
+        .tab:hover {
+            background-color: #bbb;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs" id="tabContainer">
+        <!-- 動態生成 Tabs -->
+    </div>
+    <div id="contentContainer">
+        <!-- 動態生成內容 -->
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabContainer = document.getElementById("tabContainer");
+            const contentContainer = document.getElementById("contentContainer");
+            const questions = [
+                "\\( x^2 + y^2 = r^2 \\)",
+                "\\( a^2 + b^2 = c^2 \\)",
+                "\\( \frac{d}{dx} e^x = e^x \\)",
+                "\\( \int x dx = \frac{x^2}{2} + C \\)",
+                "\\( \sum_{i=1}^{n} i = \frac{n(n+1)}{2} \\)",
+                "\\( F = ma \\)",
+                "\\( E = mc^2 \\)",
+                "\\( \sin^2 \theta + \cos^2 \theta = 1 \\)",
+                "\\( \log_a(xy) = \log_a x + \log_a y \\)",
+                "\\( \lim_{x \to 0} \frac{\sin x}{x} = 1 \\)",
+                "\\( \int e^x dx = e^x + C \\)",
+                "\\( a_n = a_1 + (n-1)d \\)",
+                "\\( V = \frac{4}{3} \pi r^3 \\)",
+                "\\( \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0} \\)",
+                "\\( PV = nRT \\)"
+            ];
+            
+            // 生成 15 個 Tabs
+            questions.forEach((question, index) => {
+                let tab = document.createElement("div");
+                tab.className = "tab";
+                tab.innerText = "題目 " + (index + 1);
+                tab.onclick = function () {
+                    document.querySelectorAll(".tab-content").forEach(el => el.style.display = "none");
+                    let contentDiv = document.getElementById("content" + index);
+                    contentDiv.style.display = "block";
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, contentDiv]);
+                };
+                tabContainer.appendChild(tab);
+                
+                let contentDiv = document.createElement("div");
+                contentDiv.className = "tab-content";
+                contentDiv.id = "content" + index;
+                contentDiv.innerHTML = `<p>${question}</p>`;
+                contentContainer.appendChild(contentDiv);
+            });
+        });
+    </script>
+</body>
+</html>
