@@ -280,12 +280,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
+            width: 60px; /* 調整寬度以容納文字 */
             height: 40px;
-            border-radius: 50%;
+            border-radius: 5px; /* 修改圓角 */
             background-color: #007bff;
             color: white;
-            font-size: 20px;
+            font-size: 14px; /* 調整字體大小 */
             cursor: pointer;
             margin-top: 15px;
             border: none;
@@ -347,7 +347,7 @@
 
 <div id="load-more-container" style="display: none;">
     <button id="load-more-btn">
-        <i class="fa-solid fa-rotate-right"></i>
+        <i class="fa-solid fa-rotate-right"></i> <span id="load-more-text">載入更多</span>
     </button>
 </div>
 
@@ -400,10 +400,12 @@
 
         let allQuestions = []; // 儲存所有載入的題目
         let questionsDisplayedCount = 0; // 記錄目前已顯示的題目數量
+        let totalQuestionsCount = 0; // 記錄總題目數量
         const questionsPerPage = 2; // 每次讀取的題目數量
         const questionContainer = $('#question-container');
         const loadMoreContainer = $('#load-more-container');
         const loadMoreBtn = $('#load-more-btn');
+        const loadMoreText = $('#load-more-text');
 
         // 顯示特定範圍的題目
         function displayQuestions(startIndex, endIndex) {
@@ -469,6 +471,7 @@
             }
             MathJax.typeset();
             questionsDisplayedCount = Math.min(endIndex, allQuestions.length);
+            loadMoreText.text(`${questionsDisplayedCount}/${totalQuestionsCount}`); // 更新按鈕文字
             if (questionsDisplayedCount < allQuestions.length) {
                 loadMoreContainer.show();
             } else {
@@ -490,6 +493,7 @@
             questionContainer.empty();
             allQuestions = []; // 清空之前的題目
             questionsDisplayedCount = 0; // 重置已顯示的題目數量
+            totalQuestionsCount = 0; // 重置總題目數量
             loadMoreContainer.hide(); // 預先隱藏載入更多按鈕
 
             fetch(jsonUrl)
@@ -504,7 +508,9 @@
 
                     if (Array.isArray(data) && data.length > 0) {
                         allQuestions = data; // 儲存所有題目
+                        totalQuestionsCount = data.length; // 設定總題目數量
                         displayQuestions(0, questionsPerPage); // 顯示前兩題
+                        loadMoreText.text(`${questionsDisplayedCount}/${totalQuestionsCount}`); // 初始設定按鈕文字
 
                         $('.accordion-section').slideUp();
                         $('#toggleMenuBtn').removeClass('rotate');
