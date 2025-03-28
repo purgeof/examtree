@@ -348,7 +348,7 @@
 
 <div id="load-more-container" style="display: none;">
     <button id="load-more-btn">
-        <i class="fa-solid fa-rotate-right"></i> <span id="load-more-text">載入更多</span>
+        <i class="fa-solid fa-circle-down"></i> <span id="load-more-text">載入更多</span>
     </button>
 </div>
 
@@ -402,7 +402,7 @@
         let allQuestions = []; // 儲存所有載入的題目
         let questionsDisplayedCount = 0; // 記錄目前已顯示的題目數量
         let totalQuestionsCount = 0; // 記錄總題目數量
-        const questionsPerPage = 2; // 每次讀取的題目數量
+        const questionsPerPage = 1; // 每次讀取的題目數量
         const questionContainer = $('#question-container');
         const loadMoreContainer = $('#load-more-container');
         const loadMoreBtn = $('#load-more-btn');
